@@ -9,9 +9,17 @@ interface GlossaryFiltersProps {
     domain: string
     type: string
   }) => void
+  availableDomains?: string[]
+  availableTypes?: string[]
+  availableLevels?: string[]
 }
 
-export function GlossaryFilters({ onFiltersChange }: GlossaryFiltersProps) {
+export function GlossaryFilters({ 
+  onFiltersChange, 
+  availableDomains = [], 
+  availableTypes = [], 
+  availableLevels = ['beginner', 'intermediate', 'advanced'] 
+}: GlossaryFiltersProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedLevel, setSelectedLevel] = useState('all')
   const [selectedDomain, setSelectedDomain] = useState('all')
@@ -38,36 +46,29 @@ export function GlossaryFilters({ onFiltersChange }: GlossaryFiltersProps) {
     setSelectedType('all')
   }
 
+  // Dynamic options based on actual data
   const levels = [
     { value: 'all', label: 'All Levels' },
-    { value: 'beginner', label: 'Beginner' },
-    { value: 'intermediate', label: 'Intermediate' },
-    { value: 'advanced', label: 'Advanced' },
+    ...availableLevels.map(level => ({
+      value: level,
+      label: level.charAt(0).toUpperCase() + level.slice(1)
+    }))
   ]
 
   const domains = [
     { value: 'all', label: 'All Domains' },
-    { value: 'ai', label: 'Artificial Intelligence' },
-    { value: 'ml', label: 'Machine Learning' },
-    { value: 'data-science', label: 'Data Science' },
-    { value: 'deep-learning', label: 'Deep Learning' },
-    { value: 'computer-vision', label: 'Computer Vision' },
-    { value: 'nlp', label: 'Natural Language Processing' },
-    { value: 'software-engineering', label: 'Software Engineering' },
-    { value: 'math', label: 'Mathematics' },
-    { value: 'statistics', label: 'Statistics' },
+    ...availableDomains.map(domain => ({
+      value: domain,
+      label: domain.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+    }))
   ]
 
   const types = [
     { value: 'all', label: 'All Types' },
-    { value: 'algorithm', label: 'Algorithm' },
-    { value: 'model', label: 'Model' },
-    { value: 'metric', label: 'Metric' },
-    { value: 'library', label: 'Library/Framework' },
-    { value: 'technique', label: 'Technique' },
-    { value: 'concept', label: 'Concept' },
-    { value: 'architecture', label: 'Architecture' },
-    { value: 'method', label: 'Method' },
+    ...availableTypes.map(type => ({
+      value: type,
+      label: type.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+    }))
   ]
 
   return (

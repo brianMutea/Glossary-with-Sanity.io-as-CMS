@@ -346,3 +346,17 @@ export const GLOSSARY_TERMS_FOR_LINKING_QUERY = `*[_type == "glossaryTerm"] {
   domain
 }`
 
+// Query for knowledge graph - all terms with their relationships
+export const KNOWLEDGE_GRAPH_QUERY = `*[_type == "glossaryTerm"] {
+  _id,
+  term,
+  slug,
+  shortDefinition,
+  level,
+  domain,
+  type,
+  "prerequisites": prerequisites[]->{ _id, term, slug, level, domain },
+  "relatedTerms": relatedTerms[]->{ _id, term, slug, level, domain },
+  "nextConcepts": nextConcepts[]->{ _id, term, slug, level, domain }
+}`
+

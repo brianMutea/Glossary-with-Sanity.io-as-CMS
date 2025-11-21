@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { DomainInput } from '../components/DomainInput'
 
 export const learningPath = defineType({
   name: 'learningPath',
@@ -31,8 +32,9 @@ export const learningPath = defineType({
     }),
     defineField({
       name: 'level',
-      title: 'Overall Level',
+      title: 'Difficulty Level',
       type: 'string',
+      description: 'The overall difficulty level of this learning path',
       options: {
         list: [
           { title: 'Beginner', value: 'beginner' },
@@ -45,20 +47,19 @@ export const learningPath = defineType({
     }),
     defineField({
       name: 'domain',
-      title: 'Primary Domain',
+      title: 'Domain',
       type: 'string',
-      options: {
-        list: [
-          { title: 'Artificial Intelligence', value: 'ai' },
-          { title: 'Machine Learning', value: 'ml' },
-          { title: 'Data Science', value: 'data-science' },
-          { title: 'Software Engineering', value: 'software-engineering' },
-          { title: 'Deep Learning', value: 'deep-learning' },
-          { title: 'Computer Vision', value: 'computer-vision' },
-          { title: 'Natural Language Processing', value: 'nlp' },
-        ],
+      description: 'The primary domain this learning path covers. Start typing to see existing domains or create a new one.',
+      components: {
+        input: DomainInput
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().custom((value) => {
+        if (!value) return 'Domain is required'
+        if (typeof value !== 'string') return 'Domain must be a string'
+        if (value.length < 2) return 'Domain must be at least 2 characters'
+        if (!/^[a-z0-9-]+$/.test(value)) return 'Domain should use lowercase letters, numbers, and hyphens only'
+        return true
+      }),
     }),
     defineField({
       name: 'coverImage',

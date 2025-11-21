@@ -37,7 +37,7 @@ export default async function HomePage() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
               {/* Quick Access Cards */}
               <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl text-center">
                 <div className="text-4xl mb-4">🧠</div>
@@ -45,6 +45,15 @@ export default async function HomePage() {
                 <p className="text-gray-600 mb-4">Interactive definitions with examples and connections</p>
                 <a href="/glossary" className="text-blue-600 font-medium hover:text-blue-700">
                   Explore Terms →
+                </a>
+              </div>
+              
+              <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 p-8 rounded-xl text-center">
+                <div className="text-4xl mb-4">🕸️</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Knowledge Graph</h3>
+                <p className="text-gray-600 mb-4">Visual map of how concepts connect and relate</p>
+                <a href="/knowledge-graph" className="text-indigo-600 font-medium hover:text-indigo-700">
+                  Explore Graph →
                 </a>
               </div>
               

@@ -27,6 +27,12 @@ export function Header() {
               Glossary
             </Link>
             <Link 
+              href="/knowledge-graph" 
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              Knowledge Graph
+            </Link>
+            <Link 
               href="/learning-paths" 
               className="text-gray-600 hover:text-gray-900 transition-colors"
             >

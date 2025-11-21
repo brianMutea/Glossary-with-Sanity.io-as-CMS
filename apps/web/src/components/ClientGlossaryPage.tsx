@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { GlossaryCard } from '@/components/GlossaryCard'
 import { GlossaryFilters } from '@/components/GlossaryFilters'
+import { getDynamicOptions } from '@/lib/dynamicColors'
 
 interface ClientGlossaryPageProps {
   initialTerms: any[]
@@ -55,6 +56,9 @@ export function ClientGlossaryPage({ initialTerms }: ClientGlossaryPageProps) {
     setFilters(newFilters)
   }
 
+  // Get dynamic options from the data
+  const { domains, types, levels } = useMemo(() => getDynamicOptions(initialTerms), [initialTerms])
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -64,10 +68,23 @@ export function ClientGlossaryPage({ initialTerms }: ClientGlossaryPageProps) {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               AI & ML Glossary
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
               Explore our comprehensive collection of AI, Machine Learning, and Data Science concepts. 
               Each term includes definitions, examples, and connections to help you build knowledge systematically.
             </p>
+            
+            {/* Knowledge Graph CTA */}
+            <div className="flex justify-center">
+              <a
+                href="/knowledge-graph"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                Explore Knowledge Graph
+              </a>
+            </div>
           </div>
 
           {/* Quick Stats */}
@@ -101,7 +118,12 @@ export function ClientGlossaryPage({ initialTerms }: ClientGlossaryPageProps) {
       {/* Filters & Search */}
       <section className="py-8 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <GlossaryFilters onFiltersChange={handleFiltersChange} />
+          <GlossaryFilters 
+            onFiltersChange={handleFiltersChange}
+            availableDomains={domains}
+            availableTypes={types}
+            availableLevels={levels}
+          />
         </div>
       </section>
 
