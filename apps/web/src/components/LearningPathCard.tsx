@@ -27,20 +27,20 @@ interface LearningPathCardProps {
 }
 
 const levelColors = {
-  beginner: 'bg-green-100 text-green-800 border-green-200',
-  intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  advanced: 'bg-red-100 text-red-800 border-red-200',
-  mixed: 'bg-purple-100 text-purple-800 border-purple-200',
+  beginner: 'bg-[#39FF14] bg-opacity-20 text-[#39FF14] border-[#39FF14]',
+  intermediate: 'bg-[#FFD700] bg-opacity-20 text-[#FFD700] border-[#FFD700]',
+  advanced: 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61] border-[#FF6F61]',
+  mixed: 'bg-[#E6E6FA] bg-opacity-20 text-[#E6E6FA] border-[#E6E6FA]',
 }
 
 const domainColors = {
-  'ai': 'bg-purple-100 text-purple-800',
-  'ml': 'bg-blue-100 text-blue-800',
-  'data-science': 'bg-cyan-100 text-cyan-800',
-  'software-engineering': 'bg-gray-100 text-gray-800',
-  'deep-learning': 'bg-violet-100 text-violet-800',
-  'computer-vision': 'bg-emerald-100 text-emerald-800',
-  'nlp': 'bg-orange-100 text-orange-800',
+  'ai': 'bg-[#E6E6FA] bg-opacity-20 text-[#E6E6FA]',
+  'ml': 'bg-[#00BFFF] bg-opacity-20 text-[#00BFFF]',
+  'data-science': 'bg-[#39FF14] bg-opacity-20 text-[#39FF14]',
+  'software-engineering': 'bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0]',
+  'deep-learning': 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61]',
+  'computer-vision': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700]',
+  'nlp': 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61]',
 }
 
 export function LearningPathCard({ path }: LearningPathCardProps) {
@@ -50,7 +50,7 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
 
   return (
     <Link href={`/learning-paths/${path.slug.current}`}>
-      <div className="group bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all duration-300 overflow-hidden">
+      <div className="group bg-[#1A1A1A] border border-[#333333] rounded overflow-hidden hover:border-[#00BFFF] transition-all duration-200 hover:scale-105">
         {/* Image Section */}
         {imageUrl ? (
           <div className="relative h-48 overflow-hidden">
@@ -79,8 +79,8 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
             )}
           </div>
         ) : (
-          <div className="h-48 bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
-            <span className="text-6xl opacity-60">🗺️</span>
+          <div className="h-48 bg-gradient-to-br from-[#00BFFF] to-[#FFD700] flex items-center justify-center">
+            <span className="text-6xl text-[#121212]">🗺️</span>
           </div>
         )}
 
@@ -88,7 +88,7 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
         <div className="p-6">
           {/* Header */}
           <div className="mb-3">
-            <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors mb-2">
+            <h3 className="text-xl font-bold text-[#FFFFFF] group-hover:text-[#00BFFF] transition-colors mb-2">
               {path.title}
             </h3>
             
@@ -104,12 +104,12 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
           </div>
 
           {/* Description */}
-          <p className="text-gray-600 mb-4 leading-relaxed line-clamp-3">
+          <p className="text-[#E0E0E0] mb-4 leading-relaxed line-clamp-3">
             {path.description}
           </p>
 
           {/* Stats */}
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+          <div className="flex items-center justify-between text-sm text-[#E0E0E0] mb-4">
             <div className="flex items-center gap-4">
               {path.topicsCount && (
                 <span className="flex items-center gap-1">
@@ -118,7 +118,7 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
               )}
               
               {path.tutorialSeries && (
-                <span className="flex items-center gap-1 text-blue-600">
+                <span className="flex items-center gap-1 text-[#00BFFF]">
                   🎓 Series included
                 </span>
               )}
@@ -126,25 +126,25 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-between pt-4">
             <div className="flex items-center gap-2">
               <div className="flex -space-x-1">
                 {/* Progress indicator dots */}
                 {Array.from({ length: Math.min(path.topicsCount || 5, 5) }).map((_, i) => (
                   <div
                     key={i}
-                    className="w-2 h-2 rounded-full bg-blue-200 border border-white"
+                    className="w-2 h-2 rounded-full bg-[#00BFFF] bg-opacity-40 border border-[#00BFFF]"
                   />
                 ))}
                 {(path.topicsCount || 0) > 5 && (
-                  <span className="text-xs text-gray-400 ml-2">
+                  <span className="text-xs text-[#E0E0E0] ml-2">
                     +{(path.topicsCount || 0) - 5}
                   </span>
                 )}
               </div>
             </div>
             
-            <span className="text-blue-600 group-hover:text-blue-700 font-medium">
+            <span className="text-[#00BFFF] group-hover:text-[#FFD700] font-medium">
               Start learning →
             </span>
           </div>

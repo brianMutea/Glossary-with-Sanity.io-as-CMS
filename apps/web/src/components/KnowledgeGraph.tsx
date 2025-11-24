@@ -317,7 +317,7 @@ export default function KnowledgeGraph({ terms }: KnowledgeGraphProps) {
       .attr('text-anchor', 'middle')
       .attr('font-size', '12px')
       .attr('font-weight', 'bold')
-      .attr('fill', '#1f2937')
+      .attr('fill', '#FFFFFF')
 
     // Add click handlers
     node.on('click', (event, d) => {
@@ -416,91 +416,88 @@ export default function KnowledgeGraph({ terms }: KnowledgeGraphProps) {
   return (
     <div className="w-full h-full flex flex-col">
       {/* Controls */}
-      <div className="bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
-              </svg>
-              <h3 className="text-lg font-semibold text-gray-900">Filter Graph</h3>
+      <div className="bg-[#121212]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="bg-[#1A1A1A] border border-[#333333] rounded p-6 space-y-6">
+            <div className="flex items-center justify-between">
+              <h3 className="text-2xl font-bold text-[#FFD700]">Filter Graph</h3>
+
+              {(searchTerm !== '' || filterLevel !== 'all' || filterDomain !== 'all') && (
+                <button
+                  onClick={() => {
+                    setSearchTerm('')
+                    setFilterLevel('all')
+                    setFilterDomain('all')
+                  }}
+                  className="px-4 py-2 text-sm bg-[#FFD700] text-[#121212] hover:bg-[#E6C200] font-bold rounded transition-all duration-200"
+                >
+                  Clear All
+                </button>
+              )}
             </div>
 
-            {(searchTerm !== '' || filterLevel !== 'all' || filterDomain !== 'all') && (
-              <button
-                onClick={() => {
-                  setSearchTerm('')
-                  setFilterLevel('all')
-                  setFilterDomain('all')
-                }}
-                className="text-sm text-blue-600 hover:text-blue-800 font-medium cursor-pointer transition-colors"
-              >
-                Clear All
-              </button>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg className="h-4 w-4 text-[#E0E0E0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search terms..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="block w-full pl-9 pr-3 py-3 border border-[#333333] rounded bg-[#1A1A1A] placeholder-[#E0E0E0] text-sm text-[#FFFFFF] focus:outline-none focus:border-[#00BFFF] transition-all duration-200"
+                />
               </div>
-              <input
-                type="text"
-                placeholder="Search terms..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg bg-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+
+              <CustomSelect
+                value={filterLevel}
+                onChange={setFilterLevel}
+                options={[
+                  { value: 'all', label: 'All Levels' },
+                  { value: 'beginner', label: 'Beginner' },
+                  { value: 'intermediate', label: 'Intermediate' },
+                  { value: 'advanced', label: 'Advanced' }
+                ]}
+                placeholder="Select difficulty level"
+              />
+
+              <CustomSelect
+                value={filterDomain}
+                onChange={setFilterDomain}
+                options={[
+                  { value: 'all', label: 'All Domains' },
+                  ...domains.map(domain => ({
+                    value: domain,
+                    label: formatDisplayName(domain)
+                  }))
+                ]}
+                placeholder="Select domain"
               />
             </div>
 
-            <CustomSelect
-              value={filterLevel}
-              onChange={setFilterLevel}
-              options={[
-                { value: 'all', label: 'All Levels' },
-                { value: 'beginner', label: 'Beginner' },
-                { value: 'intermediate', label: 'Intermediate' },
-                { value: 'advanced', label: 'Advanced' }
-              ]}
-              placeholder="Select difficulty level"
-            />
-
-            <CustomSelect
-              value={filterDomain}
-              onChange={setFilterDomain}
-              options={[
-                { value: 'all', label: 'All Domains' },
-                ...domains.map(domain => ({
-                  value: domain,
-                  label: formatDisplayName(domain)
-                }))
-              ]}
-              placeholder="Select domain"
-            />
-          </div>
-
-          <div className="flex items-center gap-6 text-sm text-gray-600">
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-0.5 bg-gray-500"></div>
-              <span>Prerequisites</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-0.5 bg-green-500"></div>
-              <span>Related</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <div className="w-3 h-0.5 bg-blue-500"></div>
-              <span>Next</span>
+            <div className="flex items-center gap-6 text-sm text-[#E0E0E0] pt-4">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-1 bg-gray-500 rounded"></div>
+                <span>Prerequisites</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-1 bg-[#39FF14] rounded"></div>
+                <span>Related</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-1 bg-[#00BFFF] rounded"></div>
+                <span>Next</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Graph Container */}
-      <div className="flex-1 relative">
+      <div className="h-[600px] relative overflow-hidden">
         {terms.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
@@ -526,14 +523,14 @@ export default function KnowledgeGraph({ terms }: KnowledgeGraphProps) {
         />
 
         {/* Instructions & Stats */}
-        <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg p-3 text-sm text-gray-600">
-          <p><strong>Instructions:</strong></p>
+        <div className="absolute bottom-4 left-4 bg-[#1A1A1A]/95 backdrop-blur-sm rounded p-3 text-sm text-[#E0E0E0] border border-[#333333]">
+          <p className="text-[#FFD700] font-bold">Instructions:</p>
           <p>• Click to select a node</p>
           <p>• Double-click to view details</p>
           <p>• Drag to move nodes</p>
           <p>• Scroll to zoom</p>
-          <div className="mt-2 pt-2 border-t border-gray-200">
-            <p><strong>Graph Stats:</strong></p>
+          <div className="mt-2 pt-2">
+            <p className="text-[#FFD700] font-bold">Graph Stats:</p>
             <p>• {terms.filter(t => {
               const matchesSearch = searchTerm === '' ||
                 t.term.toLowerCase().includes(searchTerm.toLowerCase())

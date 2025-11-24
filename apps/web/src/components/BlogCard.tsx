@@ -12,8 +12,8 @@ interface BlogCardProps {
 
 export const BlogCard = memo(function BlogCard({ post, featured = false }: BlogCardProps) {
   const cardClass = featured
-    ? "bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-    : "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+    ? "bg-[#1A1A1A] border border-[#333333] rounded overflow-hidden hover:border-[#00BFFF] transition-all duration-200 hover:scale-105"
+    : "bg-[#1A1A1A] border border-[#333333] rounded overflow-hidden hover:border-[#00BFFF] transition-all duration-200 hover:scale-105"
 
   const mainImageUrl = getImageUrl(post.mainImage, 600, 300)
   const authorAvatarUrl = getImageUrl(post.author?.avatar, 32, 32)
@@ -62,16 +62,16 @@ export const BlogCard = memo(function BlogCard({ post, featured = false }: BlogC
             </Link>
           ))}
           {post.difficulty && (
-            <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">
+            <span className="px-2 py-1 text-xs font-medium bg-[#333333] text-[#E0E0E0] rounded-full">
               {post.difficulty}
             </span>
           )}
         </div>
 
-        <h3 className={`font-bold text-gray-900 mb-2 ${featured ? 'text-xl' : 'text-lg'}`}>
+        <h3 className={`font-bold text-[#FFFFFF] mb-2 ${featured ? 'text-xl' : 'text-lg'}`}>
           <Link
             href={`/blog/${post.slug.current}`}
-            className="hover:text-blue-600 transition-colors"
+            className="hover:text-[#00BFFF] transition-colors"
           >
             {post.title}
           </Link>
@@ -79,7 +79,7 @@ export const BlogCard = memo(function BlogCard({ post, featured = false }: BlogC
 
         {post.excerpt && (
           <CardTooltip content={post.excerpt}>
-            <p className="text-gray-600 mb-4 line-clamp-2 leading-relaxed">
+            <p className="text-[#E0E0E0] mb-4 line-clamp-2 leading-relaxed">
               {post.excerpt}
             </p>
           </CardTooltip>
@@ -91,7 +91,7 @@ export const BlogCard = memo(function BlogCard({ post, featured = false }: BlogC
             {post.codeLanguages?.slice(0, 3).map((lang: string) => (
               <span
                 key={lang}
-                className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded border"
+                className="px-2 py-1 text-xs bg-[#00BFFF] bg-opacity-20 text-[#00BFFF] rounded border border-[#00BFFF]"
               >
                 {lang}
               </span>
@@ -99,7 +99,7 @@ export const BlogCard = memo(function BlogCard({ post, featured = false }: BlogC
             {post.tags?.slice(0, 2).map((tag: string) => (
               <span
                 key={tag}
-                className="px-2 py-1 text-xs bg-gray-50 text-gray-700 rounded border"
+                className="px-2 py-1 text-xs bg-[#333333] text-[#E0E0E0] rounded border border-[#555555]"
               >
                 #{tag}
               </span>
@@ -147,15 +147,15 @@ export const BlogCard = memo(function BlogCard({ post, featured = false }: BlogC
                 className="rounded-full"
               />
             ) : (
-              <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center text-xs">
+              <div className="w-6 h-6 bg-[#333333] rounded-full flex items-center justify-center text-xs text-[#FFD700]">
                 {post.author?.name?.charAt(0) || '?'}
               </div>
             )}
             <div>
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-[#FFFFFF]">
                 {post.author?.name}
               </p>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
+              <div className="flex items-center gap-2 text-sm text-[#E0E0E0]">
                 <time dateTime={post.publishedAt}>
                   {format(new Date(post.publishedAt), 'MMM d, yyyy')}
                 </time>

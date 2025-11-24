@@ -25,9 +25,9 @@ interface SeriesCardProps {
 export function SeriesCard({ series }: SeriesCardProps) {
   const coverImageUrl = getImageUrl(series.coverImage, 300, 160)
   const statusColors = {
-    draft: 'bg-gray-100 text-gray-800 border-gray-300',
-    'in-progress': 'bg-yellow-100 text-yellow-800 border-yellow-300',
-    completed: 'bg-green-100 text-green-800 border-green-300'
+    draft: 'bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0] border-[#E0E0E0]',
+    'in-progress': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700] border-[#FFD700]',
+    completed: 'bg-[#39FF14] bg-opacity-20 text-[#39FF14] border-[#39FF14]'
   }
 
   const publishedCount = series.posts?.length || 0
@@ -36,7 +36,7 @@ export function SeriesCard({ series }: SeriesCardProps) {
 
   return (
     <Link href={`/series/${series.slug.current}`} className="group">
-      <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-purple-200">
+      <article className="bg-[#1A1A1A] border border-[#333333] rounded overflow-hidden hover:border-[#00BFFF] transition-all duration-200 hover:scale-105">
         {/* Header with image or gradient */}
         <div className="relative h-32 bg-gradient-to-br from-purple-500 via-blue-500 to-indigo-600">
           {coverImageUrl ? (
@@ -65,39 +65,39 @@ export function SeriesCard({ series }: SeriesCardProps) {
         </div>
         
         <div className="p-4">
-          <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-purple-600 transition-colors">
+          <h3 className="text-lg font-bold text-[#FFFFFF] mb-2 line-clamp-2 group-hover:text-[#00BFFF] transition-colors">
             {series.title}
           </h3>
           
           {series.description && (
-            <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+            <p className="text-[#E0E0E0] text-sm mb-3 line-clamp-2">
               {series.description}
             </p>
           )}
 
           {/* Progress Bar */}
           <div className="mb-3">
-            <div className="flex justify-between text-xs text-gray-500 mb-1">
+            <div className="flex justify-between text-xs text-[#E0E0E0] mb-1">
               <span>{publishedCount} published</span>
               <span>{totalParts} total parts</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-1.5">
+            <div className="w-full bg-[#333333] rounded-full h-1.5">
               <div 
-                className="bg-gradient-to-r from-purple-500 to-blue-500 h-1.5 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-[#00BFFF] to-[#39FF14] h-1.5 rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(progressPercentage, 100)}%` }}
               />
             </div>
           </div>
 
           {/* Stats */}
-          <div className="flex items-center justify-between text-xs text-gray-500">
+          <div className="flex items-center justify-between text-xs text-[#E0E0E0]">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1">
-                <span className="w-2 h-2 bg-purple-500 rounded-full"></span>
+                <span className="w-2 h-2 bg-[#00BFFF] rounded-full"></span>
                 {Math.round(progressPercentage)}% complete
               </span>
             </div>
-            <span className="text-purple-600 font-medium group-hover:text-purple-700">
+            <span className="text-[#00BFFF] font-medium group-hover:text-[#FFD700]">
               View Series →
             </span>
           </div>

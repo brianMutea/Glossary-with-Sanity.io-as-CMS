@@ -143,7 +143,7 @@ export function GlobalSearchBar({
       {/* Search Input */}
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <svg className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-4 w-4 text-[#E0E0E0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
@@ -156,16 +156,16 @@ export function GlobalSearchBar({
           onFocus={handleInputFocus}
           className="
             block w-full pl-9 pr-10 py-2 
-            border border-gray-300 rounded-lg 
-            bg-white placeholder-gray-500 text-sm
-            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+            border border-[#333333] rounded-lg 
+            bg-[#1A1A1A] placeholder-[#E0E0E0] text-[#FFFFFF] text-sm
+            focus:outline-none focus:ring-2 focus:ring-[#00BFFF] focus:border-[#00BFFF]
             transition-all duration-200
           "
         />
         {query && (
           <button
             onClick={clearSearch}
-            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-[#E0E0E0] hover:text-[#00BFFF]"
           >
             <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -174,22 +174,22 @@ export function GlobalSearchBar({
         )}
         {isLoading && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-            <div className="animate-spin h-4 w-4 border-2 border-blue-500 border-t-transparent rounded-full"></div>
+            <div className="animate-spin h-4 w-4 border-2 border-[#00BFFF] border-t-transparent rounded-full"></div>
           </div>
         )}
       </div>
 
       {/* Search Results Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+        <div className="absolute top-full left-0 right-0 mt-1 bg-[#1A1A1A] border border-[#333333] rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
           {results.length > 0 ? (
             <>
               {results.map((result, index) => (
                 <div
                   key={result.id}
                   className={`
-                    px-4 py-3 cursor-pointer border-b border-gray-100 last:border-b-0
-                    ${index === selectedIndex ? 'bg-blue-50' : 'hover:bg-gray-50'}
+                    px-4 py-3 cursor-pointer border-b border-[#333333] last:border-b-0
+                    ${index === selectedIndex ? 'bg-[#00BFFF] bg-opacity-20' : 'hover:bg-[#333333]'}
                     transition-colors duration-150
                   `}
                   onClick={() => handleResultClick(result)}
@@ -200,30 +200,30 @@ export function GlobalSearchBar({
                     </span>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center space-x-2 mb-1">
-                        <h4 className="text-sm font-medium text-gray-900 truncate">
+                        <h4 className="text-sm font-medium text-[#FFFFFF] truncate">
                           {result.title}
                         </h4>
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-[#333333] text-[#E0E0E0]">
                           {typeLabels[result.type]}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600 line-clamp-2">
+                      <p className="text-sm text-[#E0E0E0] line-clamp-2">
                         {result.description}
                       </p>
                       {result.metadata && (
                         <div className="flex items-center space-x-2 mt-1">
                           {result.metadata.level && (
-                            <span className="text-xs text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                            <span className="text-xs text-[#00BFFF] bg-[#00BFFF] bg-opacity-20 px-1.5 py-0.5 rounded">
                               {result.metadata.level}
                             </span>
                           )}
                           {result.metadata.domain && (
-                            <span className="text-xs text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded">
+                            <span className="text-xs text-[#FFD700] bg-[#FFD700] bg-opacity-20 px-1.5 py-0.5 rounded">
                               {result.metadata.domain}
                             </span>
                           )}
                           {result.metadata.author && (
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs text-[#E0E0E0]">
                               by {result.metadata.author}
                             </span>
                           )}
@@ -235,10 +235,10 @@ export function GlobalSearchBar({
               ))}
               
               {/* View All Results Link */}
-              <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
+              <div className="px-4 py-3 border-t border-[#333333] bg-[#333333]">
                 <Link
                   href={`/search?q=${encodeURIComponent(query)}`}
-                  className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                  className="text-sm text-[#00BFFF] hover:text-[#FFD700] font-medium"
                   onClick={() => setIsOpen(false)}
                 >
                   View all results for "{query}" →
@@ -246,12 +246,12 @@ export function GlobalSearchBar({
               </div>
             </>
           ) : (
-            <div className="px-4 py-6 text-center text-gray-500">
-              <svg className="mx-auto h-12 w-12 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="px-4 py-6 text-center text-[#E0E0E0]">
+              <svg className="mx-auto h-12 w-12 text-[#E0E0E0] mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
               <p className="text-sm">No results found for "{query}"</p>
-              <p className="text-xs text-gray-400 mt-1">Try different keywords or check spelling</p>
+              <p className="text-xs text-[#E0E0E0] mt-1">Try different keywords or check spelling</p>
             </div>
           )}
         </div>

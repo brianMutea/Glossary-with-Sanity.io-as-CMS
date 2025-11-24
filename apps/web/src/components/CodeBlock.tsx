@@ -19,17 +19,25 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
         try {
           // Dynamically import Prism to avoid SSR issues
           const Prism = (await import('prismjs')).default
-          
+
           // Import common language definitions
+          // @ts-ignore
           await import('prismjs/components/prism-javascript')
+          // @ts-ignore
           await import('prismjs/components/prism-typescript')
+          // @ts-ignore
           await import('prismjs/components/prism-python')
+          // @ts-ignore
           await import('prismjs/components/prism-json')
+          // @ts-ignore
           await import('prismjs/components/prism-bash')
+          // @ts-ignore
           await import('prismjs/components/prism-sql')
+          // @ts-ignore
           await import('prismjs/components/prism-css')
+          // @ts-ignore
           await import('prismjs/components/prism-markup')
-          
+
           // Map language aliases
           const languageMap: { [key: string]: string } = {
             'js': 'javascript',
@@ -40,9 +48,9 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
             'html': 'markup',
             'xml': 'markup'
           }
-          
+
           const prismLanguage = languageMap[language] || language
-          
+
           if (Prism.languages[prismLanguage]) {
             codeRef.current.innerHTML = Prism.highlight(code, Prism.languages[prismLanguage], prismLanguage)
           } else {
@@ -109,18 +117,18 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
     return (
       <div className="codeblock-container my-8 not-prose">
         {(filename || language) && (
-          <div className="codeblock-header bg-gray-800 text-gray-300 px-4 py-3 text-sm font-mono rounded-t-lg border-b border-gray-700 flex items-center justify-between">
-            {filename && <span className="text-gray-300">{filename}</span>}
+          <div className="codeblock-header bg-[#2d2d30] text-[#cccccc] px-4 py-3 text-sm font-mono rounded-t-lg border-b border-[#333333] flex items-center justify-between">
+            {filename && <span className="text-[#cccccc]">{filename}</span>}
             {language && (
-              <span className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded font-medium">
+              <span className="text-xs bg-[#3c3c3c] text-[#cccccc] px-2 py-1 rounded font-medium">
                 {getLanguageDisplayName(language)}
               </span>
             )}
           </div>
         )}
         <div className="codeblock-content relative">
-          <pre className={`codeblock-pre bg-gray-900 text-gray-100 p-6 overflow-x-auto text-sm leading-relaxed font-mono ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
-            <code 
+          <pre className={`codeblock-pre bg-[#1e1e1e] text-[#d4d4d4] p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-[#333333] ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
+            <code
               ref={codeRef}
               className={`codeblock-code language-${language}`}
               style={{ fontWeight: 'normal' }}
@@ -130,7 +138,7 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
           </pre>
           <button
             onClick={copyToClipboard}
-            className="absolute top-3 right-3 bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors font-medium"
+            className="absolute top-3 right-3 bg-[#3c3c3c] hover:bg-[#4c4c4c] text-[#cccccc] px-3 py-1 rounded text-xs transition-colors font-medium"
             title="Copy to clipboard"
           >
             {copied ? (
@@ -169,7 +177,7 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
       )}
       <div className="codeblock-content relative">
         <pre className={`codeblock-pre bg-gray-50 text-gray-800 p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-gray-200 ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
-          <code 
+          <code
             ref={codeRef}
             className={`codeblock-code language-${language}`}
             style={{ fontWeight: 'normal' }}

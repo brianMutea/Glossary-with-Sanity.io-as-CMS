@@ -12,20 +12,20 @@ interface Props {
 }
 
 const levelColors = {
-  beginner: 'bg-green-100 text-green-800 border-green-200',
-  intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  advanced: 'bg-red-100 text-red-800 border-red-200',
-  mixed: 'bg-purple-100 text-purple-800 border-purple-200',
+  beginner: 'bg-[#39FF14] bg-opacity-20 text-[#39FF14] border-[#39FF14]',
+  intermediate: 'bg-[#FFD700] bg-opacity-20 text-[#FFD700] border-[#FFD700]',
+  advanced: 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61] border-[#FF6F61]',
+  mixed: 'bg-[#E6E6FA] bg-opacity-20 text-[#E6E6FA] border-[#E6E6FA]',
 }
 
 const domainColors = {
-  'ai': 'bg-purple-100 text-purple-800',
-  'ml': 'bg-blue-100 text-blue-800',
-  'data-science': 'bg-cyan-100 text-cyan-800',
-  'software-engineering': 'bg-gray-100 text-gray-800',
-  'deep-learning': 'bg-violet-100 text-violet-800',
-  'computer-vision': 'bg-emerald-100 text-emerald-800',
-  'nlp': 'bg-orange-100 text-orange-800',
+  'ai': 'bg-[#E6E6FA] bg-opacity-20 text-[#E6E6FA]',
+  'ml': 'bg-[#00BFFF] bg-opacity-20 text-[#00BFFF]',
+  'data-science': 'bg-[#39FF14] bg-opacity-20 text-[#39FF14]',
+  'software-engineering': 'bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0]',
+  'deep-learning': 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61]',
+  'computer-vision': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700]',
+  'nlp': 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61]',
 }
 
 export default async function LearningPathPage({ params }: Props) {
@@ -45,9 +45,9 @@ export default async function LearningPathPage({ params }: Props) {
   const domainColor = domainColors[path.domain as keyof typeof domainColors] || domainColors['software-engineering']
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Header */}
-      <section className="bg-white">
+      <section className="bg-[#121212]">
         {coverImageUrl && (
           <div className="relative h-64 md:h-80">
             <Image
@@ -134,18 +134,18 @@ export default async function LearningPathPage({ params }: Props) {
               {/* Learning Sequence */}
               {path.topics && path.topics.length > 0 && (
                 <div className="mb-12">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-8">Learning Sequence</h2>
+                  <h2 className="text-2xl font-bold text-[#FFD700] mb-8">Learning Sequence</h2>
                   
                   {/* Progress Bar */}
-                  <div className="mb-8 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <div className="flex justify-between text-sm text-gray-600 mb-3">
+                  <div className="mb-8 bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                    <div className="flex justify-between text-sm text-[#E0E0E0] mb-3">
                       <span className="font-medium">Your Progress</span>
-                      <span className="font-bold text-blue-600">0% Complete</span>
+                      <span className="font-bold text-[#00BFFF]">0% Complete</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                      <div className="bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full transition-all duration-500 shadow-sm w-0" />
+                    <div className="w-full bg-[#333333] rounded-full h-3 overflow-hidden">
+                      <div className="bg-gradient-to-r from-[#00BFFF] to-[#FFD700] h-3 rounded-full transition-all duration-500 shadow-sm w-0" />
                     </div>
-                    <div className="flex justify-between text-xs text-gray-500 mt-2">
+                    <div className="flex justify-between text-xs text-[#E0E0E0] mt-2">
                       <span>Start here</span>
                       <span>{path.topics.length} concepts to master</span>
                     </div>
@@ -156,7 +156,7 @@ export default async function LearningPathPage({ params }: Props) {
                     {path.topics.map((topic: any, index: number) => (
                       <div key={topic.slug.current} className="flex gap-6">
                         {/* Step Number */}
-                        <div className="flex-shrink-0 w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-lg border-2 border-blue-200">
+                        <div className="flex-shrink-0 w-12 h-12 bg-[#00BFFF] bg-opacity-20 text-[#00BFFF] rounded-full flex items-center justify-center font-bold text-lg border-2 border-[#00BFFF]">
                           {index + 1}
                         </div>
                         
@@ -203,9 +203,9 @@ export default async function LearningPathPage({ params }: Props) {
             <div className="xl:col-span-1 space-y-6">
               {/* Prerequisites */}
               {path.prerequisites && path.prerequisites.length > 0 && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">📋 Prerequisites</h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <h3 className="text-lg font-bold text-[#FFD700] mb-4">📋 Prerequisites</h3>
+                  <p className="text-sm text-[#E0E0E0] mb-4">
                     Make sure you understand these concepts first:
                   </p>
                   <div className="space-y-2">
@@ -213,10 +213,10 @@ export default async function LearningPathPage({ params }: Props) {
                       <Link
                         key={prereq.slug.current}
                         href={`/glossary/${prereq.slug.current}`}
-                        className="block p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                        className="block p-3 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                       >
-                        <div className="font-medium text-gray-900">{prereq.term}</div>
-                        <div className="text-sm text-gray-600">{prereq.shortDefinition}</div>
+                        <div className="font-medium text-[#FFFFFF]">{prereq.term}</div>
+                        <div className="text-sm text-[#E0E0E0]">{prereq.shortDefinition}</div>
                       </Link>
                     ))}
                   </div>
@@ -225,17 +225,17 @@ export default async function LearningPathPage({ params }: Props) {
 
               {/* Related Paths */}
               {path.relatedPaths && path.relatedPaths.length > 0 && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">🔗 Related Paths</h3>
+                <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <h3 className="text-lg font-bold text-[#FFD700] mb-4">🔗 Related Paths</h3>
                   <div className="space-y-3">
                     {path.relatedPaths.map((related: any) => (
                       <Link
                         key={related.slug.current}
                         href={`/learning-paths/${related.slug.current}`}
-                        className="block p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                        className="block p-3 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                       >
-                        <div className="font-medium text-gray-900">{related.title}</div>
-                        <div className="text-sm text-gray-600 mb-2">{related.description}</div>
+                        <div className="font-medium text-[#FFFFFF]">{related.title}</div>
+                        <div className="text-sm text-[#E0E0E0] mb-2">{related.description}</div>
                         <div className="flex gap-2">
                           <span className={`px-2 py-1 text-xs rounded-full ${levelColors[related.level as keyof typeof levelColors]}`}>
                             {related.level}
@@ -251,18 +251,18 @@ export default async function LearningPathPage({ params }: Props) {
               )}
 
               {/* Quick Actions */}
-              <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">🚀 Quick Actions</h3>
+              <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                <h3 className="text-lg font-bold text-[#FFD700] mb-4">🚀 Quick Actions</h3>
                 <div className="space-y-3">
-                  <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                  <button className="w-full px-4 py-2 bg-[#00BFFF] text-[#121212] rounded-lg hover:bg-[#0099CC] transition-colors font-bold">
                     Start Learning Path
                   </button>
-                  <button className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                  <button className="w-full px-4 py-2 border border-[#333333] text-[#E0E0E0] rounded-lg hover:bg-[#333333] transition-colors">
                     Save for Later
                   </button>
                   <Link
                     href="/glossary"
-                    className="block w-full px-4 py-2 text-center border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="block w-full px-4 py-2 text-center border border-[#333333] text-[#E0E0E0] rounded-lg hover:bg-[#333333] transition-colors"
                   >
                     Browse All Terms
                   </Link>

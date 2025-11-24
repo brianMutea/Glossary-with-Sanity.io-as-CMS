@@ -119,7 +119,7 @@ export function CustomSelect({
     <div className={`relative w-full ${className}`}>
       {/* Label */}
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-base font-bold text-[#FFD700] mb-2">
           {label}
         </label>
       )}
@@ -128,11 +128,11 @@ export function CustomSelect({
       <div
         ref={selectRef}
         className={`
-          relative w-full px-4 py-2 border border-gray-300 rounded-lg bg-white cursor-pointer
+          relative w-full px-4 py-3 border border-[#333333] rounded bg-[#1A1A1A] cursor-pointer
           transition-all duration-200 ease-in-out
-          ${isOpen ? 'border-transparent ring-2 ring-blue-500' : 'hover:border-gray-400'}
-          ${disabled ? 'opacity-50 cursor-not-allowed bg-gray-50' : ''}
-          focus:outline-none focus:border-transparent focus:ring-2 focus:ring-blue-500
+          ${isOpen ? 'border-[#00BFFF]' : 'hover:border-[#555555]'}
+          ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
+          focus:outline-none focus:border-[#00BFFF]
         `}
         onClick={handleToggle}
         onKeyDown={(e) => {
@@ -150,7 +150,7 @@ export function CustomSelect({
         {/* Selected Value */}
         <div className="flex items-center justify-between">
           <span className={`block truncate text-sm ${
-            selectedOption ? 'text-gray-900' : 'text-gray-500'
+            selectedOption ? 'text-[#FFFFFF] font-medium' : 'text-[#E0E0E0]'
           }`}>
             {selectedOption ? selectedOption.label : placeholder}
           </span>
@@ -177,7 +177,7 @@ export function CustomSelect({
         {isOpen && (
           <div
             ref={optionsRef}
-            className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto left-0 right-0"
+            className="absolute z-50 w-full mt-1 bg-[#1A1A1A] border border-[#333333] rounded shadow-lg max-h-60 overflow-auto left-0 right-0"
             style={{ top: '100%' }}
             role="listbox"
           >
@@ -185,11 +185,11 @@ export function CustomSelect({
               <div
                 key={option.value}
                 className={`
-                  px-4 py-2.5 text-sm cursor-pointer transition-colors duration-150
-                  ${highlightedIndex === index ? 'bg-blue-50 text-blue-700' : 'text-gray-900'}
-                  ${option.value === value ? 'bg-blue-100 text-blue-800 font-medium' : ''}
-                  hover:bg-blue-50 hover:text-blue-700
-                  first:rounded-t-lg last:rounded-b-lg
+                  px-4 py-2.5 text-sm cursor-pointer transition-colors duration-200
+                  ${highlightedIndex === index ? 'bg-[#333333] text-[#00BFFF]' : 'text-[#E0E0E0]'}
+                  ${option.value === value ? 'bg-[#00BFFF] text-white font-medium' : ''}
+                  hover:bg-[#333333] hover:text-[#00BFFF]
+                  first:rounded-t last:rounded-b
                 `}
                 onClick={() => handleOptionClick(option.value)}
                 onMouseEnter={() => setHighlightedIndex(index)}
@@ -200,7 +200,7 @@ export function CustomSelect({
                   <span className="truncate">{option.label}</span>
                   {option.value === value && (
                     <svg
-                      className="w-4 h-4 text-blue-600"
+                      className="w-4 h-4 text-white"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

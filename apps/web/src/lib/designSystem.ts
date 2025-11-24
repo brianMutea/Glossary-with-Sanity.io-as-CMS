@@ -94,6 +94,7 @@ export function getStatusColor(status: string): string {
 }
 
 // Format display names
-export function formatDisplayName(value: string): string {
+export function formatDisplayName(value: string | undefined): string {
+  if (!value) return ''
   return value.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
 }

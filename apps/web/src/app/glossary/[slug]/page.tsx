@@ -7,7 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { CodeBlock } from '@/components/CodeBlock'
 import { getImageUrl } from '@/sanity/image'
-import { GlossaryCard } from '@/components/GlossaryCard'
+import { GlossaryModalContent } from '@/components/GlossaryModalContent'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -47,27 +47,27 @@ const portableTextComponents = {
   },
   block: {
     h1: ({ children }: any) => (
-      <h1 className="text-3xl font-bold text-gray-900 mt-8 mb-4 first:mt-0">
+      <h1 className="text-3xl font-bold text-[#FFD700] mt-8 mb-4 first:mt-0">
         {children}
       </h1>
     ),
     h2: ({ children }: any) => (
-      <h2 className="text-2xl font-bold text-gray-900 mt-6 mb-3">
+      <h2 className="text-2xl font-bold text-[#FFD700] mt-6 mb-3">
         {children}
       </h2>
     ),
     h3: ({ children }: any) => (
-      <h3 className="text-xl font-semibold text-gray-900 mt-4 mb-2">
+      <h3 className="text-xl font-semibold text-[#00BFFF] mt-4 mb-2">
         {children}
       </h3>
     ),
     normal: ({ children }: any) => (
-      <p className="text-gray-700 mb-4 leading-relaxed">
+      <p className="text-[#E0E0E0] mb-4 leading-relaxed">
         {children}
       </p>
     ),
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-blue-500 pl-4 py-2 my-6 bg-blue-50 italic text-gray-700">
+      <blockquote className="border-l-4 border-[#00BFFF] pl-4 py-2 my-6 bg-[#00BFFF] bg-opacity-10 italic text-[#E0E0E0]">
         {children}
       </blockquote>
     ),
@@ -86,24 +86,24 @@ const portableTextComponents = {
   },
   listItem: {
     bullet: ({ children }: any) => (
-      <li className="text-gray-700">
+      <li className="text-[#E0E0E0]">
         {children}
       </li>
     ),
     number: ({ children }: any) => (
-      <li className="text-gray-700">
+      <li className="text-[#E0E0E0]">
         {children}
       </li>
     ),
   },
   marks: {
     code: ({ children }: any) => (
-      <code className="bg-gray-100 text-red-600 px-1 py-0.5 rounded text-sm font-mono">
+      <code className="bg-[#333333] text-[#39FF14] px-1 py-0.5 rounded text-sm font-mono">
         {children}
       </code>
     ),
     strong: ({ children }: any) => (
-      <strong className="font-bold text-gray-900">
+      <strong className="font-bold text-[#FFFFFF]">
         {children}
       </strong>
     ),
@@ -115,7 +115,7 @@ const portableTextComponents = {
     link: ({ children, value }: any) => (
       <a
         href={value.href}
-        className="text-blue-600 hover:text-blue-800 underline transition-colors"
+        className="text-[#00BFFF] hover:text-[#FFD700] underline transition-colors"
         target={value.href.startsWith('http') ? '_blank' : undefined}
         rel={value.href.startsWith('http') ? 'noopener noreferrer' : undefined}
       >
@@ -126,21 +126,21 @@ const portableTextComponents = {
 }
 
 const levelColors = {
-  beginner: 'bg-green-100 text-green-800 border-green-200',
-  intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  advanced: 'bg-red-100 text-red-800 border-red-200',
+  beginner: 'bg-[#39FF14] text-[#121212] border-[#39FF14]',
+  intermediate: 'bg-[#FFD700] text-[#121212] border-[#FFD700]',
+  advanced: 'bg-[#FF6F61] text-[#121212] border-[#FF6F61]',
 }
 
 const domainColors = {
-  'ai': 'bg-purple-100 text-purple-800',
-  'ml': 'bg-blue-100 text-blue-800',
-  'data-science': 'bg-cyan-100 text-cyan-800',
-  'software-engineering': 'bg-gray-100 text-gray-800',
-  'math': 'bg-indigo-100 text-indigo-800',
-  'statistics': 'bg-pink-100 text-pink-800',
-  'deep-learning': 'bg-violet-100 text-violet-800',
-  'computer-vision': 'bg-emerald-100 text-emerald-800',
-  'nlp': 'bg-orange-100 text-orange-800',
+  'ai': 'bg-[#E6E6FA] text-[#121212]',
+  'ml': 'bg-[#00BFFF] text-[#121212]',
+  'data-science': 'bg-[#39FF14] text-[#121212]',
+  'software-engineering': 'bg-[#E0E0E0] text-[#121212]',
+  'math': 'bg-[#E6E6FA] text-[#121212]',
+  'statistics': 'bg-[#FF6F61] text-[#121212]',
+  'deep-learning': 'bg-[#E6E6FA] bg-opacity-20 text-[#E6E6FA]',
+  'computer-vision': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700]',
+  'nlp': 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61]',
 }
 
 const typeIcons = {
@@ -172,18 +172,18 @@ export default async function GlossaryTermPage({ params }: Props) {
   const typeIcon = typeIcons[term.type as keyof typeof typeIcons] || '💡'
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Header */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section className="bg-[#121212]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Breadcrumb */}
           <nav className="mb-8">
-            <ol className="flex items-center space-x-2 text-sm text-gray-500">
-              <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+            <ol className="flex items-center space-x-2 text-sm text-[#E0E0E0]">
+              <li><Link href="/" className="hover:text-[#00BFFF]">Home</Link></li>
               <li>→</li>
-              <li><Link href="/glossary" className="hover:text-gray-700">Glossary</Link></li>
+              <li><Link href="/glossary" className="hover:text-[#00BFFF]">Glossary</Link></li>
               <li>→</li>
-              <li className="text-gray-900 font-medium">{term.term}</li>
+              <li className="text-[#FFD700] font-medium">{term.term}</li>
             </ol>
           </nav>
 
@@ -193,7 +193,7 @@ export default async function GlossaryTermPage({ params }: Props) {
               <div className="flex items-center gap-4 mb-4">
                 <span className="text-3xl md:text-4xl">{typeIcon}</span>
                 <div className="flex-1">
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-2 break-words">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#FFD700] mb-2 break-words">
                     {term.term}
                   </h1>
                   
@@ -205,7 +205,7 @@ export default async function GlossaryTermPage({ params }: Props) {
                     <span className={`px-3 py-1 text-sm font-medium rounded-full ${domainColor}`}>
                       {term.domain.replace('-', ' ')}
                     </span>
-                    <span className="px-3 py-1 text-sm font-medium rounded-full bg-gray-100 text-gray-700">
+                    <span className="px-3 py-1 text-sm font-medium rounded-full bg-[#333333] text-[#E0E0E0]">
                       {term.type}
                     </span>
                   </div>
@@ -213,7 +213,7 @@ export default async function GlossaryTermPage({ params }: Props) {
               </div>
 
               {/* Short Definition */}
-              <p className="text-xl text-gray-600 leading-relaxed mb-6">
+              <p className="text-xl text-[#E0E0E0] leading-relaxed mb-6">
                 {term.shortDefinition}
               </p>
             </div>
@@ -236,15 +236,15 @@ export default async function GlossaryTermPage({ params }: Props) {
 
       {/* Content */}
       <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 xl:grid-cols-4 gap-8 lg:gap-12">
             {/* Main Content */}
             <div className="xl:col-span-3 space-y-8">
               {/* Deep Explanation */}
               {term.fullExplanation && (
-                <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Deep Explanation</h2>
-                  <div className="prose prose-lg max-w-none glossary-content">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#FFD700] mb-6">Deep Explanation</h2>
+                  <div className="max-w-none glossary-content">
                     <PortableText value={term.fullExplanation} components={portableTextComponents} />
                   </div>
                 </div>
@@ -252,8 +252,8 @@ export default async function GlossaryTermPage({ params }: Props) {
 
               {/* Code Examples */}
               {term.codeExamples && term.codeExamples.length > 0 && (
-                <div className="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Code Examples</h2>
+                <div>
+                  <h2 className="text-2xl font-bold text-[#FFD700] mb-6">Code Examples</h2>
                   <div className="space-y-6 glossary-content">
                     {term.codeExamples.map((example: any, index: number) => (
                       <CodeBlock
@@ -261,7 +261,7 @@ export default async function GlossaryTermPage({ params }: Props) {
                         code={example.code}
                         language={example.language}
                         filename={example.filename}
-                        theme="light"
+                        theme="dark"
                       />
                     ))}
                   </div>
@@ -270,9 +270,9 @@ export default async function GlossaryTermPage({ params }: Props) {
 
               {/* Real-world Use */}
               {term.realWorldUse && (
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Real-world Applications</h2>
-                  <p className="text-gray-700 leading-relaxed">
+                <div>
+                  <h2 className="text-2xl font-bold text-[#FFD700] mb-6">Real-world Applications</h2>
+                  <p className="text-[#E0E0E0] leading-relaxed">
                     {term.realWorldUse}
                   </p>
                 </div>
@@ -280,8 +280,8 @@ export default async function GlossaryTermPage({ params }: Props) {
 
               {/* External Links */}
               {term.externalLinks && term.externalLinks.length > 0 && (
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">External Resources</h2>
+                <div>
+                  <h2 className="text-2xl font-bold text-[#FFD700] mb-6">External Resources</h2>
                   <div className="space-y-3">
                     {term.externalLinks.map((link: any, index: number) => (
                       <a
@@ -289,7 +289,7 @@ export default async function GlossaryTermPage({ params }: Props) {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                        className="flex items-center gap-3 p-3 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                       >
                         <span className="text-lg">
                           {link.sourceType === 'video' ? '🎥' : 
@@ -298,8 +298,8 @@ export default async function GlossaryTermPage({ params }: Props) {
                            link.sourceType === 'course' ? '🎓' : '🔗'}
                         </span>
                         <div>
-                          <div className="font-medium text-gray-900">{link.title}</div>
-                          <div className="text-sm text-gray-500 capitalize">{link.sourceType}</div>
+                          <div className="font-medium text-[#FFFFFF]">{link.title}</div>
+                          <div className="text-sm text-[#E0E0E0] capitalize">{link.sourceType}</div>
                         </div>
                       </a>
                     ))}
@@ -312,17 +312,17 @@ export default async function GlossaryTermPage({ params }: Props) {
             <div className="xl:col-span-1 space-y-6">
               {/* Tutorial Article */}
               {term.tutorialArticle && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">📖 Related Tutorial</h3>
+                <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <h3 className="text-lg font-bold text-[#FFD700] mb-4">📖 Related Tutorial</h3>
                   <Link 
                     href={`/blog/${term.tutorialArticle.slug.current}`}
-                    className="block p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                    className="block p-4 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                   >
-                    <h4 className="font-medium text-gray-900 mb-2">{term.tutorialArticle.title}</h4>
+                    <h4 className="font-medium text-[#FFFFFF] mb-2">{term.tutorialArticle.title}</h4>
                     {term.tutorialArticle.excerpt && (
-                      <p className="text-sm text-gray-600 mb-2">{term.tutorialArticle.excerpt}</p>
+                      <p className="text-sm text-[#E0E0E0] mb-2">{term.tutorialArticle.excerpt}</p>
                     )}
-                    <div className="text-sm text-blue-600">
+                    <div className="text-sm text-[#00BFFF]">
                       By {term.tutorialArticle.author?.name} →
                     </div>
                   </Link>
@@ -331,17 +331,17 @@ export default async function GlossaryTermPage({ params }: Props) {
 
               {/* Prerequisites */}
               {term.prerequisites && term.prerequisites.length > 0 && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">📚 Prerequisites</h3>
+                <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <h3 className="text-lg font-bold text-[#FFD700] mb-4">📚 Prerequisites</h3>
                   <div className="space-y-2">
                     {term.prerequisites.map((prereq: any) => (
                       <Link
                         key={prereq.slug.current}
                         href={`/glossary/${prereq.slug.current}`}
-                        className="block p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                        className="block p-3 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                       >
-                        <div className="font-medium text-gray-900">{prereq.term}</div>
-                        <div className="text-sm text-gray-600">{prereq.shortDefinition}</div>
+                        <div className="font-medium text-[#FFFFFF]">{prereq.term}</div>
+                        <div className="text-sm text-[#E0E0E0]">{prereq.shortDefinition}</div>
                       </Link>
                     ))}
                   </div>
@@ -350,17 +350,17 @@ export default async function GlossaryTermPage({ params }: Props) {
 
               {/* Next Concepts */}
               {term.nextConcepts && term.nextConcepts.length > 0 && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">🚀 What to Learn Next</h3>
+                <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <h3 className="text-lg font-bold text-[#FFD700] mb-4">🚀 What to Learn Next</h3>
                   <div className="space-y-2">
                     {term.nextConcepts.map((next: any) => (
                       <Link
                         key={next.slug.current}
                         href={`/glossary/${next.slug.current}`}
-                        className="block p-3 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                        className="block p-3 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                       >
-                        <div className="font-medium text-gray-900">{next.term}</div>
-                        <div className="text-sm text-gray-600">{next.shortDefinition}</div>
+                        <div className="font-medium text-[#FFFFFF]">{next.term}</div>
+                        <div className="text-sm text-[#E0E0E0]">{next.shortDefinition}</div>
                       </Link>
                     ))}
                   </div>
@@ -369,13 +369,13 @@ export default async function GlossaryTermPage({ params }: Props) {
 
               {/* Tags */}
               {term.tags && term.tags.length > 0 && (
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">🏷️ Tags</h3>
+                <div className="bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <h3 className="text-lg font-bold text-[#FFD700] mb-4">🏷️ Tags</h3>
                   <div className="flex flex-wrap gap-2">
                     {term.tags.map((tag: string) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 text-sm bg-gray-100 text-gray-700 rounded-md"
+                        className="px-2 py-1 text-sm bg-[#333333] text-[#E0E0E0] rounded-md"
                       >
                         #{tag}
                       </span>
@@ -389,10 +389,16 @@ export default async function GlossaryTermPage({ params }: Props) {
           {/* Related Terms */}
           {term.relatedTerms && term.relatedTerms.length > 0 && (
             <div className="mt-16">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">Related Concepts</h2>
+              <h2 className="text-2xl font-bold text-[#FFD700] mb-8">Related Concepts</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {term.relatedTerms.map((related: any) => (
-                  <GlossaryCard key={related.slug.current} term={related} />
+                  <div
+                    key={related.slug.current}
+                    className="w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col hover:shadow-3xl transition-shadow duration-200"
+                    style={{ maxHeight: '500px' }}
+                  >
+                    <GlossaryModalContent term={related} />
+                  </div>
                 ))}
               </div>
             </div>

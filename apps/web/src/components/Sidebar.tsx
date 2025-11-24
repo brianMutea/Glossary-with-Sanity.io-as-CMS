@@ -50,20 +50,20 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
       
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 h-screen w-64 bg-gray-900 z-50 flex flex-col
+        fixed top-0 left-0 h-screen w-64 bg-[#121212] z-50 flex flex-col
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         ${alwaysVisible ? 'translate-x-0' : 'lg:translate-x-0'}
       `}>
         {/* Logo/Brand */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-800 flex-shrink-0">
+        <div className="flex items-center justify-between p-6 flex-shrink-0">
           <Link href="/" className="flex items-center space-x-3" onClick={onClose}>
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">T</span>
+            <div className="w-10 h-10 bg-[#00BFFF] rounded flex items-center justify-center">
+              <span className="text-white font-bold text-xl">T</span>
             </div>
             <div>
-              <h1 className="text-lg font-bold text-white">Tech Glossary</h1>
-              <p className="text-xs text-gray-400">Developer Resources</p>
+              <h1 className="text-xl font-bold text-[#FFD700]">Tech Glossary</h1>
+              <p className="text-sm text-[#E0E0E0]">Developer Resources</p>
             </div>
           </Link>
           
@@ -79,7 +79,7 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
           {navigation.map((item) => {
             const active = isActive(item.href)
             return (
@@ -88,10 +88,10 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
                 href={item.href}
                 onClick={onClose}
                 className={`
-                  block px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200
+                  block px-4 py-3 text-base font-medium transition-all duration-200
                   ${active 
-                    ? 'bg-blue-600 text-white' 
-                    : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                    ? 'text-[#00BFFF] border-b-2 border-[#00BFFF]' 
+                    : 'text-[#E0E0E0] hover:text-[#00BFFF] hover:bg-[#333333]'
                   }
                 `}
               >
@@ -102,10 +102,10 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-gray-800 flex-shrink-0">
-          <div className="text-xs text-gray-400 text-center">
+        <div className="p-6 flex-shrink-0">
+          <div className="text-sm text-[#E0E0E0] text-center">
             <p>&copy; 2024 Tech Glossary</p>
-            <p className="mt-1">Built with Next.js</p>
+            <p className="mt-1 text-[#39FF14]">Built with ❤️</p>
           </div>
         </div>
       </div>

@@ -37,7 +37,10 @@ export default async function BlogPostPage({ params }: Props) {
     const authorAvatarUrl = getImageUrl(post.author?.avatar, 64, 64)
 
     return (
-        <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="min-h-screen bg-[#121212] py-16">
+            <article className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-4xl">
+                <div className="bg-white rounded border border-gray-200 shadow-lg p-8 md:p-12">
             {/* Header */}
             <header className="mb-12">
                 {/* Series Badge */}
@@ -273,7 +276,10 @@ export default async function BlogPostPage({ params }: Props) {
                     </div>
                 </div>
             )}
-        </article>
+                </div>
+                </div>
+            </article>
+        </div>
     )
 }
 

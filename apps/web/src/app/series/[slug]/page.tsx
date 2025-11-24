@@ -92,15 +92,15 @@ export default async function SeriesPage({ params }: Props) {
 
   const coverImageUrl = getImageUrl(series.coverImage, 1200, 400)
   const statusColors = {
-    draft: 'bg-gray-100 text-gray-800',
-    'in-progress': 'bg-yellow-100 text-yellow-800',
-    completed: 'bg-green-100 text-green-800'
+    draft: 'bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0]',
+    'in-progress': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700]',
+    completed: 'bg-[#39FF14] bg-opacity-20 text-[#39FF14]'
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Series Header */}
-      <section className="bg-white">
+      <section className="bg-[#121212]">
         {coverImageUrl && (
           <div className="relative h-64 md:h-80">
             <Image
@@ -115,37 +115,37 @@ export default async function SeriesPage({ params }: Props) {
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-sm font-medium text-purple-600">📚 SERIES</span>
+            <span className="text-sm font-medium text-[#00BFFF]">📚 SERIES</span>
             <span className={`px-3 py-1 text-sm font-medium rounded-full ${statusColors[series.status as keyof typeof statusColors] || statusColors.draft}`}>
               {series.status.replace('-', ' ').toUpperCase()}
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-[#FFD700] mb-6">
             {series.title}
           </h1>
 
           {series.description && (
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+            <p className="text-xl text-[#E0E0E0] mb-8 leading-relaxed">
               {series.description}
             </p>
           )}
 
           {/* Series Stats */}
-          <div className="flex flex-wrap gap-6 text-sm text-gray-600">
+          <div className="flex flex-wrap gap-6 text-sm text-[#E0E0E0]">
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-gray-900">{posts.length}</span>
+              <span className="font-semibold text-[#FFFFFF]">{posts.length}</span>
               <span>parts published</span>
             </div>
             {series.estimatedParts && (
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-gray-900">{series.estimatedParts}</span>
+                <span className="font-semibold text-[#FFFFFF]">{series.estimatedParts}</span>
                 <span>parts planned</span>
               </div>
             )}
             {posts.length > 0 && (
               <div className="flex items-center gap-2">
-                <span className="font-semibold text-gray-900">
+                <span className="font-semibold text-[#FFFFFF]">
                   {Math.round(posts.reduce((acc: number, post: any) => acc + (post.estimatedReadTime || 5), 0))}
                 </span>
                 <span>total minutes</span>
@@ -161,30 +161,30 @@ export default async function SeriesPage({ params }: Props) {
           {posts.length > 0 || series.estimatedParts ? (
             <>
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-3xl font-bold text-gray-900">
+                <h2 className="text-3xl font-bold text-[#FFD700]">
                   Learning Path
                 </h2>
-                <div className="text-sm text-gray-600">
+                <div className="text-sm text-[#E0E0E0]">
                   {posts.length} of {series.estimatedParts || posts.length} parts
                 </div>
               </div>
 
               {/* Progress Bar */}
               {series.estimatedParts && (
-                <div className="mb-12 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <div className="flex justify-between text-sm text-gray-600 mb-3">
+                <div className="mb-12 bg-[#1A1A1A] rounded-xl p-6 shadow-sm border border-[#333333]">
+                  <div className="flex justify-between text-sm text-[#E0E0E0] mb-3">
                     <span className="font-medium">Series Progress</span>
-                    <span className="font-bold text-purple-600">
+                    <span className="font-bold text-[#00BFFF]">
                       {Math.round((posts.length / series.estimatedParts) * 100)}% Complete
                     </span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div className="w-full bg-[#333333] rounded-full h-3 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-500 shadow-sm"
+                      className="bg-gradient-to-r from-[#00BFFF] to-[#FFD700] h-3 rounded-full transition-all duration-500 shadow-sm"
                       style={{ width: `${Math.min((posts.length / series.estimatedParts) * 100, 100)}%` }}
                     />
                   </div>
-                  <div className="flex justify-between text-xs text-gray-500 mt-2">
+                  <div className="flex justify-between text-xs text-[#E0E0E0] mt-2">
                     <span>{posts.length} published</span>
                     <span>{(series.estimatedParts || 0) - posts.length} remaining</span>
                   </div>
@@ -221,10 +221,10 @@ export default async function SeriesPage({ params }: Props) {
 
                     {series.estimatedParts - posts.length > 3 && (
                       <div className="flex gap-4 items-center">
-                        <div className="flex-shrink-0 w-12 h-12 bg-gray-100 text-gray-400 rounded-full flex items-center justify-center font-bold text-sm border-2 border-dashed border-gray-300">
+                        <div className="flex-shrink-0 w-12 h-12 bg-[#333333] text-[#E0E0E0] rounded-full flex items-center justify-center font-bold text-sm border-2 border-dashed border-[#555555]">
                           ...
                         </div>
-                        <div className="flex-1 text-center py-8 text-gray-500">
+                        <div className="flex-1 text-center py-8 text-[#E0E0E0]">
                           <p className="text-sm">
                             And {series.estimatedParts - posts.length - 3} more parts coming soon!
                           </p>
@@ -236,25 +236,25 @@ export default async function SeriesPage({ params }: Props) {
               </div>
 
               {/* Call to Action */}
-              <div className="mt-16 text-center bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-8 border border-purple-100">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
+              <div className="mt-16 text-center bg-[#1A1A1A] rounded-xl p-8 border border-[#333333]">
+                <h3 className="text-xl font-bold text-[#FFD700] mb-2">
                   Following this series?
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#E0E0E0] mb-4">
                   Get notified when new parts are published
                 </p>
-                <button className="px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg hover:from-purple-600 hover:to-blue-600 transition-all duration-300 font-medium shadow-md">
+                <button className="px-6 py-3 bg-gradient-to-r from-[#00BFFF] to-[#FFD700] text-[#121212] rounded-lg hover:from-[#0099CC] hover:to-[#E6C200] transition-all duration-300 font-medium shadow-md">
                   Subscribe to Updates
                 </button>
               </div>
             </>
           ) : (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">📚</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <div className="text-center py-16">
+              <div className="text-6xl mb-6">📚</div>
+              <h3 className="text-2xl font-bold text-[#FFD700] mb-4">
                 No parts published yet
               </h3>
-              <p className="text-gray-600">
+              <p className="text-[#E0E0E0] text-lg">
                 This series is still in development. Check back soon for new parts!
               </p>
             </div>

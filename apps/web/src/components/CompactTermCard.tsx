@@ -58,14 +58,14 @@ export function CompactTermCard({ term, onHover, onHoverEnd, onTap }: CompactTer
   return (
     <div
       ref={cardRef}
-      className="group relative bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md hover:border-gray-300 transition-all duration-200 cursor-pointer min-h-[80px] flex items-center"
+      className="group relative bg-[#1A1A1A] border border-[#333333] p-4 hover:border-[#00BFFF] transition-all duration-200 cursor-pointer min-h-[80px] flex items-center hover:scale-105"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
       {/* Color accent bar */}
       <div 
-        className="absolute top-0 left-0 w-full h-1 rounded-t-lg"
+        className="absolute top-0 left-0 w-full h-1"
         style={{ backgroundColor: domainColor }}
       />
       
@@ -77,18 +77,15 @@ export function CompactTermCard({ term, onHover, onHoverEnd, onTap }: CompactTer
 
       {/* Term name */}
       <div className="flex-1">
-        <h3 className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors leading-tight">
+        <h3 className="font-bold text-[#FFFFFF] group-hover:text-[#00BFFF] transition-colors leading-tight">
           {term.term}
         </h3>
         
         {/* Small type indicator */}
-        <p className="text-xs text-gray-500 mt-1 capitalize">
+        <p className="text-xs text-[#E0E0E0] mt-1 capitalize">
           {term.type.replace('-', ' ')}
         </p>
       </div>
-
-      {/* Hover indicator */}
-      <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-blue-100 transition-colors pointer-events-none" />
     </div>
   )
 }

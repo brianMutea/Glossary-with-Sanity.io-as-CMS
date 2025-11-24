@@ -169,37 +169,32 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+      <div className="bg-[#121212]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold text-[#FFD700] mb-6">
               Tech Glossary
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-              {filteredTerms.length} of {terms.length} technical concepts
+            <p className="text-xl text-[#E0E0E0] max-w-4xl mx-auto leading-relaxed">
+              Discover and explore <span className="text-[#00BFFF] font-semibold">{terms.length}</span> technical concepts, definitions, and programming terms
               {(searchTerm || filterLevel !== 'all' || filterDomain !== 'all' || filterType !== 'all') && (
-                <span className="text-blue-600"> (filtered)</span>
+                <span className="text-[#39FF14] font-semibold"> ({filteredTerms.length} filtered)</span>
               )}
             </p>
           </div>
-
-
         </div>
       </div>
 
       {/* Filters Section */}
-      <div className="bg-gray-50 border-b border-gray-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 space-y-6">
+      <div className="bg-[#121212]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="bg-[#1A1A1A] border border-[#333333] rounded p-8 space-y-6">
             {/* Filter Header */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
-                </svg>
-                <h3 className="text-lg font-semibold text-gray-900">Filter Terms</h3>
+              <div className="flex items-center gap-3">
+                <h3 className="text-2xl font-bold text-[#FFD700]">Filter Terms</h3>
               </div>
               
               {/* Clear All Button */}
@@ -210,7 +205,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
                     setFilterDomain('all')
                     setFilterType('all')
                   }}
-                  className="text-sm text-blue-600 hover:text-blue-800 font-medium cursor-pointer transition-colors"
+                  className="px-4 py-2 text-sm bg-[#FFD700] text-[#121212] hover:bg-[#E6C200] font-bold rounded transition-all duration-200"
                 >
                   Clear All
                 </button>
@@ -314,14 +309,14 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
       </div>
 
       {/* Terms Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {Object.keys(groupedTerms).length === 0 ? (
-          <div className="text-center py-12">
-            <div className="text-6xl mb-4">🔍</div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <div className="text-center py-20">
+            <div className="text-6xl mb-6">🔍</div>
+            <h3 className="text-3xl font-bold text-[#FFD700] mb-4">
               No terms match your filters
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-[#E0E0E0] mb-8 text-xl">
               Try adjusting your search or filter criteria.
             </p>
             <button
@@ -331,7 +326,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
                 setFilterDomain('all')
                 setFilterType('all')
               }}
-              className="text-blue-600 hover:text-blue-700 font-medium"
+              className="px-8 py-3 bg-[#FFD700] text-[#121212] font-bold rounded hover:bg-[#E6C200] transition-colors"
             >
               Clear all filters
             </button>
@@ -341,11 +336,11 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
             <div key={letter} className="mb-12">
               {/* Letter Header */}
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-xl mr-4">
+                <div className="w-12 h-12 bg-[#00BFFF] text-white rounded flex items-center justify-center font-bold text-xl mr-4">
                   {letter}
                 </div>
-                <div className="flex-1 h-px bg-gray-200" />
-                <span className="ml-4 text-sm text-gray-500">
+                <div className="flex-1 h-px bg-[#333333]" />
+                <span className="ml-4 text-sm text-[#E0E0E0]">
                   {letterTerms.length} term{letterTerms.length !== 1 ? 's' : ''}
                 </span>
               </div>

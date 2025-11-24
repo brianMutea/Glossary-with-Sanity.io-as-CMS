@@ -93,9 +93,9 @@ export default async function AuthorPage({ params }: Props) {
   const avatarUrl = getImageUrl(author.avatar, 200, 200)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#121212]">
       {/* Author Header */}
-      <section className="bg-white py-16">
+      <section className="bg-[#121212] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
             {/* Avatar */}
@@ -109,7 +109,7 @@ export default async function AuthorPage({ params }: Props) {
                   className="rounded-full shadow-lg"
                 />
               ) : (
-                <div className="w-48 h-48 bg-gray-300 rounded-full flex items-center justify-center text-6xl font-bold text-gray-600 shadow-lg">
+                <div className="w-48 h-48 bg-[#333333] rounded-full flex items-center justify-center text-6xl font-bold text-[#FFD700] shadow-lg">
                   {author.name.charAt(0)}
                 </div>
               )}
@@ -117,12 +117,12 @@ export default async function AuthorPage({ params }: Props) {
 
             {/* Author Info */}
             <div className="flex-1 text-center md:text-left">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-[#FFD700] mb-4">
                 {author.name}
               </h1>
               
               {author.bio && (
-                <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                <p className="text-xl text-[#E0E0E0] mb-6 leading-relaxed">
                   {author.bio}
                 </p>
               )}
@@ -137,14 +137,14 @@ export default async function AuthorPage({ params }: Props) {
               )}
 
               {/* Stats */}
-              <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm text-gray-600">
+              <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm text-[#E0E0E0]">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-gray-900">{posts.length}</div>
+                  <div className="text-2xl font-bold text-[#FFFFFF]">{posts.length}</div>
                   <div>Articles Published</div>
                 </div>
                 {posts.length > 0 && (
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-gray-900">
+                    <div className="text-2xl font-bold text-[#FFFFFF]">
                       {(() => {
                         const postsWithReadTime = posts.filter((post: any) => post.estimatedReadTime && post.estimatedReadTime > 0)
                         if (postsWithReadTime.length === 0) return 'N/A'
@@ -165,7 +165,7 @@ export default async function AuthorPage({ params }: Props) {
       {/* Author's Posts */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+          <h2 className="text-3xl font-bold text-[#FFD700] mb-8">
             Articles by {author.name}
           </h2>
           
@@ -176,12 +176,12 @@ export default async function AuthorPage({ params }: Props) {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">📝</div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+            <div className="text-center py-16">
+              <div className="text-6xl mb-6">📝</div>
+              <h3 className="text-2xl font-bold text-[#FFD700] mb-4">
                 No articles yet
               </h3>
-              <p className="text-gray-600">
+              <p className="text-[#E0E0E0] text-lg">
                 {author.name} hasn't published any articles yet. Check back soon!
               </p>
             </div>

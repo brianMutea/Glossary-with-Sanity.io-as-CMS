@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { SanityLive } from "@/sanity/live";
 
-const inter = Inter({ 
+const lato = Lato({
   subsets: ["latin"],
-  variable: '--font-inter',
-});
-
-const firaCode = Fira_Code({ 
-  subsets: ["latin"],
-  variable: '--font-fira-code',
+  weight: ['300', '400', '700', '900'],
+  variable: '--font-lato',
 });
 
 export const metadata: Metadata = {
@@ -27,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${firaCode.variable} font-sans`}>
+      <body className={`${lato.variable} font-sans`}>
         <LayoutWrapper>
           {children}
         </LayoutWrapper>

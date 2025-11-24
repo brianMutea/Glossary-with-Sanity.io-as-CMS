@@ -1,9 +1,36 @@
 @import "tailwindcss";
 
-/* CSS Custom Properties for theming */
+/* CodePen.io Inspired Design System */
 :root {
-  --color-primary: #2563eb;
-  --color-accent: #7c3aed;
+  /* Primary Brand Colors */
+  --color-midnight: #191970;
+  --color-dark-bg: #121212;
+  --color-card-bg: #1A1A1A;
+  --color-electric-blue: #00BFFF;
+  --color-neon-green: #39FF14;
+  
+  /* Accent Colors */
+  --color-golden-yellow: #FFD700;
+  --color-coral-pink: #FF6F61;
+  --color-lavender: #E6E6FA;
+  
+  /* Text Colors */
+  --color-white: #FFFFFF;
+  --color-off-white: #E0E0E0;
+  --color-light-gray: #CCCCCC;
+  --color-secondary-bg: #333333;
+  
+  /* Typography */
+  --font-lato: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', 'Monaco', 'Menlo', 'Consolas', monospace;
+}
+
+/* Base dark theme */
+body {
+  font-family: var(--font-lato);
+  background-color: var(--color-dark-bg);
+  color: var(--color-white);
+  line-height: 1.6;
 }
 
 /* Responsive layout improvements */
@@ -363,6 +390,7 @@
 .copy-button:hover {
   background-color: #4b5563;
 }
+
 /* Glossary tooltip styles */
 .glossary-term {
   position: relative;
@@ -381,6 +409,7 @@
     opacity: 0;
     transform: translateX(-50%) translateY(-100%) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(-100%) scale(1);
@@ -481,11 +510,14 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
-}/* S
+}
+
+/* S
 idebar Layout Styles */
 .sidebar-layout {
   display: flex;
@@ -501,7 +533,8 @@ idebar Layout Styles */
 /* Ensure proper spacing for sidebar layout */
 @media (min-width: 1024px) {
   .sidebar-content {
-    margin-left: 16rem; /* 64 * 0.25rem = 16rem for w-64 */
+    margin-left: 16rem;
+    /* 64 * 0.25rem = 16rem for w-64 */
   }
 }
 
@@ -519,7 +552,9 @@ idebar Layout Styles */
 /* Search bar focus styles */
 .search-input:focus {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}/* 
+}
+
+/* 
 Prism.js Syntax Highlighting */
 .token.comment,
 .token.prolog,
@@ -646,7 +681,9 @@ Prism.js Syntax Highlighting */
 .dark .token.important,
 .dark .token.variable {
   color: #ffa657;
-}/* Co
+}
+
+/* Co
 deBlock Component - Override prose styles for consistency */
 .prose .my-8,
 .my-8 {
@@ -672,15 +709,15 @@ code {
 }
 
 /* Ensure header is always attached to code block */
-.prose .my-8 > div:first-child,
-.my-8 > div:first-child {
+.prose .my-8>div:first-child,
+.my-8>div:first-child {
   margin-bottom: 0 !important;
   border-bottom: 1px solid #e5e7eb;
 }
 
 /* Ensure code block container has no gaps */
-.prose .my-8 > div:last-child,
-.my-8 > div:last-child {
+.prose .my-8>div:last-child,
+.my-8>div:last-child {
   margin-top: 0 !important;
 }
 
@@ -698,16 +735,18 @@ code strong {
   border-radius: 0 0 0.5rem 0.5rem !important;
 }
 
-.prose .my-8 > div:first-child,
-.my-8 > div:first-child {
+.prose .my-8>div:first-child,
+.my-8>div:first-child {
   border-radius: 0.5rem 0.5rem 0 0 !important;
 }
 
 /* When no header, ensure proper border radius */
-.prose .my-8 > div:only-child pre,
-.my-8 > div:only-child pre {
+.prose .my-8>div:only-child pre,
+.my-8>div:only-child pre {
   border-radius: 0.5rem !important;
-}/*
+}
+
+/*
  CodeBlock Component - Specific overrides to ensure consistency */
 .codeblock-container {
   margin: 2rem 0 !important;
@@ -765,7 +804,8 @@ code strong {
 .prose .token.keyword,
 .prose .token.atrule,
 .prose .token.attr-value {
-  font-weight: 600 !important; /* Only keywords should be bold */
+  font-weight: 600 !important;
+  /* Only keywords should be bold */
 }
 
 .prose .token.function,
@@ -784,7 +824,9 @@ code strong {
 .prose .token.builtin,
 .prose .token.inserted {
   font-weight: normal !important;
-}/*
+}
+
+/*
  Custom Select Dropdown Styling */
 select {
   cursor: pointer !important;
@@ -863,18 +905,18 @@ select::-ms-expand {
   color: #374151;
   cursor: pointer !important;
   transition: all 0.2s ease-in-out;
-  
+
   /* Remove default styling */
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
   appearance: none !important;
-  
+
   /* Custom dropdown arrow */
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e");
   background-position: right 1rem center;
   background-repeat: no-repeat;
   background-size: 1.25rem 1.25rem;
-  
+
   /* Shadow for depth */
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
@@ -932,7 +974,7 @@ select::-ms-expand {
     background-color: white !important;
     color: #374151 !important;
   }
-  
+
   .filter-select option:checked {
     background: #3b82f6 !important;
     color: white !important;
@@ -1006,4 +1048,213 @@ div select.filter-select option:checked,
 .filter-select option:checked {
   background-color: #3b82f6 !important;
   color: white !important;
+}
+/* Cen
+tered Layout System */
+.centered-layout {
+  /* Mobile: Full width with padding */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .centered-layout {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .centered-layout {
+    /* Desktop: Sidebar on left (16rem), matching margin on right */
+    margin-left: 16rem;
+    margin-right: 16rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Responsive container that works with centered layout */
+.responsive-container {
+  width: 100%;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .responsive-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Ensure sidebar doesn't interfere with mobile layout */
+@media (max-width: 1023px) {
+  .lg\:ml-64 {
+    margin-left: 0 !important;
+  }
+  
+  .lg\:mr-64 {
+    margin-right: 0 !important;
+  }
+}
+
+/* Mobile-first responsive breakpoints */
+.mobile-container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Ensure proper spacing for full-width sections */
+.full-width-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 1024px) {
+  .full-width-section {
+    /* On desktop, account for sidebar offset */
+    width: calc(100vw - 16rem);
+    left: calc(50% + 8rem);
+    margin-left: calc(-50vw + 8rem);
+  }
+}
+
+/* Utility for content that should break out of centered layout */
+.break-out {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 1024px) {
+  .break-out {
+    /* On desktop with sidebar, adjust calculations */
+    width: calc(100vw - 16rem);
+    left: calc(50% + 8rem);
+    margin-left: calc(-50vw + 8rem);
+  }
+}
+
+/* Ensure smooth transitions for layout changes */
+.layout-transition {
+  transition: margin-left 0.3s ease-in-out, margin-right 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+/* Fix for knowledge graph full-height sections */
+.knowledge-graph-container {
+  height: calc(100vh - 200px);
+  min-height: 600px;
+}
+
+@media (max-width: 1023px) {
+  .knowledge-graph-container {
+    height: calc(100vh - 150px);
+    min-height: 500px;
+  }
+}
+
+/* Responsive grid utilities that work with centered layout */
+.responsive-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .responsive-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Ensure proper text wrapping in centered layout */
+.text-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 1023px) {
+  .mobile-nav-padding {
+    padding-top: 4rem; /* Account for mobile header */
+  }
+}
+
+/* Accessibility improvements for centered layout */
+.skip-to-content {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-content:focus {
+  top: 6px;
+}
+
+/* Print styles for centered layout */
+@media print {
+  .lg\:ml-64,
+  .lg\:mr-64 {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .sidebar {
+    display: none !important;
+  }
+  
+  .responsive-container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
 }

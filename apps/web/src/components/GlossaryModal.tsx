@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { GlossaryModalContent } from './GlossaryModalContent'
 import { calculateTooltipPosition, type TooltipPosition } from '@/lib/tooltipPositioning'
 
@@ -35,23 +35,23 @@ interface GlossaryModalProps {
   onClose?: () => void
 }
 
-export function GlossaryModal({ 
-  term, 
-  variant, 
-  isVisible, 
-  triggerRect, 
-  onMouseEnter, 
-  onMouseLeave, 
-  onClose 
+export function GlossaryModal({
+  term,
+  variant,
+  isVisible,
+  triggerRect,
+  onMouseEnter,
+  onMouseLeave,
+  onClose
 }: GlossaryModalProps) {
   const modalRef = useRef<HTMLDivElement>(null)
-  
+
   // Calculate position synchronously to prevent flash
   const calculateCurrentPosition = (): TooltipPosition => {
     if (variant !== 'desktop' || !triggerRect) {
       return { x: 0, y: 0, placement: 'right' }
     }
-    
+
     const tooltipWidth = 380
     const tooltipHeight = 450
 
@@ -67,7 +67,7 @@ export function GlossaryModal({
 
   // Calculate position immediately, not in state
   const position = calculateCurrentPosition()
-  
+
   // Don't render if position is not ready for desktop
   const shouldRender = variant === 'mobile' || (variant === 'desktop' && triggerRect && position.x !== 0 && position.y !== 0)
 
@@ -95,7 +95,7 @@ export function GlossaryModal({
           preferredPlacement: 'right'
         })
 
-        setPosition(newPosition)
+        // Position is calculated synchronously, no need to set state
       }
     }
 
@@ -131,9 +131,8 @@ export function GlossaryModal({
     return (
       <div
         ref={modalRef}
-        className={`fixed z-50 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 ease-out flex flex-col ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
+        className={`fixed z-50 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 ease-out flex flex-col ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
         style={{
           left: position.x,
           top: position.y,
@@ -152,9 +151,9 @@ export function GlossaryModal({
               left: position.arrow.side === 'left' ? -6 : position.arrow.side === 'right' ? 'calc(100% - 6px)' : position.arrow.x - position.x - 6,
               top: position.arrow.side === 'top' ? -6 : position.arrow.side === 'bottom' ? 'calc(100% - 6px)' : position.arrow.y - position.y - 6,
               borderColor: position.arrow.side === 'left' ? 'transparent transparent #e5e7eb #e5e7eb' :
-                          position.arrow.side === 'right' ? '#e5e7eb #e5e7eb transparent transparent' :
-                          position.arrow.side === 'top' ? 'transparent #e5e7eb #e5e7eb transparent' :
-                          '#e5e7eb transparent transparent #e5e7eb'
+                position.arrow.side === 'right' ? '#e5e7eb #e5e7eb transparent transparent' :
+                  position.arrow.side === 'top' ? 'transparent #e5e7eb #e5e7eb transparent' :
+                    '#e5e7eb transparent transparent #e5e7eb'
             }}
           />
         )}
@@ -168,19 +167,17 @@ export function GlossaryModal({
   return (
     <>
       {/* Backdrop */}
-      <div 
-        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
-        }`}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div 
+      <div
         ref={modalRef}
-        className={`fixed z-50 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 ease-out flex flex-col ${
-          isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-        }`}
+        className={`fixed z-50 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 ease-out flex flex-col ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+          }`}
         style={{
           left: '50%',
           top: '50%',
