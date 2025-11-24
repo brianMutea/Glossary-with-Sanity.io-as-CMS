@@ -138,9 +138,9 @@ const domainColors = {
   'software-engineering': 'bg-[#E0E0E0] text-[#121212]',
   'math': 'bg-[#E6E6FA] text-[#121212]',
   'statistics': 'bg-[#FF6F61] text-[#121212]',
-  'deep-learning': 'bg-[#E6E6FA] bg-opacity-20 text-[#E6E6FA]',
-  'computer-vision': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700]',
-  'nlp': 'bg-[#FF6F61] bg-opacity-20 text-[#FF6F61]',
+  'deep-learning': 'bg-[#E6E6FA] text-[#121212]',
+  'computer-vision': 'bg-[#FFD700] text-[#121212]',
+  'nlp': 'bg-[#FF6F61] text-[#121212]',
 }
 
 const typeIcons = {

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getImageUrl } from '@/sanity/image'
+import { Badge } from './ui/Badge'
 
 interface SeriesCardProps {
   series: {
@@ -24,12 +25,6 @@ interface SeriesCardProps {
 
 export function SeriesCard({ series }: SeriesCardProps) {
   const coverImageUrl = getImageUrl(series.coverImage, 300, 160)
-  const statusColors = {
-    draft: 'bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0] border-[#E0E0E0]',
-    'in-progress': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700] border-[#FFD700]',
-    completed: 'bg-[#39FF14] bg-opacity-20 text-[#39FF14] border-[#39FF14]'
-  }
-
   const publishedCount = series.posts?.length || 0
   const totalParts = series.estimatedParts || publishedCount
   const progressPercentage = totalParts > 0 ? (publishedCount / totalParts) * 100 : 0
@@ -49,26 +44,26 @@ export function SeriesCard({ series }: SeriesCardProps) {
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-blue-500 to-indigo-600" />
           )}
-          
+
           {/* Overlay with series info */}
           <div className="absolute inset-0 bg-black bg-opacity-20" />
           <div className="absolute top-3 left-3 right-3 flex items-start justify-between">
             <div className="flex items-center gap-2">
-              <span className="px-2 py-1 bg-white bg-opacity-90 text-purple-700 text-xs font-bold rounded-full">
+              <Badge variant="custom" size="xs" className="bg-white bg-opacity-90 text-purple-700">
                 📚 SERIES
-              </span>
+              </Badge>
             </div>
-            <span className={`px-2 py-1 text-xs font-medium rounded-full border ${statusColors[series.status as keyof typeof statusColors] || statusColors.draft}`}>
+            <Badge variant="status" value={series.status} size="xs">
               {series.status.replace('-', ' ').toUpperCase()}
-            </span>
+            </Badge>
           </div>
         </div>
-        
+
         <div className="p-4">
           <h3 className="text-lg font-bold text-[#FFFFFF] mb-2 line-clamp-2 group-hover:text-[#00BFFF] transition-colors">
             {series.title}
           </h3>
-          
+
           {series.description && (
             <p className="text-[#E0E0E0] text-sm mb-3 line-clamp-2">
               {series.description}
@@ -82,7 +77,7 @@ export function SeriesCard({ series }: SeriesCardProps) {
               <span>{totalParts} total parts</span>
             </div>
             <div className="w-full bg-[#333333] rounded-full h-1.5">
-              <div 
+              <div
                 className="bg-gradient-to-r from-[#00BFFF] to-[#39FF14] h-1.5 rounded-full transition-all duration-300"
                 style={{ width: `${Math.min(progressPercentage, 100)}%` }}
               />

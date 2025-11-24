@@ -80,75 +80,8 @@ export default async function KnowledgeGraphPage() {
       </div>
 
       {/* Graph Container */}
-      <div className="h-[calc(100vh-200px)]">
+      <div className="h-[calc(100vh-200px)] min-h-[800px]">
         <KnowledgeGraph terms={terms} />
-      </div>
-
-      {/* Legend and Info */}
-      <div className="bg-[#121212]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Node Colors Legend */}
-            <div>
-              <h3 className="text-xl font-bold text-[#FFD700] mb-4">Node Colors</h3>
-              <div className="space-y-3">
-                {levels.map(level => (
-                  <div key={level} className="flex items-center gap-3">
-                    <div 
-                      className="w-4 h-4 rounded-full border-2" 
-                      style={{ 
-                        backgroundColor: getLevelColor(level as 'beginner' | 'intermediate' | 'advanced'),
-                        borderColor: getLevelColor(level as 'beginner' | 'intermediate' | 'advanced')
-                      }}
-                    ></div>
-                    <span className="text-sm text-[#E0E0E0]">{formatDisplayName(level)} Level</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Domain Colors - Dynamic */}
-            <div>
-              <h3 className="text-xl font-bold text-[#FFD700] mb-4">Domain Colors</h3>
-              <div className="grid grid-cols-2 gap-2 text-sm">
-                {domains.map(domain => (
-                  <div key={domain} className="flex items-center gap-2">
-                    <div 
-                      className="w-3 h-3 rounded-full" 
-                      style={{ backgroundColor: getDomainColor(domain) }}
-                    ></div>
-                    <span className="text-[#E0E0E0]">{formatDisplayName(domain)}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Usage Tips */}
-          <div className="mt-8 p-6 bg-[#1A1A1A] border border-[#333333] rounded">
-            <h3 className="text-xl font-bold text-[#FFD700] mb-4">How to Use the Knowledge Graph</h3>
-            <div className="grid md:grid-cols-2 gap-6 text-sm text-[#E0E0E0]">
-              <div>
-                <h4 className="font-bold text-[#00BFFF] mb-2">Navigation:</h4>
-                <ul className="space-y-1">
-                  <li>• Click and drag to move nodes around</li>
-                  <li>• Scroll or pinch to zoom in/out</li>
-                  <li>• Click a node to see details</li>
-                  <li>• Double-click to go to term page</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-bold text-[#00BFFF] mb-2">Learning Paths:</h4>
-                <ul className="space-y-1">
-                  <li>• Gray arrows show prerequisites</li>
-                  <li>• Blue arrows show next concepts</li>
-                  <li>• Green lines show related terms</li>
-                  <li>• Follow arrows to build knowledge</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

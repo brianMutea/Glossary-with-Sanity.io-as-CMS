@@ -7,6 +7,99 @@ import { getDynamicOptions, getDomainColor, getLevelColor, formatDisplayName } f
 import { GlossaryModal } from './GlossaryModal'
 import { CustomSelect } from './ui/CustomSelect'
 
+interface GraphInfoPanelProps {
+  terms: KnowledgeGraphProps['terms']
+  searchTerm: string
+  filterLevel: string
+  filterDomain: string
+}
+
+function GraphInfoPanel({ terms, searchTerm, filterLevel, filterDomain }: GraphInfoPanelProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const visibleNodes = terms.filter(t => {
+    const matchesSearch = searchTerm === '' ||
+      t.term.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesLevel = filterLevel === 'all' || t.level === filterLevel
+    const matchesDomain = filterDomain === 'all' || t.domain === filterDomain
+    return matchesSearch && matchesLevel && matchesDomain
+  }).length
+
+  const totalRelationships = terms.reduce((acc, t) =>
+    acc + (t.prerequisites?.length || 0) + (t.relatedTerms?.length || 0) + (t.nextConcepts?.length || 0), 0
+  )
+
+  return (
+    <>
+      {/* Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="absolute bottom-4 left-4 bg-[#1A1A1A]/90 hover:bg-[#333333]/90 text-[#FFD700] p-3 rounded-full shadow-lg transition-all duration-200 z-50 border border-[#333333] cursor-pointer"
+        aria-label="Toggle graph information"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </button>
+
+      {/* Info Panel */}
+      {isOpen && (
+        <div className="absolute bottom-16 left-4 right-4 md:right-auto md:min-w-[600px] md:max-w-[700px] bg-[#1A1A1A]/95 backdrop-blur-sm rounded-lg p-4 text-sm text-[#E0E0E0] border border-[#333333] shadow-xl z-50">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-[#FFD700] font-bold">Graph Info</h4>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-[#E0E0E0] hover:text-[#FFFFFF] transition-colors cursor-pointer"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div>
+              <p className="text-[#00BFFF] font-semibold mb-2">Instructions:</p>
+              <ul className="space-y-1 text-xs">
+                <li>• Click to select a node</li>
+                <li>• Double-click to view details</li>
+                <li>• Drag to move nodes</li>
+                <li>• Scroll to zoom</li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[#FFD700] font-semibold mb-2">Stats:</p>
+              <ul className="space-y-1 text-xs">
+                <li>• {visibleNodes} nodes visible</li>
+                <li>• {totalRelationships} total relationships</li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="text-[#39FF14] font-semibold mb-2">Legend:</p>
+              <div className="space-y-1 text-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-0.5 bg-gray-500"></div>
+                  <span>Prerequisites</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-0.5 bg-[#39FF14]"></div>
+                  <span>Related</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-0.5 bg-[#00BFFF]"></div>
+                  <span>Next concepts</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 interface GraphNode {
   id: string
   term: string
@@ -497,7 +590,7 @@ export default function KnowledgeGraph({ terms }: KnowledgeGraphProps) {
       </div>
 
       {/* Graph Container */}
-      <div className="h-[600px] relative overflow-hidden">
+      <div className="flex-1 relative overflow-hidden">
         {terms.length === 0 ? (
           <div className="flex items-center justify-center h-full">
             <div className="text-center">
@@ -522,27 +615,13 @@ export default function KnowledgeGraph({ terms }: KnowledgeGraphProps) {
           }}
         />
 
-        {/* Instructions & Stats */}
-        <div className="absolute bottom-4 left-4 bg-[#1A1A1A]/95 backdrop-blur-sm rounded p-3 text-sm text-[#E0E0E0] border border-[#333333]">
-          <p className="text-[#FFD700] font-bold">Instructions:</p>
-          <p>• Click to select a node</p>
-          <p>• Double-click to view details</p>
-          <p>• Drag to move nodes</p>
-          <p>• Scroll to zoom</p>
-          <div className="mt-2 pt-2">
-            <p className="text-[#FFD700] font-bold">Graph Stats:</p>
-            <p>• {terms.filter(t => {
-              const matchesSearch = searchTerm === '' ||
-                t.term.toLowerCase().includes(searchTerm.toLowerCase())
-              const matchesLevel = filterLevel === 'all' || t.level === filterLevel
-              const matchesDomain = filterDomain === 'all' || t.domain === filterDomain
-              return matchesSearch && matchesLevel && matchesDomain
-            }).length} nodes visible</p>
-            <p>• {terms.reduce((acc, t) =>
-              acc + (t.prerequisites?.length || 0) + (t.relatedTerms?.length || 0) + (t.nextConcepts?.length || 0), 0
-            )} total relationships</p>
-          </div>
-        </div>
+        {/* Instructions & Stats Toggle */}
+        <GraphInfoPanel 
+          terms={terms}
+          searchTerm={searchTerm}
+          filterLevel={filterLevel}
+          filterDomain={filterDomain}
+        />
       </div>
     </div>
   )

@@ -12,33 +12,31 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ category, postCount }: CategoryCardProps) {
-  const bgColor = category.color?.hex || '#2563eb'
-  const lightBgColor = category.color?.hex ? `${category.color.hex}15` : '#dbeafe'
+  const bgColor = category.color?.hex || '#00BFFF'
 
   return (
     <Link 
       href={`/category/${category.slug.current}`}
-      className="block p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 border-l-4"
+      className="block bg-[#1A1A1A] border border-[#333333] p-6 rounded-lg hover:border-[#00BFFF] hover:scale-105 transition-all duration-200 border-l-4"
       style={{
-        backgroundColor: lightBgColor,
         borderLeftColor: bgColor
       }}
     >
       <div className="flex items-center justify-between mb-2">
         <h3 
-          className="text-lg font-semibold"
+          className="text-lg font-semibold text-[#FFFFFF]"
           style={{ color: bgColor }}
         >
           {category.title}
         </h3>
         {postCount !== undefined && (
-          <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded-full">
+          <span className="text-sm text-[#E0E0E0] bg-[#333333] px-2 py-1 rounded-full">
             {postCount} posts
           </span>
         )}
       </div>
       {category.description && (
-        <p className="text-sm text-gray-600 line-clamp-2">
+        <p className="text-sm text-[#E0E0E0] line-clamp-2">
           {category.description}
         </p>
       )}

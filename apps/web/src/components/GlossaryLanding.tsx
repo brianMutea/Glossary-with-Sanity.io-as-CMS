@@ -57,6 +57,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
   const [filterLevel, setFilterLevel] = useState('all')
   const [filterDomain, setFilterDomain] = useState('all')
   const [filterType, setFilterType] = useState('all')
+  const [selectedLetter, setSelectedLetter] = useState<string>('all')
 
   // Detect mobile on mount
   useEffect(() => {
@@ -94,6 +95,15 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
   // Get dynamic options for filters
   const { domains, types, levels } = useMemo(() => getDynamicOptions(terms), [terms])
 
+  // Get available letters from terms
+  const availableLetters = useMemo(() => {
+    const letters = new Set<string>()
+    terms.forEach(term => {
+      letters.add(term.term.charAt(0).toUpperCase())
+    })
+    return Array.from(letters).sort()
+  }, [terms])
+
   // Filter terms based on search and filters
   const filteredTerms = useMemo(() => {
     return terms.filter((term) => {
@@ -108,6 +118,11 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
           (term.tags && term.tags.some((tag: string) => tag.toLowerCase().includes(searchLower)))
         
         if (!matchesSearch) return false
+      }
+
+      // Letter filter
+      if (selectedLetter !== 'all' && term.term.charAt(0).toUpperCase() !== selectedLetter) {
+        return false
       }
 
       // Level filter
@@ -127,7 +142,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
 
       return true
     })
-  }, [terms, searchTerm, filterLevel, filterDomain, filterType])
+  }, [terms, searchTerm, selectedLetter, filterLevel, filterDomain, filterType])
 
   // Group filtered terms alphabetically
   const groupedTerms = useMemo(() => {
@@ -198,9 +213,10 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
               </div>
               
               {/* Clear All Button */}
-              {(filterLevel !== 'all' || filterDomain !== 'all' || filterType !== 'all') && (
+              {(selectedLetter !== 'all' || filterLevel !== 'all' || filterDomain !== 'all' || filterType !== 'all') && (
                 <button
                   onClick={() => {
+                    setSelectedLetter('all')
                     setFilterLevel('all')
                     setFilterDomain('all')
                     setFilterType('all')
@@ -260,23 +276,61 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
               />
             </div>
 
+            {/* Alphabetical Filter */}
+            <div className="pt-4 border-t border-[#333333]">
+              <div className="flex flex-wrap gap-1 sm:gap-2">
+                <button
+                  onClick={() => setSelectedLetter('all')}
+                  className={`px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded transition-all duration-200 ${
+                    selectedLetter === 'all'
+                      ? 'bg-[#FFD700] text-[#121212]'
+                      : 'bg-[#333333] text-[#E0E0E0] hover:bg-[#555555]'
+                  }`}
+                >
+                  All
+                </button>
+                {availableLetters.map((letter) => (
+                  <button
+                    key={letter}
+                    onClick={() => setSelectedLetter(letter)}
+                    className={`px-2 sm:px-3 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded transition-all duration-200 ${
+                      selectedLetter === letter
+                        ? 'bg-[#FFD700] text-[#121212]'
+                        : 'bg-[#333333] text-[#E0E0E0] hover:bg-[#555555]'
+                    }`}
+                  >
+                    {letter}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Active Filters Display */}
-            {(searchTerm || filterLevel !== 'all' || filterDomain !== 'all' || filterType !== 'all') && (
-              <div className="pt-4 border-t border-gray-100">
+            {(searchTerm || selectedLetter !== 'all' || filterLevel !== 'all' || filterDomain !== 'all' || filterType !== 'all') && (
+              <div className="pt-4 border-t border-[#333333]">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-sm font-medium text-gray-600">Active filters:</span>
+                  <span className="text-sm font-medium text-[#E0E0E0]">Active filters:</span>
                   
                   {searchTerm && (
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-700 text-sm rounded-full border border-blue-200">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#00BFFF] text-[#121212] text-sm rounded-full font-medium">
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                       "{searchTerm}"
                     </span>
                   )}
+
+                  {selectedLetter !== 'all' && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#E0E0E0] text-[#121212] text-sm rounded-full font-medium">
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                      </svg>
+                      Letter {selectedLetter}
+                    </span>
+                  )}
                   
                   {filterLevel !== 'all' && (
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-green-50 text-green-700 text-sm rounded-full border border-green-200">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#39FF14] text-[#121212] text-sm rounded-full font-medium">
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
@@ -285,7 +339,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
                   )}
                   
                   {filterDomain !== 'all' && (
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-50 text-purple-700 text-sm rounded-full border border-purple-200">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#FFD700] text-[#121212] text-sm rounded-full font-medium">
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                       </svg>
@@ -294,7 +348,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
                   )}
                   
                   {filterType !== 'all' && (
-                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-orange-50 text-orange-700 text-sm rounded-full border border-orange-200">
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#FF6F61] text-[#121212] text-sm rounded-full font-medium">
                       <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                       </svg>
@@ -307,6 +361,8 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
           </div>
         </div>
       </div>
+
+
 
       {/* Terms Grid */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -322,6 +378,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
             <button
               onClick={() => {
                 setSearchTerm('')
+                setSelectedLetter('all')
                 setFilterLevel('all')
                 setFilterDomain('all')
                 setFilterType('all')
@@ -336,7 +393,7 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
             <div key={letter} className="mb-12">
               {/* Letter Header */}
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-[#00BFFF] text-white rounded flex items-center justify-center font-bold text-xl mr-4">
+                <div className="w-16 h-16 flex items-center justify-center font-bold text-4xl mr-6 text-[#E0E0E0] opacity-60">
                   {letter}
                 </div>
                 <div className="flex-1 h-px bg-[#333333]" />

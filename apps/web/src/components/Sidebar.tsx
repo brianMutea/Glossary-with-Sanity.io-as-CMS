@@ -21,9 +21,9 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
   const navigation = [
     { name: 'Glossary', href: '/' },
     { name: 'Knowledge Graph', href: '/knowledge-graph' },
-    { name: 'Learning Paths', href: '/learning-paths' },
     { name: 'Blog', href: '/blog' },
     { name: 'Series', href: '/series' },
+    { name: 'Learning Paths', href: '/learning-paths' },
     { name: 'Authors', href: '/authors' },
   ]
 

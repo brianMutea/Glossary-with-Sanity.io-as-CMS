@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import { SeriesPostCard } from '@/components/SeriesPostCard'
 import { getImageUrl } from '@/sanity/image'
+import { Badge } from '@/components/ui/Badge'
 
 // Query for series details and posts
 const SERIES_QUERY = `*[_type == "series" && slug.current == $slug][0] {
@@ -91,34 +92,19 @@ export default async function SeriesPage({ params }: Props) {
   }
 
   const coverImageUrl = getImageUrl(series.coverImage, 1200, 400)
-  const statusColors = {
-    draft: 'bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0]',
-    'in-progress': 'bg-[#FFD700] bg-opacity-20 text-[#FFD700]',
-    completed: 'bg-[#39FF14] bg-opacity-20 text-[#39FF14]'
-  }
 
   return (
-    <div className="min-h-screen bg-[#121212]">
-      {/* Series Header */}
-      <section className="bg-[#121212]">
-        {coverImageUrl && (
-          <div className="relative h-64 md:h-80">
-            <Image
-              src={coverImageUrl}
-              alt={series.coverImage?.alt || series.title}
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-40" />
-          </div>
-        )}
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-sm font-medium text-[#00BFFF]">📚 SERIES</span>
-            <span className={`px-3 py-1 text-sm font-medium rounded-full ${statusColors[series.status as keyof typeof statusColors] || statusColors.draft}`}>
+    <div className="min-h-screen bg-[#121212] py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Series Header */}
+        <div className="mb-16 text-center">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <Badge variant="custom" size="sm" className="bg-[#00BFFF] text-[#121212]">
+              📚 SERIES
+            </Badge>
+            <Badge variant="status" value={series.status} size="sm">
               {series.status.replace('-', ' ').toUpperCase()}
-            </span>
+            </Badge>
           </div>
 
           <h1 className="text-4xl md:text-5xl font-bold text-[#FFD700] mb-6">
@@ -126,13 +112,13 @@ export default async function SeriesPage({ params }: Props) {
           </h1>
 
           {series.description && (
-            <p className="text-xl text-[#E0E0E0] mb-8 leading-relaxed">
+            <p className="text-xl text-[#E0E0E0] mb-8 leading-relaxed max-w-4xl mx-auto">
               {series.description}
             </p>
           )}
 
           {/* Series Stats */}
-          <div className="flex flex-wrap gap-6 text-sm text-[#E0E0E0]">
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-[#E0E0E0]">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-[#FFFFFF]">{posts.length}</span>
               <span>parts published</span>
@@ -153,11 +139,9 @@ export default async function SeriesPage({ params }: Props) {
             )}
           </div>
         </div>
-      </section>
 
-      {/* Series Posts */}
-      <section className="py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Series Posts */}
+        <div>
           {posts.length > 0 || series.estimatedParts ? (
             <>
               <div className="flex items-center justify-between mb-8">
@@ -260,7 +244,7 @@ export default async function SeriesPage({ params }: Props) {
             </div>
           )}
         </div>
-      </section>
+      </div>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { getImageUrl } from '@/sanity/image'
 import { SocialLinks } from '@/components/SocialLinks'
 import { GitHubIcon } from '@/components/SocialIcons'
+import { Badge } from '@/components/ui/Badge'
 
 interface Props {
     params: Promise<{ slug: string }>
@@ -46,11 +47,10 @@ export default async function BlogPostPage({ params }: Props) {
                 {/* Series Badge */}
                 {post.series && (
                     <div className="mb-6">
-                        <Link 
-                            href={`/series/${post.series.slug.current}`}
-                            className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-800 rounded-full hover:bg-purple-200 transition-colors"
-                        >
-                            📚 Part of: {post.series.title}
+                        <Link href={`/series/${post.series.slug.current}`}>
+                            <Badge variant="custom" size="md" className="bg-purple-600 text-white hover:bg-purple-700">
+                                📚 Part of: {post.series.title}
+                            </Badge>
                         </Link>
                     </div>
                 )}
@@ -62,13 +62,18 @@ export default async function BlogPostPage({ params }: Props) {
                             <Link
                                 key={category.slug.current}
                                 href={`/category/${category.slug.current}`}
-                                className="px-3 py-1 text-sm font-medium rounded-full transition-colors"
-                                style={{
-                                    backgroundColor: category.color?.hex ? `${category.color.hex}20` : '#f3f4f6',
-                                    color: category.color?.hex || '#374151'
-                                }}
                             >
-                                {category.title}
+                                <Badge 
+                                    variant="custom" 
+                                    size="sm"
+                                    className="hover:opacity-80 transition-opacity"
+                                    style={{
+                                        backgroundColor: category.color?.hex || '#00BFFF',
+                                        color: '#121212'
+                                    }}
+                                >
+                                    {category.title}
+                                </Badge>
                             </Link>
                         ))}
                     </div>
@@ -118,9 +123,9 @@ export default async function BlogPostPage({ params }: Props) {
                                     <span>{post.estimatedReadTime} min read</span>
                                 )}
                                 {post.difficulty && (
-                                    <span className="px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">
+                                    <Badge variant="level" value={post.difficulty} size="xs">
                                         {post.difficulty}
-                                    </span>
+                                    </Badge>
                                 )}
                             </div>
                         </div>
@@ -131,20 +136,14 @@ export default async function BlogPostPage({ params }: Props) {
                 {(post.tags || post.codeLanguages) && (
                     <div className="flex flex-wrap gap-2 mb-8">
                         {post.codeLanguages?.map((lang: string) => (
-                            <span
-                                key={lang}
-                                className="px-3 py-1 text-sm bg-blue-50 text-blue-700 rounded-full border border-blue-200"
-                            >
+                            <Badge key={lang} variant="language" size="sm">
                                 {lang}
-                            </span>
+                            </Badge>
                         ))}
                         {post.tags?.map((tag: string) => (
-                            <span
-                                key={tag}
-                                className="px-3 py-1 text-sm bg-gray-50 text-gray-700 rounded-full border border-gray-200"
-                            >
+                            <Badge key={tag} variant="custom" size="sm">
                                 #{tag}
-                            </span>
+                            </Badge>
                         ))}
                     </div>
                 )}
@@ -157,10 +156,11 @@ export default async function BlogPostPage({ params }: Props) {
                                 href={post.githubRepo}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
                             >
-                                <GitHubIcon className="w-4 h-4" />
-                                <span>View on GitHub</span>
+                                <Badge variant="custom" size="md" className="bg-gray-900 text-white hover:bg-gray-800">
+                                    <GitHubIcon className="w-4 h-4 mr-2" />
+                                    View on GitHub
+                                </Badge>
                             </a>
                         )}
                         {post.liveDemo && (
@@ -168,9 +168,10 @@ export default async function BlogPostPage({ params }: Props) {
                                 href={post.liveDemo}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                             >
-                                🚀 Live Demo
+                                <Badge variant="custom" size="md" className="bg-green-600 text-white hover:bg-green-700">
+                                    🚀 Live Demo
+                                </Badge>
                             </a>
                         )}
                     </div>
@@ -212,17 +213,17 @@ export default async function BlogPostPage({ params }: Props) {
                             <Link
                                 key={term._id}
                                 href={`/glossary/${term.slug.current}`}
-                                className="px-3 py-2 bg-white text-blue-700 rounded-full border border-blue-200 hover:bg-blue-100 transition-colors text-sm font-medium"
                             >
-                                {term.term}
+                                <Badge variant="custom" size="sm" className="bg-white text-blue-700 border border-blue-200 hover:bg-blue-100">
+                                    {term.term}
+                                </Badge>
                             </Link>
                         ))}
                         {termsInContent.length > 8 && (
-                            <Link
-                                href="/glossary"
-                                className="px-3 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors text-sm font-medium"
-                            >
-                                +{termsInContent.length - 8} more terms
+                            <Link href="/glossary">
+                                <Badge variant="custom" size="sm" className="bg-blue-600 text-white hover:bg-blue-700">
+                                    +{termsInContent.length - 8} more terms
+                                </Badge>
                             </Link>
                         )}
                     </div>

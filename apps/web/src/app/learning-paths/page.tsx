@@ -6,7 +6,7 @@ export default async function LearningPathsPage() {
   const { data: paths } = await sanityFetch({ query: LEARNING_PATHS_QUERY })
 
   return (
-    <div className="min-h-screen bg-[#121212]">
+    <div className="min-h-screen bg-[#121212] relative">
       {/* Header */}
       <section className="bg-[#121212] py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -60,19 +60,19 @@ export default async function LearningPathsPage() {
                     if (levelPaths.length === 0) return null
                     
                     const levelColors = {
-                      beginner: 'bg-[#39FF14] bg-opacity-20 border-[#39FF14] text-[#39FF14]',
-                      intermediate: 'bg-[#FFD700] bg-opacity-20 border-[#FFD700] text-[#FFD700]',
-                      advanced: 'bg-[#FF6F61] bg-opacity-20 border-[#FF6F61] text-[#FF6F61]',
-                      mixed: 'bg-[#E6E6FA] bg-opacity-20 border-[#E6E6FA] text-[#E6E6FA]',
+                      beginner: 'bg-[#1A1A1A] border-[#39FF14] text-[#39FF14]',
+                      intermediate: 'bg-[#1A1A1A] border-[#FFD700] text-[#FFD700]',
+                      advanced: 'bg-[#1A1A1A] border-[#FF6F61] text-[#FF6F61]',
+                      mixed: 'bg-[#1A1A1A] border-[#E6E6FA] text-[#E6E6FA]',
                     }
                     
                     return (
                       <div
                         key={level}
-                        className={`p-4 rounded-lg border-2 ${levelColors[level as keyof typeof levelColors]}`}
+                        className={`p-6 rounded-lg border-2 ${levelColors[level as keyof typeof levelColors]} hover:bg-[#333333] transition-all duration-200 cursor-pointer`}
                       >
-                        <div className="text-lg font-bold capitalize">{level}</div>
-                        <div className="text-sm">{levelPaths.length} paths available</div>
+                        <div className="text-xl font-bold capitalize mb-2">{level}</div>
+                        <div className="text-sm text-[#E0E0E0]">{levelPaths.length} paths available</div>
                       </div>
                     )
                   })}
@@ -125,6 +125,22 @@ export default async function LearningPathsPage() {
           </div>
         </div>
       </section>
+
+      {/* Subtle Overlay to Prevent Interaction */}
+      <div className="fixed inset-0 bg-black bg-opacity-5 z-10"></div>
+
+      {/* Coming Soon Message */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-20">
+        <div className="text-center pointer-events-auto bg-[#121212] bg-opacity-90 backdrop-blur-sm rounded-xl p-8 border border-[#333333] shadow-2xl">
+          <div className="text-4xl md:text-5xl mb-4">🚧</div>
+          <h2 className="text-2xl md:text-3xl font-bold text-[#FFD700] mb-3">
+            Coming Soon!
+          </h2>
+          <p className="text-base md:text-lg text-[#E0E0E0] max-w-md mx-auto leading-relaxed">
+            We're building amazing learning paths for you.
+          </p>
+        </div>
+      </div>
     </div>
   )
 }

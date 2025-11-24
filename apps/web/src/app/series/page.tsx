@@ -1,6 +1,7 @@
 import { sanityFetch } from '@/sanity/live'
 import { SERIES_QUERY } from '@/sanity/queries'
 import { SeriesCard } from '@/components/SeriesCard'
+import { Badge } from '@/components/ui/Badge'
 
 export default async function SeriesPage() {
   const { data: series } = await sanityFetch({ query: SERIES_QUERY })
@@ -28,15 +29,15 @@ export default async function SeriesPage() {
               <div className="flex flex-wrap gap-4 mb-8">
                 <span className="text-sm font-medium text-[#FFD700]">Filter by status:</span>
                 <div className="flex gap-2">
-                  <span className="px-3 py-1 text-xs bg-[#39FF14] bg-opacity-20 text-[#39FF14] rounded-full cursor-pointer hover:bg-opacity-30 transition-colors">
+                  <Badge variant="status" value="completed" size="xs" className="cursor-pointer hover:opacity-80 transition-opacity">
                     Completed ({series.filter((s: any) => s.status === 'completed').length})
-                  </span>
-                  <span className="px-3 py-1 text-xs bg-[#FFD700] bg-opacity-20 text-[#FFD700] rounded-full cursor-pointer hover:bg-opacity-30 transition-colors">
+                  </Badge>
+                  <Badge variant="status" value="in-progress" size="xs" className="cursor-pointer hover:opacity-80 transition-opacity">
                     In Progress ({series.filter((s: any) => s.status === 'in-progress').length})
-                  </span>
-                  <span className="px-3 py-1 text-xs bg-[#E0E0E0] bg-opacity-20 text-[#E0E0E0] rounded-full cursor-pointer hover:bg-opacity-30 transition-colors">
+                  </Badge>
+                  <Badge variant="status" value="draft" size="xs" className="cursor-pointer hover:opacity-80 transition-opacity">
                     Draft ({series.filter((s: any) => s.status === 'draft').length})
-                  </span>
+                  </Badge>
                 </div>
               </div>
 

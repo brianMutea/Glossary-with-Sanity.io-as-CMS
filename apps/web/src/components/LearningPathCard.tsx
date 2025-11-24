@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { getImageUrl } from '@/sanity/image'
+import { Badge } from './ui/Badge'
 
 interface LearningPathCardProps {
   path: {
@@ -94,12 +95,12 @@ export function LearningPathCard({ path }: LearningPathCardProps) {
             
             {/* Badges */}
             <div className="flex flex-wrap gap-2 mb-3">
-              <span className={`px-2 py-1 text-xs font-medium rounded-full border ${levelColor}`}>
+              <Badge variant="level" value={path.level}>
                 {path.level}
-              </span>
-              <span className={`px-2 py-1 text-xs font-medium rounded-full ${domainColor}`}>
+              </Badge>
+              <Badge variant="domain" value={path.domain}>
                 {path.domain.replace('-', ' ')}
-              </span>
+              </Badge>
             </div>
           </div>
 

@@ -65,7 +65,7 @@ export function GlossaryCard({ term, featured = false }: GlossaryCardProps) {
                 <Badge variant="domain" value={term.domain}>
                   {formatDisplayName(term.domain)}
                 </Badge>
-                <Badge>
+                <Badge variant="type">
                   {term.type}
                 </Badge>
               </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { SearchResult } from '@/app/api/search/route'
+import { Badge } from './ui/Badge'
 
 interface GlobalSearchBarProps {
   placeholder?: string
@@ -213,14 +214,19 @@ export function GlobalSearchBar({
                       {result.metadata && (
                         <div className="flex items-center space-x-2 mt-1">
                           {result.metadata.level && (
-                            <span className="text-xs text-[#00BFFF] bg-[#00BFFF] bg-opacity-20 px-1.5 py-0.5 rounded">
+                            <Badge variant="level" value={result.metadata.level} size="xs">
                               {result.metadata.level}
-                            </span>
+                            </Badge>
                           )}
                           {result.metadata.domain && (
-                            <span className="text-xs text-[#FFD700] bg-[#FFD700] bg-opacity-20 px-1.5 py-0.5 rounded">
+                            <Badge variant="domain" value={result.metadata.domain} size="xs">
                               {result.metadata.domain}
-                            </span>
+                            </Badge>
+                          )}
+                          {result.metadata.type && (
+                            <Badge variant="type" size="xs">
+                              {result.metadata.type}
+                            </Badge>
                           )}
                           {result.metadata.author && (
                             <span className="text-xs text-[#E0E0E0]">

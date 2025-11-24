@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { getImageUrl } from '@/sanity/image'
 import { GlossaryCard } from '@/components/GlossaryCard'
+import { Badge } from '@/components/ui/Badge'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -63,12 +64,12 @@ export default async function LearningPathPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Breadcrumb */}
           <nav className="mb-8">
-            <ol className="flex items-center space-x-2 text-sm text-gray-500">
-              <li><Link href="/" className="hover:text-gray-700">Home</Link></li>
+            <ol className="flex items-center space-x-2 text-sm text-[#E0E0E0]">
+              <li><Link href="/" className="hover:text-[#00BFFF]">Home</Link></li>
               <li>→</li>
-              <li><Link href="/learning-paths" className="hover:text-gray-700">Learning Paths</Link></li>
+              <li><Link href="/learning-paths" className="hover:text-[#00BFFF]">Learning Paths</Link></li>
               <li>→</li>
-              <li className="text-gray-900 font-medium">{path.title}</li>
+              <li className="text-[#FFD700] font-medium">{path.title}</li>
             </ol>
           </nav>
 
@@ -78,34 +79,34 @@ export default async function LearningPathPage({ params }: Props) {
               <div className="flex items-center gap-4 mb-4">
                 <span className="text-4xl">🗺️</span>
                 <div>
-                  <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                  <h1 className="text-4xl font-bold text-[#FFD700] mb-2">
                     {path.title}
                   </h1>
                   
                   {/* Badges */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className={`px-3 py-1 text-sm font-medium rounded-full border ${levelColor}`}>
+                    <Badge variant="level" value={path.level} size="md">
                       {path.level}
-                    </span>
-                    <span className={`px-3 py-1 text-sm font-medium rounded-full ${domainColor}`}>
+                    </Badge>
+                    <Badge variant="domain" value={path.domain} size="md">
                       {path.domain.replace('-', ' ')}
-                    </span>
+                    </Badge>
                     {path.estimatedDuration && (
-                      <span className="px-3 py-1 text-sm font-medium rounded-full bg-gray-100 text-gray-700">
+                      <Badge variant="custom" size="md">
                         ⏱️ {path.estimatedDuration}
-                      </span>
+                      </Badge>
                     )}
                   </div>
                 </div>
               </div>
 
               {/* Description */}
-              <p className="text-xl text-gray-600 leading-relaxed mb-6">
+              <p className="text-xl text-[#E0E0E0] leading-relaxed mb-6">
                 {path.description}
               </p>
 
               {/* Stats */}
-              <div className="flex items-center gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-6 text-sm text-[#E0E0E0]">
                 <span className="flex items-center gap-2">
                   📚 {path.topics?.length || 0} concepts
                 </span>
@@ -115,7 +116,7 @@ export default async function LearningPathPage({ params }: Props) {
                   </span>
                 )}
                 {path.tutorialSeries && (
-                  <span className="flex items-center gap-2 text-blue-600">
+                  <span className="flex items-center gap-2 text-[#00BFFF]">
                     🎓 Tutorial series included
                   </span>
                 )}
@@ -156,7 +157,7 @@ export default async function LearningPathPage({ params }: Props) {
                     {path.topics.map((topic: any, index: number) => (
                       <div key={topic.slug.current} className="flex gap-6">
                         {/* Step Number */}
-                        <div className="flex-shrink-0 w-12 h-12 bg-[#00BFFF] bg-opacity-20 text-[#00BFFF] rounded-full flex items-center justify-center font-bold text-lg border-2 border-[#00BFFF]">
+                        <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center font-bold text-2xl text-[#FFD700]">
                           {index + 1}
                         </div>
                         
@@ -172,25 +173,25 @@ export default async function LearningPathPage({ params }: Props) {
 
               {/* Tutorial Series */}
               {path.tutorialSeries && (
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">📖 Related Tutorial Series</h2>
+                <div className="bg-[#1A1A1A] rounded-xl p-8 shadow-sm border border-[#333333]">
+                  <h2 className="text-2xl font-bold text-[#FFD700] mb-6">📖 Related Tutorial Series</h2>
                   <Link 
                     href={`/series/${path.tutorialSeries.slug.current}`}
-                    className="block p-6 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 transition-colors"
+                    className="block p-6 border border-[#333333] rounded-lg hover:border-[#00BFFF] hover:bg-[#00BFFF] hover:bg-opacity-10 transition-colors"
                   >
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{path.tutorialSeries.title}</h3>
+                    <h3 className="text-xl font-bold text-[#FFFFFF] mb-2">{path.tutorialSeries.title}</h3>
                     {path.tutorialSeries.description && (
-                      <p className="text-gray-600 mb-4">{path.tutorialSeries.description}</p>
+                      <p className="text-[#E0E0E0] mb-4">{path.tutorialSeries.description}</p>
                     )}
                     <div className="flex items-center justify-between">
                       <span className={`px-3 py-1 text-sm font-medium rounded-full ${
-                        path.tutorialSeries.status === 'completed' ? 'bg-green-100 text-green-800' :
-                        path.tutorialSeries.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-gray-100 text-gray-800'
+                        path.tutorialSeries.status === 'completed' ? 'bg-[#39FF14] text-[#121212]' :
+                        path.tutorialSeries.status === 'in-progress' ? 'bg-[#FFD700] text-[#121212]' :
+                        'bg-[#333333] text-[#E0E0E0]'
                       }`}>
                         {path.tutorialSeries.status?.replace('-', ' ')}
                       </span>
-                      <span className="text-blue-600 font-medium">
+                      <span className="text-[#00BFFF] font-medium">
                         Read series →
                       </span>
                     </div>
@@ -237,12 +238,12 @@ export default async function LearningPathPage({ params }: Props) {
                         <div className="font-medium text-[#FFFFFF]">{related.title}</div>
                         <div className="text-sm text-[#E0E0E0] mb-2">{related.description}</div>
                         <div className="flex gap-2">
-                          <span className={`px-2 py-1 text-xs rounded-full ${levelColors[related.level as keyof typeof levelColors]}`}>
+                          <Badge variant="level" value={related.level} size="xs">
                             {related.level}
-                          </span>
-                          <span className={`px-2 py-1 text-xs rounded-full ${domainColors[related.domain as keyof typeof domainColors]}`}>
+                          </Badge>
+                          <Badge variant="domain" value={related.domain} size="xs">
                             {related.domain.replace('-', ' ')}
-                          </span>
+                          </Badge>
                         </div>
                       </Link>
                     ))}

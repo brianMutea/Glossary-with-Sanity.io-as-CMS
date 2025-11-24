@@ -1,26 +1,26 @@
 // Centralized design system for consistent styling across components
 
 export const levelColors = {
-  beginner: 'bg-green-100 text-green-800 border-green-200',
-  intermediate: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  advanced: 'bg-red-100 text-red-800 border-red-200',
-  mixed: 'bg-purple-100 text-purple-800 border-purple-200',
+  beginner: 'bg-[#39FF14] text-[#121212] border-[#39FF14]',
+  intermediate: 'bg-[#FFD700] text-[#121212] border-[#FFD700]',
+  advanced: 'bg-[#FF6F61] text-[#121212] border-[#FF6F61]',
+  mixed: 'bg-[#E6E6FA] text-[#121212] border-[#E6E6FA]',
 } as const
 
 export const domainColors = {
-  'ai': 'bg-purple-100 text-purple-800',
-  'artificial-intelligence': 'bg-purple-100 text-purple-800',
-  'ml': 'bg-blue-100 text-blue-800',
-  'machine-learning': 'bg-blue-100 text-blue-800',
-  'data-science': 'bg-cyan-100 text-cyan-800',
-  'software-engineering': 'bg-gray-100 text-gray-800',
-  'math': 'bg-indigo-100 text-indigo-800',
-  'mathematics': 'bg-indigo-100 text-indigo-800',
-  'statistics': 'bg-pink-100 text-pink-800',
-  'deep-learning': 'bg-violet-100 text-violet-800',
-  'computer-vision': 'bg-emerald-100 text-emerald-800',
-  'nlp': 'bg-orange-100 text-orange-800',
-  'natural-language-processing': 'bg-orange-100 text-orange-800',
+  'ai': 'bg-[#E6E6FA] text-[#121212]',
+  'artificial-intelligence': 'bg-[#E6E6FA] text-[#121212]',
+  'ml': 'bg-[#00BFFF] text-[#121212]',
+  'machine-learning': 'bg-[#00BFFF] text-[#121212]',
+  'data-science': 'bg-[#39FF14] text-[#121212]',
+  'software-engineering': 'bg-[#E0E0E0] text-[#121212]',
+  'math': 'bg-[#E6E6FA] text-[#121212]',
+  'mathematics': 'bg-[#E6E6FA] text-[#121212]',
+  'statistics': 'bg-[#FF6F61] text-[#121212]',
+  'deep-learning': 'bg-[#E6E6FA] text-[#121212]',
+  'computer-vision': 'bg-[#FFD700] text-[#121212]',
+  'nlp': 'bg-[#FF6F61] text-[#121212]',
+  'natural-language-processing': 'bg-[#FF6F61] text-[#121212]',
 } as const
 
 export const typeIcons = {
@@ -35,9 +35,9 @@ export const typeIcons = {
 } as const
 
 export const statusColors = {
-  draft: 'bg-gray-100 text-gray-800 border-gray-300',
-  'in-progress': 'bg-yellow-100 text-yellow-800 border-yellow-300',
-  completed: 'bg-green-100 text-green-800 border-green-300',
+  draft: 'bg-[#E0E0E0] text-[#121212] border-[#E0E0E0]',
+  'in-progress': 'bg-[#FFD700] text-[#121212] border-[#FFD700]',
+  completed: 'bg-[#39FF14] text-[#121212] border-[#39FF14]',
 } as const
 
 // Base card styling classes

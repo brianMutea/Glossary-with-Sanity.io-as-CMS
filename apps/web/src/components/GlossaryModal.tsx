@@ -176,15 +176,15 @@ export function GlossaryModal({
       {/* Modal */}
       <div
         ref={modalRef}
-        className={`fixed z-50 w-96 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 ease-out flex flex-col ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        className={`fixed z-50 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden transition-all duration-200 ease-out flex flex-col ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
           }`}
         style={{
           left: '50%',
           top: '50%',
           transform: isVisible ? 'translate(-50%, -50%)' : 'translate(-50%, -50%) scale(0.95)',
           maxHeight: `${Math.min(500, window.innerHeight - 80)}px`,
-          margin: '24px',
-          maxWidth: 'calc(100vw - 48px)',
+          width: 'min(384px, calc(100vw - 32px))',
+          maxWidth: 'calc(100vw - 32px)',
         }}
       >
         <GlossaryModalContent term={term} onClose={onClose} />
