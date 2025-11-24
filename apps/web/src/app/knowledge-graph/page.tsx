@@ -18,6 +18,18 @@ interface KnowledgeGraphTerm {
   level: 'beginner' | 'intermediate' | 'advanced'
   domain: string
   type?: string
+  image?: {
+    asset: {
+      _id: string
+      url: string
+    }
+    alt?: string
+  }
+  tags?: string[]
+  tutorialArticle?: {
+    title: string
+    slug: { current: string }
+  }
   prerequisites?: Array<{
     _id: string
     term: string
@@ -54,7 +66,7 @@ export default async function KnowledgeGraphPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">
               Interactive Knowledge Graph
@@ -74,7 +86,7 @@ export default async function KnowledgeGraphPage() {
 
       {/* Legend and Info */}
       <div className="bg-gray-50 border-t">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid md:grid-cols-2 gap-8">
             {/* Node Colors Legend */}
             <div>

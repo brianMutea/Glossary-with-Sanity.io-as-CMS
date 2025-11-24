@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface CodeBlockProps {
   code: string
@@ -11,58 +11,54 @@ interface CodeBlockProps {
 
 export function CodeBlock({ code, language = 'javascript', filename, theme = 'light' }: CodeBlockProps) {
   const [copied, setCopied] = useState(false)
-  const [highlightedCode, setHighlightedCode] = useState('')
+  const codeRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    // Simple syntax highlighting for common languages
-    const highlightCode = (code: string, lang: string) => {
-      let highlighted = code
-
-      if (lang === 'python' || lang === 'py') {
-        highlighted = code
-          .replace(/#.*$/gm, '<span style="color: #6a737d; font-style: italic;">$&</span>') // Comments
-          .replace(/\b(import|from|as|def|class|if|else|elif|for|while|return|try|except|finally|with|lambda|yield|async|await|True|False|None)\b/g, '<span style="color: #d73a49; font-weight: 600;">$1</span>') // Keywords
-          .replace(/"([^"\\]|\\.)*"/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/'([^'\\]|\\.)*'/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/\b\d+\.?\d*\b/g, '<span style="color: #005cc5;">$&</span>') // Numbers
-          .replace(/([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g, '<span style="color: #6f42c1;">$1</span>(') // Functions
-      } else if (lang === 'javascript' || lang === 'js' || lang === 'typescript' || lang === 'ts') {
-        highlighted = code
-          .replace(/\/\/.*$/gm, '<span style="color: #6a737d; font-style: italic;">$&</span>') // Comments
-          .replace(/\/\*[\s\S]*?\*\//g, '<span style="color: #6a737d; font-style: italic;">$&</span>') // Block comments
-          .replace(/\b(function|const|let|var|if|else|for|while|return|import|export|class|extends|async|await|try|catch|throw|new|this|super|static|public|private|protected|interface|type|enum)\b/g, '<span style="color: #d73a49; font-weight: 600;">$1</span>') // Keywords
-          .replace(/"([^"\\]|\\.)*"/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/'([^'\\]|\\.)*'/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/`([^`\\]|\\.)*`/g, '<span style="color: #032f62;">$&</span>') // Template strings
-          .replace(/\b\d+\.?\d*\b/g, '<span style="color: #005cc5;">$&</span>') // Numbers
-          .replace(/\b(true|false|null|undefined)\b/g, '<span style="color: #005cc5;">$&</span>') // Booleans/null
-          .replace(/([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/g, '<span style="color: #6f42c1;">$1</span>(') // Functions
-      } else if (lang === 'json') {
-        highlighted = code
-          .replace(/"([^"\\]|\\.)*":/g, '<span style="color: #005cc5; font-weight: 600;">$&</span>') // Keys
-          .replace(/:\s*"([^"\\]|\\.)*"/g, ': <span style="color: #032f62;">$1</span>') // String values
-          .replace(/:\s*(true|false|null)/g, ': <span style="color: #005cc5;">$1</span>') // Boolean/null values
-          .replace(/:\s*(\d+\.?\d*)/g, ': <span style="color: #005cc5;">$1</span>') // Number values
-      } else if (lang === 'sql') {
-        highlighted = code
-          .replace(/--.*$/gm, '<span style="color: #6a737d; font-style: italic;">$&</span>') // Comments
-          .replace(/\b(SELECT|FROM|WHERE|JOIN|INNER|LEFT|RIGHT|OUTER|ON|GROUP|BY|ORDER|HAVING|INSERT|UPDATE|DELETE|CREATE|TABLE|INDEX|ALTER|DROP|DATABASE|SCHEMA)\b/gi, '<span style="color: #d73a49; font-weight: 600;">$&</span>') // Keywords
-          .replace(/'([^'\\]|\\.)*'/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/\b\d+\.?\d*\b/g, '<span style="color: #005cc5;">$&</span>') // Numbers
-      } else if (lang === 'r') {
-        highlighted = code
-          .replace(/#.*$/gm, '<span style="color: #6a737d; font-style: italic;">$&</span>') // Comments
-          .replace(/\b(function|if|else|for|while|repeat|next|break|TRUE|FALSE|NULL|NA|Inf|NaN|library|require|source|data|summary|plot|print|cat|paste|length|dim|names|str|head|tail)\b/g, '<span style="color: #d73a49; font-weight: 600;">$1</span>') // Keywords
-          .replace(/"([^"\\]|\\.)*"/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/'([^'\\]|\\.)*'/g, '<span style="color: #032f62;">$&</span>') // Strings
-          .replace(/\b\d+\.?\d*\b/g, '<span style="color: #005cc5;">$&</span>') // Numbers
-          .replace(/([a-zA-Z_][a-zA-Z0-9_\.]*)\s*\(/g, '<span style="color: #6f42c1;">$1</span>(') // Functions
+    const highlightCode = async () => {
+      if (typeof window !== 'undefined' && codeRef.current) {
+        try {
+          // Dynamically import Prism to avoid SSR issues
+          const Prism = (await import('prismjs')).default
+          
+          // Import common language definitions
+          await import('prismjs/components/prism-javascript')
+          await import('prismjs/components/prism-typescript')
+          await import('prismjs/components/prism-python')
+          await import('prismjs/components/prism-json')
+          await import('prismjs/components/prism-bash')
+          await import('prismjs/components/prism-sql')
+          await import('prismjs/components/prism-css')
+          await import('prismjs/components/prism-markup')
+          
+          // Map language aliases
+          const languageMap: { [key: string]: string } = {
+            'js': 'javascript',
+            'ts': 'typescript',
+            'py': 'python',
+            'sh': 'bash',
+            'shell': 'bash',
+            'html': 'markup',
+            'xml': 'markup'
+          }
+          
+          const prismLanguage = languageMap[language] || language
+          
+          if (Prism.languages[prismLanguage]) {
+            codeRef.current.innerHTML = Prism.highlight(code, Prism.languages[prismLanguage], prismLanguage)
+          } else {
+            // Fallback to plain text if language not supported
+            codeRef.current.textContent = code
+          }
+        } catch (error) {
+          // Fallback to plain text if Prism fails to load
+          if (codeRef.current) {
+            codeRef.current.textContent = code
+          }
+        }
       }
-
-      return highlighted
     }
 
-    setHighlightedCode(highlightCode(code, language))
+    highlightCode()
   }, [code, language])
 
   const copyToClipboard = async () => {
@@ -111,9 +107,9 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
 
   if (theme === 'dark') {
     return (
-      <div className="my-8">
+      <div className="codeblock-container my-8 not-prose">
         {(filename || language) && (
-          <div className="bg-gray-800 text-gray-300 px-4 py-3 text-sm font-mono rounded-t-lg border-b border-gray-700 flex items-center justify-between">
+          <div className="codeblock-header bg-gray-800 text-gray-300 px-4 py-3 text-sm font-mono rounded-t-lg border-b border-gray-700 flex items-center justify-between">
             {filename && <span className="text-gray-300">{filename}</span>}
             {language && (
               <span className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded font-medium">
@@ -122,12 +118,15 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
             )}
           </div>
         )}
-        <div className="relative">
-          <pre className={`bg-gray-900 text-gray-100 p-6 overflow-x-auto text-sm leading-relaxed font-mono ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
+        <div className="codeblock-content relative">
+          <pre className={`codeblock-pre bg-gray-900 text-gray-100 p-6 overflow-x-auto text-sm leading-relaxed font-mono ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
             <code 
-              className={`language-${language}`}
-              dangerouslySetInnerHTML={{ __html: highlightedCode || code }}
-            />
+              ref={codeRef}
+              className={`codeblock-code language-${language}`}
+              style={{ fontWeight: 'normal' }}
+            >
+              {code}
+            </code>
           </pre>
           <button
             onClick={copyToClipboard}
@@ -157,9 +156,9 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
 
   // Light theme (default)
   return (
-    <div className="my-8">
+    <div className="codeblock-container my-8 not-prose">
       {(filename || language) && (
-        <div className="bg-gray-100 text-gray-700 px-4 py-3 text-sm font-mono rounded-t-lg border-b border-gray-200 flex items-center justify-between">
+        <div className="codeblock-header bg-gray-100 text-gray-700 px-4 py-3 text-sm font-mono rounded-t-lg border-b border-gray-200 flex items-center justify-between">
           {filename && <span className="text-gray-700 font-medium">{filename}</span>}
           {language && (
             <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded font-medium">
@@ -168,12 +167,15 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
           )}
         </div>
       )}
-      <div className="relative">
-        <pre className={`bg-gray-50 text-gray-800 p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-gray-200 ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
+      <div className="codeblock-content relative">
+        <pre className={`codeblock-pre bg-gray-50 text-gray-800 p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-gray-200 ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
           <code 
-            className={`language-${language}`}
-            dangerouslySetInnerHTML={{ __html: highlightedCode || code }}
-          />
+            ref={codeRef}
+            className={`codeblock-code language-${language}`}
+            style={{ fontWeight: 'normal' }}
+          >
+            {code}
+          </code>
         </pre>
         <button
           onClick={copyToClipboard}

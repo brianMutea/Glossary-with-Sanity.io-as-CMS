@@ -9,7 +9,7 @@ export default async function SeriesPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <section className="bg-gradient-to-r from-purple-50 to-blue-50 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Learning Series
           </h1>
@@ -21,7 +21,7 @@ export default async function SeriesPage() {
 
       {/* Series Grid */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {series.length > 0 ? (
             <>
               {/* Filter by Status */}

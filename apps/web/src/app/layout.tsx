@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Fira_Code } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { SanityLive } from "@/sanity/live";
 
 const inter = Inter({ 
@@ -29,13 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${firaCode.variable} font-sans`}>
-        <div className="min-h-screen flex flex-col">
-          <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <LayoutWrapper>
+          {children}
+        </LayoutWrapper>
         <SanityLive />
       </body>
     </html>

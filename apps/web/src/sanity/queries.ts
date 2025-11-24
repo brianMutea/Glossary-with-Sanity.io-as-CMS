@@ -355,6 +355,18 @@ export const KNOWLEDGE_GRAPH_QUERY = `*[_type == "glossaryTerm"] {
   level,
   domain,
   type,
+  image{
+    asset->{
+      _id,
+      url
+    },
+    alt
+  },
+  tags,
+  tutorialArticle->{
+    title,
+    slug
+  },
   "prerequisites": prerequisites[]->{ _id, term, slug, level, domain },
   "relatedTerms": relatedTerms[]->{ _id, term, slug, level, domain },
   "nextConcepts": nextConcepts[]->{ _id, term, slug, level, domain }

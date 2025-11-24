@@ -1,10 +1,7 @@
-import { sanityFetch } from '@/sanity/live'
-import { GLOSSARY_TERMS_QUERY } from '@/sanity/queries'
-import { ClientGlossaryPage } from '@/components/ClientGlossaryPage'
+import { redirect } from 'next/navigation'
 
-export default async function GlossaryPage() {
-  const { data: allTerms } = await sanityFetch({ query: GLOSSARY_TERMS_QUERY })
-
-  return <ClientGlossaryPage initialTerms={allTerms} />
+export default function GlossaryPage() {
+  // Redirect to home since home is now the glossary
+  redirect('/')
 }
 

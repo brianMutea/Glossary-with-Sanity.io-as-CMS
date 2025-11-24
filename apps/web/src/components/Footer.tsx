@@ -1,9 +1,68 @@
 import Link from 'next/link'
 
-export function Footer() {
+interface FooterProps {
+  className?: string
+  containerClassName?: string
+  variant?: 'default' | 'minimal' | 'compact'
+}
+
+export function Footer({ 
+  className = "", 
+  containerClassName = "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8",
+  variant = 'default'
+}: FooterProps) {
+  
+  if (variant === 'minimal') {
+    return (
+      <footer className={`bg-gray-50 border-t border-gray-200 ${className}`}>
+        <div className={`${containerClassName} py-6`}>
+          <p className="text-center text-gray-500 text-sm">
+            © {new Date().getFullYear()} Tech Glossary. All rights reserved.
+          </p>
+        </div>
+      </footer>
+    )
+  }
+
+  if (variant === 'compact') {
+    return (
+      <footer className={`bg-gray-50 border-t border-gray-200 ${className}`}>
+        <div className={`${containerClassName} py-8`}>
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <h3 className="text-lg font-semibold text-blue-600">
+                Tech Glossary
+              </h3>
+              <p className="text-gray-600 text-sm">
+                Developer resources and tutorials
+              </p>
+            </div>
+            <div className="flex space-x-6">
+              <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                Glossary
+              </Link>
+              <Link href="/blog" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                Blog
+              </Link>
+              <Link href="/series" className="text-gray-600 hover:text-gray-900 transition-colors text-sm">
+                Series
+              </Link>
+            </div>
+          </div>
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <p className="text-center text-gray-500 text-sm">
+              © {new Date().getFullYear()} Tech Glossary. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+    )
+  }
+
+  // Default variant
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className={`bg-gray-50 border-t border-gray-200 ${className}`}>
+      <div className={`${containerClassName} py-12`}>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Site Info */}
           <div className="md:col-span-2">
@@ -22,7 +81,7 @@ export function Footer() {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/glossary" className="text-gray-600 hover:text-gray-900 transition-colors">
+                <Link href="/" className="text-gray-600 hover:text-gray-900 transition-colors">
                   Glossary
                 </Link>
               </li>

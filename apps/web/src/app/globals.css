@@ -485,4 +485,525 @@
     opacity: 1;
     transform: translateY(0);
   }
+}/* S
+idebar Layout Styles */
+.sidebar-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure proper spacing for sidebar layout */
+@media (min-width: 1024px) {
+  .sidebar-content {
+    margin-left: 16rem; /* 64 * 0.25rem = 16rem for w-64 */
+  }
+}
+
+/* Smooth transitions for mobile sidebar */
+.sidebar-transition {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Focus styles for accessibility */
+.sidebar-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Search bar focus styles */
+.search-input:focus {
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}/* 
+Prism.js Syntax Highlighting */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #586069;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #005cc5;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #032f62;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #d73a49;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #d73a49;
+  font-weight: 600;
+}
+
+.token.function,
+.token.class-name {
+  color: #6f42c1;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e36209;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Dark theme overrides */
+.dark .token.comment,
+.dark .token.prolog,
+.dark .token.doctype,
+.dark .token.cdata {
+  color: #8b949e;
+}
+
+.dark .token.punctuation {
+  color: #c9d1d9;
+}
+
+.dark .token.property,
+.dark .token.tag,
+.dark .token.boolean,
+.dark .token.number,
+.dark .token.constant,
+.dark .token.symbol,
+.dark .token.deleted {
+  color: #79c0ff;
+}
+
+.dark .token.selector,
+.dark .token.attr-name,
+.dark .token.string,
+.dark .token.char,
+.dark .token.builtin,
+.dark .token.inserted {
+  color: #a5d6ff;
+}
+
+.dark .token.operator,
+.dark .token.entity,
+.dark .token.url,
+.dark .language-css .token.string,
+.dark .style .token.string {
+  color: #ff7b72;
+}
+
+.dark .token.atrule,
+.dark .token.attr-value,
+.dark .token.keyword {
+  color: #ff7b72;
+  font-weight: 600;
+}
+
+.dark .token.function,
+.dark .token.class-name {
+  color: #d2a8ff;
+}
+
+.dark .token.regex,
+.dark .token.important,
+.dark .token.variable {
+  color: #ffa657;
+}/* Co
+deBlock Component - Override prose styles for consistency */
+.prose .my-8,
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Ensure code blocks are never affected by prose styles */
+.prose pre,
+pre {
+  margin: 0 !important;
+  padding: 1.5rem !important;
+  font-weight: normal !important;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.625 !important;
+}
+
+.prose code,
+code {
+  font-weight: normal !important;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace !important;
+}
+
+/* Ensure header is always attached to code block */
+.prose .my-8 > div:first-child,
+.my-8 > div:first-child {
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Ensure code block container has no gaps */
+.prose .my-8 > div:last-child,
+.my-8 > div:last-child {
+  margin-top: 0 !important;
+}
+
+/* Override any prose bold styling in code blocks */
+.prose pre strong,
+.prose code strong,
+pre strong,
+code strong {
+  font-weight: normal !important;
+}
+
+/* Ensure consistent border radius */
+.prose .my-8 pre,
+.my-8 pre {
+  border-radius: 0 0 0.5rem 0.5rem !important;
+}
+
+.prose .my-8 > div:first-child,
+.my-8 > div:first-child {
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+/* When no header, ensure proper border radius */
+.prose .my-8 > div:only-child pre,
+.my-8 > div:only-child pre {
+  border-radius: 0.5rem !important;
+}/*
+ CodeBlock Component - Specific overrides to ensure consistency */
+.codeblock-container {
+  margin: 2rem 0 !important;
+}
+
+.codeblock-header {
+  margin: 0 !important;
+  padding: 0.75rem 1rem !important;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace !important;
+  font-size: 0.875rem !important;
+  font-weight: normal !important;
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+.codeblock-content {
+  margin: 0 !important;
+}
+
+.codeblock-pre {
+  margin: 0 !important;
+  padding: 1.5rem !important;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.625 !important;
+  font-weight: normal !important;
+}
+
+.codeblock-code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace !important;
+  font-size: 0.875rem !important;
+  font-weight: normal !important;
+}
+
+/* Ensure no prose styles affect our code blocks */
+.prose .codeblock-container,
+.prose .codeblock-header,
+.prose .codeblock-content,
+.prose .codeblock-pre,
+.prose .codeblock-code {
+  font-weight: normal !important;
+  margin: 0 !important;
+}
+
+.prose .codeblock-container {
+  margin: 2rem 0 !important;
+}
+
+/* Override any bold styling from syntax highlighting or prose */
+.codeblock-code *,
+.codeblock-pre * {
+  font-weight: inherit !important;
+}
+
+/* Ensure tokens don't get bold from prose */
+.prose .token.keyword,
+.prose .token.atrule,
+.prose .token.attr-value {
+  font-weight: 600 !important; /* Only keywords should be bold */
+}
+
+.prose .token.function,
+.prose .token.class-name,
+.prose .token.property,
+.prose .token.tag,
+.prose .token.boolean,
+.prose .token.number,
+.prose .token.constant,
+.prose .token.symbol,
+.prose .token.deleted,
+.prose .token.selector,
+.prose .token.attr-name,
+.prose .token.string,
+.prose .token.char,
+.prose .token.builtin,
+.prose .token.inserted {
+  font-weight: normal !important;
+}/*
+ Custom Select Dropdown Styling */
+select {
+  cursor: pointer !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+  background-position: right 0.75rem center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.25em 1.25em !important;
+  padding-right: 2.5rem !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+select:focus {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%233b82f6' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+}
+
+select:hover {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%234b5563' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+}
+
+/* Remove default select styling on different browsers */
+select::-ms-expand {
+  display: none;
+}
+
+/* Ensure consistent styling across browsers */
+.filter-select {
+  background-color: white !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 0.5rem !important;
+  padding: 0.625rem 2.5rem 0.625rem 1rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+  color: #374151 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease-in-out !important;
+}
+
+.filter-select:hover {
+  border-color: #9ca3af !important;
+}
+
+.filter-select:focus {
+  outline: none !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+/* Style the options */
+.filter-select option {
+  padding: 0.5rem !important;
+  color: #374151 !important;
+  background-color: white !important;
+}
+
+.filter-select option:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.filter-select option:checked {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Modern Custom Select Dropdown Styling */
+.filter-select {
+  /* Base styling */
+  width: 100%;
+  padding: 0.75rem 3rem 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background-color: white;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #374151;
+  cursor: pointer !important;
+  transition: all 0.2s ease-in-out;
+  
+  /* Remove default styling */
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  
+  /* Custom dropdown arrow */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25rem 1.25rem;
+  
+  /* Shadow for depth */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.filter-select:hover {
+  border-color: #9ca3af;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%234b5563'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e");
+}
+
+.filter-select:focus {
+  outline: none !important;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%233b82f6'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e");
+}
+
+/* Remove default select styling on different browsers */
+.filter-select::-ms-expand {
+  display: none;
+}
+
+/* Firefox specific */
+.filter-select::-moz-focus-inner {
+  border: 0;
+}
+
+/* Style the dropdown options - Modern approach */
+.filter-select option {
+  padding: 0.75rem 1rem !important;
+  color: #374151 !important;
+  background-color: white !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5rem !important;
+  cursor: pointer !important;
+  border: none !important;
+  font-weight: 400 !important;
+}
+
+.filter-select option:hover {
+  background-color: #f9fafb !important;
+  color: #111827 !important;
+}
+
+.filter-select option:checked,
+.filter-select option:focus {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  font-weight: 500 !important;
+}
+
+/* Webkit specific option styling for better appearance */
+@supports (-webkit-appearance: none) {
+  .filter-select option {
+    background-color: white !important;
+    color: #374151 !important;
+  }
+  
+  .filter-select option:checked {
+    background: #3b82f6 !important;
+    color: white !important;
+  }
+}
+
+/* Force cursor pointer on all select elements */
+select.filter-select,
+select.filter-select * {
+  cursor: pointer !important;
+}
+
+/* Force override for filter selects - High specificity */
+div select.filter-select,
+.filter-select {
+  cursor: pointer !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e") !important;
+  background-position: right 1rem center !important;
+  background-repeat: no-repeat !important;
+  background-size: 1.25rem 1.25rem !important;
+  padding-right: 3rem !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid #d1d5db !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+  padding-left: 1rem !important;
+  background-color: white !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+div select.filter-select:hover,
+.filter-select:hover {
+  border-color: #9ca3af !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%234b5563'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e") !important;
+}
+
+div select.filter-select:focus,
+.filter-select:focus {
+  outline: none !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='2' stroke='%233b82f6'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3e%3c/svg%3e") !important;
+}
+
+/* Force remove default select styling */
+div select.filter-select::-ms-expand,
+.filter-select::-ms-expand {
+  display: none !important;
+}
+
+/* Force cursor on options too */
+div select.filter-select option,
+.filter-select option {
+  cursor: pointer !important;
+  padding: 0.75rem 1rem !important;
+  background-color: white !important;
+  color: #374151 !important;
+}
+
+div select.filter-select option:hover,
+.filter-select option:hover {
+  background-color: #f9fafb !important;
+}
+
+div select.filter-select option:checked,
+.filter-select option:checked {
+  background-color: #3b82f6 !important;
+  color: white !important;
 }

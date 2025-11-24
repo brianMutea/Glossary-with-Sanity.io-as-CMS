@@ -9,7 +9,7 @@ export default async function AuthorsPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Our Authors
           </h1>
@@ -21,7 +21,7 @@ export default async function AuthorsPage() {
 
       {/* Authors Grid */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {authors.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {authors.map((author: any) => (
