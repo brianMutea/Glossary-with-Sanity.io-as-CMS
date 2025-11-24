@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { GlobalSearchBar } from './GlobalSearchBar'
+import { DonateButton } from './DonateButton'
 
 interface HeaderProps {
   onMenuToggle: () => void
@@ -12,8 +13,8 @@ interface HeaderProps {
   containerClassName?: string
 }
 
-export function Header({ 
-  onMenuToggle, 
+export function Header({
+  onMenuToggle,
   showSearch = false,
   searchPlaceholder = "Search everything...",
   className = "",
@@ -21,7 +22,7 @@ export function Header({
   containerClassName = "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
 }: HeaderProps) {
   return (
-    <header className={`bg-[#121212] border-b border-[#333333] sticky top-0 z-30 ${className}`}>
+    <header className={`bg-[#0F0F0F] border-b border-[#00BFFF]/10 sticky top-0 z-30 relative ${className}`}>
       <div className="h-16">
         <div className={`${containerClassName} h-full flex items-center`}>
           {/* Mobile menu button */}
@@ -48,7 +49,7 @@ export function Header({
           {/* Global Search Bar - aligned with content */}
           {showSearch && (
             <div className="flex-1 lg:flex-none lg:w-full">
-              <GlobalSearchBar 
+              <GlobalSearchBar
                 placeholder={searchPlaceholder}
                 className="max-w-2xl"
               />
@@ -65,6 +66,11 @@ export function Header({
               </Link>
             </div>
           )}
+        </div>
+
+        {/* Donate Button - positioned at content edge */}
+        <div className="absolute right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2">
+          <DonateButton />
         </div>
       </div>
     </header>

@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link'
+import { DynamicLogo } from './DynamicLogo'
+import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 interface FooterProps {
   className?: string
@@ -6,12 +10,13 @@ interface FooterProps {
   variant?: 'default' | 'minimal' | 'compact'
 }
 
-export function Footer({ 
-  className = "", 
+export function Footer({
+  className = "",
   containerClassName = "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8",
   variant = 'default'
 }: FooterProps) {
-  
+  const { siteSettings } = useSiteSettings()
+
   if (variant === 'minimal') {
     return (
       <footer className={`bg-[#121212] border-t border-[#333333] ${className}`}>
@@ -30,11 +35,13 @@ export function Footer({
         <div className={`${containerClassName} py-8`}>
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
-              <h3 className="text-lg font-semibold text-[#00BFFF]">
-                Tech Glossary
-              </h3>
+              <DynamicLogo
+                logoData={siteSettings?.logo}
+                variant="footer"
+                className="mb-2"
+              />
               <p className="text-[#E0E0E0] text-sm">
-                Developer resources and tutorials
+                {siteSettings?.tagline || 'Developer resources and tutorials'}
               </p>
             </div>
             <div className="flex space-x-6">
@@ -66,11 +73,13 @@ export function Footer({
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Site Info */}
           <div className="md:col-span-2">
-            <h3 className="text-lg font-semibold text-[#00BFFF] mb-4">
-              Tech Glossary
-            </h3>
+            <DynamicLogo
+              logoData={siteSettings?.logo}
+              variant="footer"
+              className="mb-4"
+            />
             <p className="text-[#E0E0E0] mb-4">
-              Your go-to resource for code tutorials and technical articles
+              {siteSettings?.tagline || 'Your go-to resource for Data Science, Machine Learning and AI concepts coupled with tutorials.'}
             </p>
           </div>
 

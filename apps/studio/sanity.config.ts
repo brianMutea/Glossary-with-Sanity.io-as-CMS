@@ -65,6 +65,16 @@ export default defineConfig({
                   .title('Authors')
                   .defaultOrdering([{ field: 'name', direction: 'asc' }])
               ),
+            S.divider(),
+            // Site Settings
+            S.listItem()
+              .title('⚙️ Site Settings')
+              .child(
+                S.document()
+                  .schemaType('siteSettings')
+                  .documentId('siteSettings')
+                  .title('Site Settings')
+              ),
           ])
     }),
     visionTool(),

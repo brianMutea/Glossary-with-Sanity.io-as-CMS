@@ -29,7 +29,7 @@ export function LayoutWrapper({ children }: LayoutWrapperProps) {
       <Sidebar isOpen={sidebarOpen} onClose={handleSidebarClose} />
       
       {/* Main content area */}
-      <div className="lg:ml-64 min-h-screen flex flex-col">
+      <div className="lg:ml-[218px] min-h-screen flex flex-col">
         {/* Header */}
         <Header 
           onMenuToggle={handleMenuToggle}

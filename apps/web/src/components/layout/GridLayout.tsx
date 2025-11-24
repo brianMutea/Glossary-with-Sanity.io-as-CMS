@@ -16,8 +16,8 @@ const gridVariants = {
   // Wide grid (LearningPathCard, featured content)
   wide: 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8',
   
-  // Masonry-like grid (CompactTermCard)
-  masonry: 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4'
+  // Masonry-like grid (CompactTermCard) - flexible width
+  masonry: 'flex flex-wrap gap-4 items-start'
 }
 
 export function GridLayout({ children, variant = 'cards', className = '' }: GridLayoutProps) {

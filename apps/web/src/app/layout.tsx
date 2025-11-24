@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { SanityLive } from "@/sanity/live";
+import { FaviconUpdater } from "@/components/FaviconUpdater";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.variable} font-sans`}>
+        <FaviconUpdater />
         <LayoutWrapper>
           {children}
         </LayoutWrapper>

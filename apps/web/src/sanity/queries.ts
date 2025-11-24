@@ -372,3 +372,59 @@ export const KNOWLEDGE_GRAPH_QUERY = `*[_type == "glossaryTerm"] {
   "nextConcepts": nextConcepts[]->{ _id, term, slug, level, domain }
 }`
 
+// Simple test query
+export const SITE_SETTINGS_TEST_QUERY = `*[_type == "siteSettings"][0] {
+  _id,
+  title,
+  tagline
+}`
+
+// Site Settings Query
+export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
+  _id,
+  title,
+  tagline,
+  logo{
+    type,
+    textLogo{
+      text,
+      fontSize,
+      fontWeight,
+      color
+    },
+    imageLogo{
+      image{
+        asset->{
+          _id,
+          url
+        },
+        alt
+      },
+      width,
+      height
+    },
+    svgLogo{
+      svgCode,
+      width,
+      height
+    },
+    linkUrl
+  },
+  favicon{
+    image{
+      asset->{
+        _id,
+        url
+      }
+    },
+    appleTouchIcon{
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
+  primaryColor,
+  accentColor
+}`
+

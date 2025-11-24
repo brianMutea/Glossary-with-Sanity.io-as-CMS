@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { getDomainColor, getLevelColor } from '@/lib/dynamicColors'
+import { getLevelColor } from '@/lib/dynamicColors'
+
 
 interface CompactTermCardProps {
   term: {
@@ -33,7 +34,6 @@ interface CompactTermCardProps {
 
 export function CompactTermCard({ term, onHover, onHoverEnd, onTap }: CompactTermCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
-  const domainColor = getDomainColor(term.domain)
   const levelColor = getLevelColor(term.level)
 
   const handleMouseEnter = () => {
@@ -58,16 +58,16 @@ export function CompactTermCard({ term, onHover, onHoverEnd, onTap }: CompactTer
   return (
     <div
       ref={cardRef}
-      className="group relative bg-[#1A1A1A] border border-[#333333] p-4 hover:border-[#00BFFF] transition-all duration-200 cursor-pointer min-h-[80px] flex items-center hover:scale-105"
+      className="group relative inline-block bg-gradient-to-br from-[#1A1A1A] to-[#0F0F0F] p-3 hover:from-[#222222] hover:to-[#1A1A1A] transition-all duration-200 cursor-pointer hover:scale-105 shadow-md hover:shadow-lg rounded-xl"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
+      style={{
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2)'
+      }}
     >
-      {/* Color accent bar */}
-      <div 
-        className="absolute top-0 left-0 w-full h-1"
-        style={{ backgroundColor: domainColor }}
-      />
+      {/* Subtle accent bar */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-[#E0E0E0] opacity-30 rounded-t-xl" />
       
       {/* Level indicator */}
       <div 
@@ -76,13 +76,13 @@ export function CompactTermCard({ term, onHover, onHoverEnd, onTap }: CompactTer
       />
 
       {/* Term name */}
-      <div className="flex-1">
-        <h3 className="font-bold text-[#FFFFFF] group-hover:text-[#00BFFF] transition-colors leading-tight">
+      <div className="flex-1 pr-4 py-1">
+        <h3 className="font-bold text-[#E0E0E0] group-hover:text-[#00BFFF] transition-colors leading-tight text-base">
           {term.term}
         </h3>
         
         {/* Small type indicator */}
-        <p className="text-xs text-[#E0E0E0] mt-1 capitalize">
+        <p className="text-sm text-[#E0E0E0] mt-1 capitalize opacity-80">
           {term.type.replace('-', ' ')}
         </p>
       </div>

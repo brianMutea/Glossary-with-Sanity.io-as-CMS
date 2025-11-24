@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { DynamicLogo } from './DynamicLogo'
+import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 interface SidebarProps {
   isOpen: boolean
@@ -13,6 +15,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps) {
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
+  const { siteSettings } = useSiteSettings()
 
   useEffect(() => {
     setMounted(true)
@@ -41,36 +44,32 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
   return (
     <>
       {/* Mobile backdrop */}
-      <div 
-        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+      <div
+        className={`fixed inset-0 bg-black/50 z-40 lg:hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={onClose}
       />
-      
+
       {/* Sidebar */}
       <div className={`
-        fixed top-0 left-0 h-screen w-64 bg-[#121212] z-50 flex flex-col
+        fixed top-0 left-0 h-screen w-[218px] z-50 flex flex-col
+        bg-[#1A1A1A] shadow-2xl
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         ${alwaysVisible ? 'translate-x-0' : 'lg:translate-x-0'}
       `}>
         {/* Logo/Brand */}
         <div className="flex items-center justify-between p-6 flex-shrink-0">
-          <Link href="/" className="flex items-center space-x-3" onClick={onClose}>
-            <div className="w-10 h-10 bg-[#00BFFF] rounded flex items-center justify-center">
-              <span className="text-white font-bold text-xl">T</span>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-[#FFD700]">Tech Glossary</h1>
-              <p className="text-sm text-[#E0E0E0]">Developer Resources</p>
-            </div>
-          </Link>
-          
+          <DynamicLogo
+            logoData={siteSettings?.logo}
+            variant="sidebar"
+            onClick={onClose}
+          />
+
           {/* Close button for mobile */}
           <button
             onClick={onClose}
-            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 transition-colors"
+            className="lg:hidden p-2 rounded-md text-gray-400 hover:text-white hover:bg-[#222222] transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -88,10 +87,10 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
                 href={item.href}
                 onClick={onClose}
                 className={`
-                  block px-4 py-3 text-base font-medium transition-all duration-200
-                  ${active 
-                    ? 'text-[#00BFFF] border-b-2 border-[#00BFFF]' 
-                    : 'text-[#E0E0E0] hover:text-[#00BFFF] hover:bg-[#333333]'
+                  block px-4 py-3 text-base font-medium transition-all duration-200 rounded-lg mx-2
+                  ${active
+                    ? 'text-[#00BFFF] bg-[#00BFFF]/10 border-l-3 border-[#00BFFF]'
+                    : 'text-[#E0E0E0] hover:text-[#00BFFF] hover:bg-[#222222]'
                   }
                 `}
               >
@@ -105,7 +104,7 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
         <div className="p-6 flex-shrink-0">
           <div className="text-sm text-[#E0E0E0] text-center">
             <p>&copy; 2024 Tech Glossary</p>
-            <p className="mt-1 text-[#39FF14]">Built with ❤️</p>
+            {/* <p className="mt-1 text-[#39FF14]">Built with by:</p> */}
           </div>
         </div>
       </div>

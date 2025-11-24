@@ -6,7 +6,7 @@ export default async function LearningPathsPage() {
   const { data: paths } = await sanityFetch({ query: LEARNING_PATHS_QUERY })
 
   return (
-    <div className="min-h-screen bg-[#121212] relative">
+    <div className="min-h-screen bg-[#121212]">
       {/* Header */}
       <section className="bg-[#121212] py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -126,11 +126,11 @@ export default async function LearningPathsPage() {
         </div>
       </section>
 
-      {/* Subtle Overlay to Prevent Interaction */}
-      <div className="fixed inset-0 bg-black bg-opacity-5 z-10"></div>
+      {/* Invisible Overlay to Prevent Interaction */}
+      <div className="fixed inset-0 bg-transparent z-40 pointer-events-auto"></div>
 
-      {/* Coming Soon Message */}
-      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-20">
+      {/* Coming Soon Message - Fixed to viewport center */}
+      <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-50">
         <div className="text-center pointer-events-auto bg-[#121212] bg-opacity-90 backdrop-blur-sm rounded-xl p-8 border border-[#333333] shadow-2xl">
           <div className="text-4xl md:text-5xl mb-4">🚧</div>
           <h2 className="text-2xl md:text-3xl font-bold text-[#FFD700] mb-3">
