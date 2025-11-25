@@ -5,6 +5,7 @@ import { LayoutWrapper } from "@/components/LayoutWrapper";
 import { SanityLive } from "@/sanity/live";
 import { FaviconUpdater } from "@/components/FaviconUpdater";
 import { SiteSettingsProvider } from "@/components/SiteSettingsProvider";
+import { NavigationTracker } from "@/components/NavigationTracker";
 import { sanityFetch } from "@/sanity/live";
 import { SITE_SETTINGS_QUERY } from "@/sanity/queries";
 
@@ -58,6 +59,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${lato.variable} font-sans`}>
         <SiteSettingsProvider initialSettings={siteSettings}>
+          <NavigationTracker />
           <FaviconUpdater />
           <LayoutWrapper>
             {children}
