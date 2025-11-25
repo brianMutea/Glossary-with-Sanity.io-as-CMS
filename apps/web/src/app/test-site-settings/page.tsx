@@ -63,7 +63,7 @@ export default function TestSiteSettingsPage() {
       
       // If successful, refresh the page to see changes
       if (result.success) {
-        setTimeout(() => refreshPage(), 2000)
+        setTimeout(() => window.location.reload(), 2000)
       }
     } catch (err) {
       setApiResult({ error: 'Failed to create basic settings', details: err })
@@ -93,7 +93,7 @@ export default function TestSiteSettingsPage() {
       
       // If successful, refresh the page to see changes
       if (result.success) {
-        setTimeout(() => refreshPage(), 2000)
+        setTimeout(() => window.location.reload(), 2000)
       }
     } catch (err) {
       setApiResult({ error: 'Failed to create settings', details: err })

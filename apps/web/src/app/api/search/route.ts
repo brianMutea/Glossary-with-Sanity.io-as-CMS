@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sanityFetch } from '@/sanity/live'
+import { GLOBAL_SEARCH_QUERY } from '@/sanity/queries'
+import type { SearchData } from '@/sanity/types'
 
 // Define search result interface
 export interface SearchResult {
@@ -14,88 +16,31 @@ export interface SearchResult {
     publishedAt?: string
     author?: string
     tags?: string[]
+    status?: string
   }
 }
 
-// Global search query that searches across all content types
-const GLOBAL_SEARCH_QUERY = `
-{
-  "glossaryTerms": *[_type == "glossaryTerm" && (
-    term match $query + "*" ||
-    shortDefinition match $query + "*" ||
-    domain match $query + "*" ||
-    tags[]->title match $query + "*"
-  )][0...5] {
-    _id,
-    term,
-    shortDefinition,
-    level,
-    domain,
-    slug,
-    tags
-  },
-  "blogPosts": *[_type == "blogPost" && (
-    title match $query + "*" ||
-    excerpt match $query + "*" ||
-    tags[] match $query + "*"
-  )][0...5] {
-    _id,
-    title,
-    excerpt,
-    slug,
-    publishedAt,
-    tags,
-    "author": author->name
-  },
-  "series": *[_type == "series" && (
-    title match $query + "*" ||
-    description match $query + "*"
-  )][0...3] {
-    _id,
-    title,
-    description,
-    slug,
-    status
-  },
-  "learningPaths": *[_type == "learningPath" && (
-    title match $query + "*" ||
-    description match $query + "*" ||
-    domain match $query + "*"
-  )][0...3] {
-    _id,
-    title,
-    description,
-    slug,
-    level,
-    domain
-  },
-  "authors": *[_type == "author" && (
-    name match $query + "*" ||
-    bio match $query + "*"
-  )][0...3] {
-    _id,
-    name,
-    bio,
-    slug
-  }
-}
-`
+
 
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
-    const query = searchParams.get('q')
+    const searchQuery = searchParams.get('q')
 
-    if (!query || query.length < 2) {
+    if (!searchQuery || searchQuery.length < 2) {
       return NextResponse.json({ results: [] })
     }
 
+    // Ensure searchQuery is not null before using it
+    const queryParam = searchQuery.toLowerCase()
+
     // Fetch all content types
-    const { data } = await sanityFetch({
+    const result = await sanityFetch({
       query: GLOBAL_SEARCH_QUERY,
-      params: { query: query.toLowerCase() },
+      params: { query: queryParam } as any,
       tags: ['glossaryTerm', 'blogPost', 'series', 'learningPath', 'author'],
     })
+    const data = result.data as SearchData
 
     const results: SearchResult[] = []
 
@@ -183,8 +128,8 @@ export async function GET(request: NextRequest) {
 
     // Sort results by relevance (exact matches first, then partial matches)
     const sortedResults = results.sort((a, b) => {
-      const aExact = a.title.toLowerCase().includes(query.toLowerCase())
-      const bExact = b.title.toLowerCase().includes(query.toLowerCase())
+      const aExact = a.title.toLowerCase().includes(queryParam)
+      const bExact = b.title.toLowerCase().includes(queryParam)
       
       if (aExact && !bExact) return -1
       if (!aExact && bExact) return 1
@@ -194,7 +139,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ 
       results: sortedResults.slice(0, 10), // Limit to 10 results
-      query,
+      query: searchQuery,
       total: sortedResults.length 
     })
 

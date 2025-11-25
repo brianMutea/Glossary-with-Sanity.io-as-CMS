@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  typescript: {
+    // Only ignore build errors if absolutely necessary
+    ignoreBuildErrors: false,
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "cdn.sanity.io" },

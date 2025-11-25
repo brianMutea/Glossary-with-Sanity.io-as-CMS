@@ -5,7 +5,8 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "typegen": "cd apps/studio && pnpm typegen"
   },
   "devDependencies": {
     "@turbo/gen": "^1.13.4",

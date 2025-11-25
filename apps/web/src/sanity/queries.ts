@@ -379,6 +379,68 @@ export const SITE_SETTINGS_TEST_QUERY = `*[_type == "siteSettings"][0] {
   tagline
 }`
 
+// Global Search Query
+export const GLOBAL_SEARCH_QUERY = `{
+  "glossaryTerms": *[_type == "glossaryTerm" && (
+    term match $query + "*" ||
+    shortDefinition match $query + "*" ||
+    domain match $query + "*" ||
+    tags[]->title match $query + "*"
+  )][0...5] {
+    _id,
+    term,
+    shortDefinition,
+    level,
+    domain,
+    slug,
+    tags
+  },
+  "blogPosts": *[_type == "blogPost" && (
+    title match $query + "*" ||
+    excerpt match $query + "*" ||
+    tags[] match $query + "*"
+  )][0...5] {
+    _id,
+    title,
+    excerpt,
+    slug,
+    publishedAt,
+    tags,
+    "author": author->name
+  },
+  "series": *[_type == "series" && (
+    title match $query + "*" ||
+    description match $query + "*"
+  )][0...3] {
+    _id,
+    title,
+    description,
+    slug,
+    status
+  },
+  "learningPaths": *[_type == "learningPath" && (
+    title match $query + "*" ||
+    description match $query + "*" ||
+    domain match $query + "*"
+  )][0...3] {
+    _id,
+    title,
+    description,
+    slug,
+    level,
+    domain
+  },
+  "authors": *[_type == "author" && (
+    name match $query + "*" ||
+    bio match $query + "*"
+  )][0...3] {
+    _id,
+    name,
+    bio,
+    slug
+  }
+}`
+
 // Site Settings Query
 export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   _id,
