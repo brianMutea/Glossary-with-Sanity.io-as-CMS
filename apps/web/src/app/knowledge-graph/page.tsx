@@ -5,7 +5,7 @@ import KnowledgeGraph from '@/components/KnowledgeGraph'
 import { getDynamicOptions, getDomainColor, getLevelColor, formatDisplayName } from '@/lib/dynamicColors'
 
 export const metadata: Metadata = {
-  title: 'Knowledge Graph | Tech Glossary',
+  title: 'Knowledge Graph | Glossifyd',
   description: 'Interactive visualization of how technical concepts connect and relate to each other. Explore the relationships between AI, ML, and data science terms.',
   keywords: ['knowledge graph', 'concept map', 'technical terms', 'AI', 'machine learning', 'data science', 'visualization'],
 }

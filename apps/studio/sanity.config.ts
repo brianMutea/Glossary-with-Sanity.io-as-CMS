@@ -7,7 +7,7 @@ import { schemaTypes } from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
-  title: 'Tech Glossary Blog',
+  title: 'Glossifyd Blog',
 
   projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'czq3a9vt',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',

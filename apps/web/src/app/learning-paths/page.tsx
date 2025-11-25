@@ -146,6 +146,6 @@ export default async function LearningPathsPage() {
 }
 
 export const metadata = {
-  title: 'Learning Paths - Tech Glossary',
+  title: 'Learning Paths - Glossifyd',
   description: 'Structured learning journeys for AI, Machine Learning, and Data Science. Follow curated paths from beginner to advanced levels.',
 }

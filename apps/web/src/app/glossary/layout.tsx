@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'AI & ML Glossary - Tech Glossary',
+  title: 'AI & ML Glossary - Glossifyd',
   description: 'Comprehensive glossary of AI, Machine Learning, and Data Science terms with definitions, examples, and learning connections.',
 }
 

@@ -1,4 +1,4 @@
-# Tech Glossary
+# Glossifyd
 
 A modern, interactive technical knowledge platform that combines blogging with an intelligent glossary system. Features automatic term detection, hover tooltips, and curated learning paths.
 

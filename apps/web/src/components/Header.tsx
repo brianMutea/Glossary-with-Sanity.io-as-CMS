@@ -16,7 +16,7 @@ interface HeaderProps {
 export function Header({
   onMenuToggle,
   showSearch = false,
-  searchPlaceholder = "Search everything...",
+  searchPlaceholder = "Search glossify...",
   className = "",
   showMenuButton = true,
   containerClassName = "max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -41,7 +41,7 @@ export function Header({
           {showMenuButton && (
             <Link href="/" className="lg:hidden flex items-center">
               <span className="text-xl font-bold text-[#FFD700]">
-                Tech Glossary
+                {/* Glossify */}
               </span>
             </Link>
           )}

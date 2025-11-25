@@ -425,6 +425,34 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
     }
   },
   primaryColor,
-  accentColor
+  accentColor,
+  heroSection{
+    enabled,
+    headline,
+    subheadline,
+    ctaButtons[]{
+      text,
+      url,
+      style,
+      openInNewTab
+    },
+    heroImage{
+      type,
+      image{
+        asset->{
+          _id,
+          url
+        },
+        alt
+      },
+      codeSnippet{
+        language,
+        code
+      },
+      customHtml
+    },
+    backgroundColor,
+    textColor
+  }
 }`
 

@@ -305,6 +305,6 @@ export async function generateMetadata({ params }: Props) {
 
     return {
         title: post.title,
-        description: post.excerpt || `Read ${post.title} on Tech Glossary`,
+        description: post.excerpt || `Read ${post.title} on Glossifyd`,
     }
 }

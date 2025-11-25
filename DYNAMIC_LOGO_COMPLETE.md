@@ -37,7 +37,7 @@ Choose from three logo types:
 
 #### **Text Logo**
 - Set "Logo Type" to "Text Logo"
-- Enter your text (e.g., "Tech Glossary")
+- Enter your text (e.g., "Glossifyd")
 - Choose font size: Small, Medium, Large, Extra Large
 - Select font weight: Normal, Medium, Semibold, Bold
 - Pick a color using the color picker

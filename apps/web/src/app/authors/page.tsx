@@ -11,7 +11,7 @@ export default async function AuthorsPage() {
   return (
     <PageLayout
       title="Our Authors"
-      description="Meet the talented writers and developers who share their knowledge and expertise on Tech Glossary."
+      description="Meet the talented writers and developers who share their knowledge and expertise on Glossifyd."
     >
       {authors.length > 0 ? (
         <GridLayout variant="compact">
@@ -31,6 +31,6 @@ export default async function AuthorsPage() {
 }
 
 export const metadata = {
-  title: 'Authors - Tech Glossary',
-  description: 'Meet the talented writers and developers who contribute to Tech Glossary.',
+  title: 'Authors - Glossifyd',
+  description: 'Meet the talented writers and developers who contribute to Glossifyd.',
 }

@@ -22,7 +22,7 @@ export function Footer({
       <footer className={`bg-[#121212] border-t border-[#333333] ${className}`}>
         <div className={`${containerClassName} py-6`}>
           <p className="text-center text-[#E0E0E0] text-sm">
-            © {new Date().getFullYear()} Tech Glossary. All rights reserved.
+            © {new Date().getFullYear()} Glossifyd. All rights reserved.
           </p>
         </div>
       </footer>
@@ -58,7 +58,7 @@ export function Footer({
           </div>
           <div className="mt-6 pt-6 border-t border-[#333333]">
             <p className="text-center text-[#E0E0E0] text-sm">
-              © {new Date().getFullYear()} Tech Glossary. All rights reserved.
+              © {new Date().getFullYear()} Glossifyd. All rights reserved.
             </p>
           </div>
         </div>
@@ -135,7 +135,7 @@ export function Footer({
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-[#333333]">
           <p className="text-center text-[#E0E0E0] text-sm">
-            © {new Date().getFullYear()} Tech Glossary. All rights reserved.
+            © {new Date().getFullYear()} Glossifyd. All rights reserved.
           </p>
         </div>
       </div>

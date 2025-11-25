@@ -53,7 +53,7 @@ export function DynamicLogo({
         <span className="text-white font-bold text-xl">T</span>
       </div>
       <div>
-        <h1 className="text-xl font-bold text-[#FFD700]">Tech Glossary</h1>
+        <h1 className="text-xl font-bold text-[#FFD700]">Glossifyd</h1>
         <p className="text-sm text-[#E0E0E0]">Developer Resources</p>
       </div>
     </div>

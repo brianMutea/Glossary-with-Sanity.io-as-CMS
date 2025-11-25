@@ -65,6 +65,6 @@ export default async function SeriesPage() {
 }
 
 export const metadata = {
-  title: 'Learning Series - Tech Glossary',
-  description: 'Explore comprehensive learning paths and tutorial series on Tech Glossary.',
+  title: 'Learning Series - Glossifyd',
+  description: 'Explore comprehensive learning paths and tutorial series on Glossifyd.',
 }

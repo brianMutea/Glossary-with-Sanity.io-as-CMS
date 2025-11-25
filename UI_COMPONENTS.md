@@ -1,6 +1,6 @@
 # UI Components Documentation
 
-*Complete guide to all UI components in the Tech Glossary application*
+*Complete guide to all UI components in the Glossifyd application*
 
 ## Table of Contents
 
@@ -494,7 +494,7 @@ interface HeaderProps {
 
 - **Responsive Design**: Mobile-first with collapsible menu
 - **Global Search**: Integrated search functionality
-- **Brand Logo**: Tech Glossary branding
+- **Brand Logo**: Glossifyd branding
 - **Navigation Links**: Main site sections
 - **Dark Theme**: Consistent with design system
 
@@ -994,7 +994,7 @@ function GlossaryPage({ terms }) {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-[#FFD700] mb-4">
-            Tech Glossary
+            Glossifyd
           </h1>
           <p className="text-xl text-[#E0E0E0]">
             Explore {terms.length} technical concepts and definitions

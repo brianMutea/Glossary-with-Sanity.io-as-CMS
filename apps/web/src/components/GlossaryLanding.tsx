@@ -3,9 +3,11 @@
 import { useState, useMemo, useEffect } from 'react'
 import { CompactTermCard } from './CompactTermCard'
 import { GlossaryModal } from './GlossaryModal'
+import { HeroSection } from './HeroSection'
 import { getDynamicOptions, formatDisplayName } from '@/lib/dynamicColors'
 import { useTooltipHover } from '@/hooks/useTooltipHover'
 import { CustomSelect } from './ui/CustomSelect'
+import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 interface GlossaryLandingProps {
   terms: Array<{
@@ -33,6 +35,7 @@ interface GlossaryLandingProps {
 }
 
 export function GlossaryLanding({ terms }: GlossaryLandingProps) {
+  const { siteSettings } = useSiteSettings()
   const [hoveredTerm, setHoveredTerm] = useState<any>(null)
   const [triggerRect, setTriggerRect] = useState<DOMRect | null>(null)
   const [selectedTerm, setSelectedTerm] = useState<any>(null)
@@ -185,13 +188,13 @@ export function GlossaryLanding({ terms }: GlossaryLandingProps) {
 
   return (
     <div className="min-h-screen bg-[#121212]">
-      {/* Header */}
-      <div className="bg-[#121212]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* Hero Section */}
+      <HeroSection heroData={siteSettings?.heroSection} />
+
+      {/* Stats Section */}
+      <div className="bg-[#121212] py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-[#FFD700] mb-6">
-              Tech Glossary
-            </h1>
             <p className="text-xl text-[#E0E0E0] max-w-4xl mx-auto leading-relaxed">
               Discover and explore <span className="text-[#00BFFF] font-semibold">{terms.length}</span> technical concepts, definitions, and programming terms
               {(searchTerm || filterLevel !== 'all' || filterDomain !== 'all' || filterType !== 'all') && (

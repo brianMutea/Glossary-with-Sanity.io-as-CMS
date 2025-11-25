@@ -8,10 +8,15 @@ export async function GET() {
     const data = await client.fetch(SITE_SETTINGS_QUERY)
     
     if (data) {
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         data: data
       })
+      
+      // Add caching headers (cache for 5 minutes)
+      response.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=600')
+      
+      return response
     } else {
       // No document found, return success but no data
       return NextResponse.json({
@@ -37,7 +42,7 @@ export async function GET() {
             logo: {
               type: 'text',
               textLogo: {
-                text: simpleData.title || 'Tech Glossary',
+                text: simpleData.title || 'Glossifyd',
                 fontSize: 'text-xl',
                 fontWeight: 'font-bold',
                 color: { hex: '#FFD700' }

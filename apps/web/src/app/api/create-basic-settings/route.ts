@@ -16,7 +16,7 @@ export async function POST() {
     const basicSettings = {
       _type: 'siteSettings',
       _id: 'siteSettings',
-      title: 'Tech Glossary',
+      title: 'Glossifyd',
       tagline: 'Your go-to resource for code tutorials and technical articles'
     }
 

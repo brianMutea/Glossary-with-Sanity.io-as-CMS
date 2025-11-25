@@ -15,7 +15,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps) {
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
-  const { siteSettings } = useSiteSettings()
+  const { siteSettings, loading } = useSiteSettings()
 
   useEffect(() => {
     setMounted(true)
@@ -103,7 +103,7 @@ export function Sidebar({ isOpen, onClose, alwaysVisible = false }: SidebarProps
         {/* Footer */}
         <div className="p-6 flex-shrink-0">
           <div className="text-sm text-[#E0E0E0] text-center">
-            <p>&copy; 2024 Tech Glossary</p>
+            {/* <p>&copy; 2024 Glossifyd</p> */}
             {/* <p className="mt-1 text-[#39FF14]">Built with by:</p> */}
           </div>
         </div>

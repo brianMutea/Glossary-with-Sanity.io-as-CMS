@@ -211,7 +211,7 @@ export default function TestSiteSettingsPage() {
                 <li>Select your project: <code className="bg-[#333] px-2 py-1 rounded">czq3a9vt</code></li>
                 <li>Go to <strong>API</strong> → <strong>Tokens</strong></li>
                 <li>Click <strong>"Add API token"</strong></li>
-                <li>Name: <code className="bg-[#333] px-2 py-1 rounded">Tech Glossary Write Token</code></li>
+                <li>Name: <code className="bg-[#333] px-2 py-1 rounded">Glossifyd Write Token</code></li>
                 <li>Permissions: <strong>Editor</strong> (or higher)</li>
                 <li>Copy the generated token</li>
               </ol>

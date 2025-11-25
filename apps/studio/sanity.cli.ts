@@ -1,4 +1,4 @@
-import {defineCliConfig} from 'sanity/cli'
+import { defineCliConfig } from 'sanity/cli'
 
 export default defineCliConfig({
   api: {
@@ -6,11 +6,6 @@ export default defineCliConfig({
     dataset: 'production'
   },
   deployment: {
-    appId: 'czq3a9vt',
-    /**
-     * Enable auto-updates for studios.
-     * Learn more at https://www.sanity.io/docs/cli#auto-updates
-     */
-    autoUpdates: true,
+    appId: 'zlz3pkgzuj4qadvw6dcwbdw6'
   }
 })

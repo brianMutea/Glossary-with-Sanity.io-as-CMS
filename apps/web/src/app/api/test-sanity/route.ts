@@ -49,12 +49,12 @@ export async function POST() {
     const defaultSettings = {
       _type: 'siteSettings',
       _id: 'siteSettings',
-      title: 'Tech Glossary',
+      title: 'Glossifyd',
       tagline: 'Your go-to resource for code tutorials and technical articles',
       logo: {
         type: 'text',
         textLogo: {
-          text: 'Tech Glossary',
+          text: 'Glossifyd',
           fontSize: 'text-xl',
           fontWeight: 'font-bold',
           color: { hex: '#FFD700' }

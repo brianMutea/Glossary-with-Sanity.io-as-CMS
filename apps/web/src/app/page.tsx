@@ -15,7 +15,7 @@ export default async function HomePage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Welcome to Tech Glossary</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Welcome to Glossifyd</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
             Start by creating some glossary terms in your Sanity Studio.
           </p>

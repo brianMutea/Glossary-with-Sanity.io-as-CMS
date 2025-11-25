@@ -87,7 +87,7 @@ function MyComponent() {
 
 ## Fallback Behavior
 If no logo is configured in Sanity, the system falls back to:
-- Default "Tech Glossary" text logo with icon
+- Default "Glossifyd" text logo with icon
 - Standard favicon
 - Default site title and tagline
 

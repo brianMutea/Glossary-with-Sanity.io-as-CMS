@@ -168,7 +168,7 @@ export async function generateMetadata({ params }: Props) {
   }
 
   return {
-    title: `${category.title} - Tech Glossary`,
-    description: category.description || `Browse ${category.title} articles on Tech Glossary`,
+    title: `${category.title} - Glossifyd`,
+    description: category.description || `Browse ${category.title} articles on Glossifyd`,
   }
 }

@@ -9,7 +9,7 @@
 3. Navigate to **API** → **Tokens**
 4. Click **"Add API token"**
 5. Configure:
-   - **Name**: `Tech Glossary Write Token`
+   - **Name**: `Glossifyd Write Token`
    - **Permissions**: `Editor` (or higher)
 6. Copy the generated token
 
