@@ -223,9 +223,9 @@ export function GlobalSearchBar({
                               {result.metadata.domain}
                             </Badge>
                           )}
-                          {result.metadata.type && (
+                          {result.type && (
                             <Badge variant="type" size="xs">
-                              {result.metadata.type}
+                              {result.type}
                             </Badge>
                           )}
                           {result.metadata.author && (

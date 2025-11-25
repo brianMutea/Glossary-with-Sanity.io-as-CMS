@@ -17,6 +17,7 @@ export interface SearchResult {
     author?: string
     tags?: string[]
     status?: string
+    // Note: 'type' is available directly on the SearchResult object, not in metadata
   }
 }
 

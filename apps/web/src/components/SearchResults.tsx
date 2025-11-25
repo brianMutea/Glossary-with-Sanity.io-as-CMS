@@ -120,9 +120,9 @@ export function SearchResults() {
                           {result.metadata.domain}
                         </Badge>
                       )}
-                      {result.metadata.type && (
+                      {result.type && (
                         <Badge variant="type">
-                          {result.metadata.type}
+                          {result.type}
                         </Badge>
                       )}
                       {result.metadata.author && (
