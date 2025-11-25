@@ -1,193 +1,182 @@
-# Glossifyd
+# Tech Glossary
 
-A modern, interactive technical knowledge platform that combines blogging with an intelligent glossary system. Features automatic term detection, hover tooltips, and curated learning paths.
+A comprehensive technical glossary and blog platform with interactive features, built with Next.js 14 and Sanity CMS.
 
-## Features
+## 🎯 Goal
 
-### 📚 Interactive Glossary
-- **Smart Term Detection**: Automatically highlights technical terms in blog posts
-- **Hover Tooltips**: Instant definitions with torn-paper design aesthetic
-- **Advanced Filtering**: Search by difficulty level, domain, and term type
-- **Learning Paths**: Curated sequences of concepts for structured learning
+Create a modern, searchable platform for technical definitions, tutorials, and learning resources with an intuitive content management system.
 
-### ✍️ Content Management
-- **Rich Blog System**: Full-featured blog with series, categories, and code highlighting
-- **Author Profiles**: Comprehensive author pages with social links
-- **Media Support**: Images, videos, and interactive code blocks
-- **SEO Optimized**: Automatic metadata generation and structured data
+## ✨ Features
 
-### 🎨 User Experience
-- **Responsive Design**: Mobile-first approach with adaptive layouts
-- **Card Tooltips**: Hover previews for blog excerpts and definitions
-- **Visual Feedback**: Smooth animations and interactive elements
-- **Cross-Linking**: Seamless navigation between related content
+- **Interactive Glossary**: Searchable terms with tooltips and modal previews
+- **Dynamic Hero Section**: Customizable homepage with code snippets or images
+- **Blog System**: Technical articles with series organization
+- **Learning Paths**: Curated educational journeys
+- **Knowledge Graph**: Visual term relationships
+- **Advanced Search**: Global search with filtering by level, domain, and type
+- **Site Customization**: Dynamic logos, colors, and branding via CMS
+- **Responsive Design**: Mobile-first with dark theme
+- **Performance Optimized**: Server-side rendering and caching
 
-## Tech Stack
+## 🛠 Tech Stack
 
-### Frontend
-- **Next.js 14** - App Router with Server Components
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **React Suspense** - Lazy loading and performance optimization
+- **Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS
+- **CMS**: Sanity Studio with custom schemas
+- **Styling**: Tailwind CSS with custom design system
+- **Package Manager**: pnpm
+- **Deployment**: Vercel + Sanity hosting
 
-### Backend & CMS
-- **Sanity CMS** - Headless content management
-- **GROQ** - Graph-Relational Object Queries
-- **Sanity Studio** - Content editing interface
+## 📋 Requirements
 
-### Performance
-- **Intelligent Caching** - 5-minute TTL with automatic invalidation
-- **Content Pre-processing** - Server-side term analysis and regex compilation
-- **Memoization** - React component optimization
-- **Lazy Loading** - Code splitting and dynamic imports
-
-## Quick Start
-
-### Prerequisites
 - Node.js 18+
-- pnpm 8.15.6+
+- pnpm 8+
 - Sanity account
 
-### Installation
+## 🚀 Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd tech-glossary
-   ```
+### 1. Installation
 
-2. **Install dependencies**
-   ```bash
-   pnpm install
-   ```
+```bash
+git clone <repository-url>
+cd tech-glossary
+pnpm install
+```
 
-3. **Environment Setup**
-   ```bash
-   # Copy environment files
-   cp .env.local.example .env.local
-   cp apps/studio/.env.local.example apps/studio/.env.local
-   
-   # Add your Sanity credentials
-   # NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-   # NEXT_PUBLIC_SANITY_DATASET=production
-   # SANITY_API_TOKEN=your_token
-   ```
+### 2. Environment Setup
 
-4. **Start Development**
-   ```bash
-   # Start both web app and Sanity Studio
-   pnpm dev
-   ```
+```bash
+# Web app
+cp apps/web/.env.example apps/web/.env.local
 
-5. **Access Applications**
-   - Web App: http://localhost:3000
-   - Sanity Studio: http://localhost:3333
+# Studio
+cp apps/studio/.env.example apps/studio/.env.local
+```
 
-   > Note: `pnpm dev` uses Turbo to run both applications simultaneously
+Update both `.env.local` files with your Sanity project ID:
+```env
+SANITY_STUDIO_PROJECT_ID=your_project_id
+SANITY_STUDIO_DATASET=production
+```
 
-## Performance Optimizations
+### 3. Development
 
-### Caching Strategy
-- **GlossaryCache**: Singleton pattern with 5-minute TTL
-- **ContentProcessor**: LRU cache for analyzed content (100 entries max)
-- **Component Memoization**: React.useMemo for expensive operations
+```bash
+# Start both applications
+pnpm dev
 
-### Query Optimization
-- **Single Analysis**: One content scan per blog post instead of double queries
-- **Pre-compiled Regex**: Terms processed once and cached with regex patterns
-- **Smart Filtering**: Quick string checks before expensive regex operations
+# Or individually
+pnpm dev:web     # http://localhost:3000
+pnpm dev:studio  # http://localhost:3333
+```
 
-### Bundle Optimization
-- **Lazy Loading**: Tooltip content loaded on-demand
-- **Code Splitting**: Dynamic imports for non-critical components
-- **Tree Shaking**: Unused code elimination
+## 🚢 Deployment
 
-### Performance Monitoring
-- **Built-in Metrics**: Automatic tracking of slow operations (>100ms)
-- **Development Warnings**: Console alerts for performance regressions
-- **Cache Analytics**: Hit rates and average response times
+### Sanity Studio
 
-## Project Structure
+```bash
+cd apps/studio
+npx sanity login
+npx sanity deploy
+```
+
+Choose a hostname like `your-name-tech-glossary` when prompted.
+
+### Web Application
+
+**Vercel (Recommended):**
+1. Connect repository to Vercel
+2. Set environment variables
+3. Deploy
+
+**Manual:**
+```bash
+cd apps/web
+pnpm build
+pnpm start
+```
+
+## 📁 Project Structure
 
 ```
 tech-glossary/
 ├── apps/
 │   ├── web/                 # Next.js application
 │   │   ├── src/
-│   │   │   ├── app/         # App Router pages
+│   │   │   ├── app/         # App router pages
 │   │   │   ├── components/  # React components
-│   │   │   ├── lib/         # Utilities and services
-│   │   │   └── sanity/      # CMS integration
+│   │   │   ├── lib/         # Utilities
+│   │   │   └── sanity/      # Sanity integration
 │   │   └── public/          # Static assets
 │   └── studio/              # Sanity Studio
 │       ├── schemaTypes/     # Content schemas
-│       └── components/      # Studio components
-├── .env.local              # Environment variables
-└── README.md              # This file
+│       └── components/      # Custom studio components
+└── README.md
 ```
 
-## Content Types
+## 🎨 Content Management
 
-### Blog Posts
-- Rich text content with PortableText
-- Code blocks with syntax highlighting
-- Video embeds and image galleries
-- Series and category organization
-- Author attribution and social links
+### Access Studio
+- Local: http://localhost:3333
+- Deployed: https://your-hostname.sanity.studio
 
-### Glossary Terms
-- Term definitions with examples
-- Difficulty levels (Beginner, Intermediate, Advanced)
-- Domain categorization (AI, ML, Data Science, etc.)
-- Cross-references and prerequisites
-- Tutorial article linking
+### Content Types
+- **Glossary Terms**: Technical definitions with levels and domains
+- **Blog Posts**: Articles with rich content and code blocks
+- **Learning Paths**: Structured learning sequences
+- **Site Settings**: Logo, colors, hero section configuration
+- **Authors & Categories**: Content organization
 
-### Learning Paths
-- Structured learning sequences
-- Prerequisites and dependencies
-- Progress tracking capabilities
-- Integration with glossary terms
+### Site Customization
+Navigate to "Site Settings" in Sanity Studio to configure:
+- Logo (text, image, or SVG)
+- Hero section content and visuals
+- Brand colors and favicon
 
-## Development
+## 🔧 Available Scripts
 
-### Adding New Features
-1. Create schema types in `apps/studio/schemaTypes/`
-2. Add queries in `apps/web/src/sanity/queries.ts`
-3. Build components in `apps/web/src/components/`
-4. Create pages in `apps/web/src/app/`
+```bash
+# Development
+pnpm dev              # Start both apps
+pnpm dev:web          # Web app only
+pnpm dev:studio       # Studio only
 
-### Performance Guidelines
-- Use the caching services (`glossaryCache`, `contentProcessor`)
-- Implement memoization for expensive computations
-- Lazy load non-critical components
-- Monitor performance with built-in metrics
+# Production
+pnpm build            # Build both apps
+pnpm start            # Start production server
 
-### Code Standards
-- TypeScript strict mode enabled
-- ESLint and Prettier configured
-- Component-based architecture
-- Server/Client component separation
+# Maintenance
+pnpm lint             # Lint code
+pnpm clean            # Clean build files
+```
 
-## Deployment
+## 🌟 Key Features Detail
 
-### Vercel (Recommended)
-1. Connect repository to Vercel
-2. Add environment variables in dashboard
-3. Deploy automatically on push
+### Interactive Glossary
+- Hover tooltips for quick definitions
+- Modal previews with full content
+- Advanced filtering and search
+- Alphabetical organization
 
-### Manual Deployment
-1. Build the application: `pnpm build`
-2. Deploy `apps/web/.next` to your hosting provider
-3. Deploy Sanity Studio separately if needed
+### Dynamic Hero Section
+- Configurable via Sanity Studio
+- Support for images, code snippets, or custom HTML
+- Responsive design with mobile optimization
+- Custom CTA buttons
 
-## Contributing
+### Performance Features
+- Server-side rendering for SEO
+- Image optimization
+- Caching strategies
+- Mobile-first responsive design
+
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make changes following code standards
-4. Test performance impact
-5. Submit pull request
+2. Create feature branch: `git checkout -b feature/amazing-feature`
+3. Commit changes: `git commit -m 'Add amazing feature'`
+4. Push to branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
 
-## License
+## 📄 License
 
-MIT License - see LICENSE file for details
+MIT License - see [LICENSE](LICENSE) file for details.
