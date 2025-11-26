@@ -19,11 +19,13 @@ interface GlossaryTerm {
 interface EnhancedPortableTextProps {
   value: any
   glossaryTerms?: GlossaryTerm[]
+  theme?: 'light' | 'dark'
 }
 
 export function EnhancedPortableText({ 
   value, 
-  glossaryTerms = [] 
+  glossaryTerms = [],
+  theme = 'light'
 }: EnhancedPortableTextProps) {
   
   // Define all PortableText components inside the client component
@@ -34,7 +36,7 @@ export function EnhancedPortableText({
           code={value.code}
           language={value.language}
           filename={value.filename}
-          theme="light"
+          theme={theme}
         />
       ),
       videoEmbed: ({ value }: any) => (
@@ -59,7 +61,9 @@ export function EnhancedPortableText({
               style={{ maxHeight: '600px' }}
             />
             {value.caption && (
-              <p className="text-center text-gray-600 text-sm mt-3 italic">
+              <p className={`text-center text-sm mt-3 italic ${
+                theme === 'dark' ? 'text-[#E0E0E0]' : 'text-gray-600'
+              }`}>
                 {value.caption}
               </p>
             )}
@@ -70,34 +74,48 @@ export function EnhancedPortableText({
     block: {
       // Headings with glossary processing
       h1: ({ children }: any) => (
-        <h1 className="text-4xl font-bold text-gray-900 mt-12 mb-6 leading-tight first:mt-0">
+        <h1 className={`text-4xl font-bold mt-12 mb-6 leading-tight first:mt-0 ${
+          theme === 'dark' ? 'text-[#FFD700]' : 'text-gray-900'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </h1>
       ),
       h2: ({ children }: any) => (
-        <h2 className="text-3xl font-bold text-gray-900 mt-10 mb-4 leading-tight">
+        <h2 className={`text-3xl font-bold mt-10 mb-4 leading-tight ${
+          theme === 'dark' ? 'text-[#FFD700]' : 'text-gray-900'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </h2>
       ),
       h3: ({ children }: any) => (
-        <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-3 leading-tight">
+        <h3 className={`text-2xl font-semibold mt-8 mb-3 leading-tight ${
+          theme === 'dark' ? 'text-[#00BFFF]' : 'text-gray-900'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </h3>
       ),
       h4: ({ children }: any) => (
-        <h4 className="text-xl font-semibold text-gray-900 mt-6 mb-3 leading-tight">
+        <h4 className={`text-xl font-semibold mt-6 mb-3 leading-tight ${
+          theme === 'dark' ? 'text-[#00BFFF]' : 'text-gray-900'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </h4>
       ),
       // Paragraphs with glossary processing
       normal: ({ children }: any) => (
-        <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+        <p className={`text-lg mb-6 leading-relaxed ${
+          theme === 'dark' ? 'text-[#E0E0E0]' : 'text-gray-700'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </p>
       ),
       // Blockquotes with glossary processing
       blockquote: ({ children }: any) => (
-        <blockquote className="border-l-4 border-blue-500 pl-6 py-4 my-8 bg-blue-50 italic text-gray-700 text-lg">
+        <blockquote className={`border-l-4 pl-6 py-4 my-8 italic text-lg ${
+          theme === 'dark' 
+            ? 'border-[#00BFFF] bg-[#00BFFF] bg-opacity-10 text-[#E0E0E0]' 
+            : 'border-blue-500 bg-blue-50 text-gray-700'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </blockquote>
       ),
@@ -116,24 +134,34 @@ export function EnhancedPortableText({
     },
     listItem: {
       bullet: ({ children }: any) => (
-        <li className="text-lg text-gray-700 leading-relaxed">
+        <li className={`text-lg leading-relaxed ${
+          theme === 'dark' ? 'text-[#E0E0E0]' : 'text-gray-700'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </li>
       ),
       number: ({ children }: any) => (
-        <li className="text-lg text-gray-700 leading-relaxed">
+        <li className={`text-lg leading-relaxed ${
+          theme === 'dark' ? 'text-[#E0E0E0]' : 'text-gray-700'
+        }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </li>
       ),
     },
     marks: {
       code: ({ children }: any) => (
-        <code className="bg-gray-100 text-red-600 px-2 py-1 rounded text-sm font-medium font-mono">
+        <code className={`px-2 py-1 rounded text-sm font-medium font-mono ${
+          theme === 'dark' 
+            ? 'bg-[#333333] text-[#39FF14]' 
+            : 'bg-gray-100 text-red-600'
+        }`}>
           {children}
         </code>
       ),
       strong: ({ children }: any) => (
-        <strong className="font-bold text-gray-900">
+        <strong className={`font-bold ${
+          theme === 'dark' ? 'text-[#FFFFFF]' : 'text-gray-900'
+        }`}>
           {children}
         </strong>
       ),
@@ -145,7 +173,11 @@ export function EnhancedPortableText({
       link: ({ children, value }: any) => (
         <a
           href={value.href}
-          className="text-blue-600 hover:text-blue-800 underline transition-colors"
+          className={`underline transition-colors ${
+            theme === 'dark' 
+              ? 'text-[#00BFFF] hover:text-[#FFD700]' 
+              : 'text-blue-600 hover:text-blue-800'
+          }`}
           target={value.href.startsWith('http') ? '_blank' : undefined}
           rel={value.href.startsWith('http') ? 'noopener noreferrer' : undefined}
         >

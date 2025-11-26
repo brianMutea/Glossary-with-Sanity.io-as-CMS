@@ -196,6 +196,7 @@ export default async function BlogPostPage({ params }: Props) {
                 <EnhancedPortableText 
                     value={post.content} 
                     glossaryTerms={termsInContent}
+                    theme="light"
                 />
             </div>
 

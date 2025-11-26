@@ -1,7 +1,8 @@
 import { sanityFetch } from '@/sanity/live'
 import { buildSafeFetch } from '@/sanity/fetch'
 import { GLOSSARY_TERM_QUERY, GLOSSARY_TERMS_SLUGS_QUERY } from '@/sanity/queries'
-import { PortableText } from '@portabletext/react'
+import { EnhancedPortableText } from '@/components/EnhancedPortableText'
+import { contentProcessor } from '@/lib/contentProcessor'
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -13,118 +14,7 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
-const portableTextComponents = {
-  types: {
-    code: ({ value }: any) => (
-      <CodeBlock
-        code={value.code}
-        language={value.language}
-        filename={value.filename}
-        theme="light"
-      />
-    ),
-    image: ({ value }: any) => {
-      const imageUrl = getImageUrl(value, 1200, 800)
-      if (!imageUrl) return null
-      
-      return (
-        <div className="my-8">
-          <Image
-            src={imageUrl}
-            alt={value.alt || ''}
-            width={1200}
-            height={800}
-            className="w-full h-auto rounded-lg shadow-lg object-contain"
-            style={{ maxHeight: '600px' }}
-          />
-          {value.caption && (
-            <p className="text-center text-[#E0E0E0] text-sm mt-3 italic">
-              {value.caption}
-            </p>
-          )}
-        </div>
-      )
-    },
-  },
-  block: {
-    h1: ({ children }: any) => (
-      <h1 className="text-3xl font-bold text-[#FFD700] mt-8 mb-4 first:mt-0">
-        {children}
-      </h1>
-    ),
-    h2: ({ children }: any) => (
-      <h2 className="text-2xl font-bold text-[#FFD700] mt-6 mb-3">
-        {children}
-      </h2>
-    ),
-    h3: ({ children }: any) => (
-      <h3 className="text-xl font-semibold text-[#00BFFF] mt-4 mb-2">
-        {children}
-      </h3>
-    ),
-    normal: ({ children }: any) => (
-      <p className="text-[#E0E0E0] mb-4 leading-relaxed">
-        {children}
-      </p>
-    ),
-    blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-[#00BFFF] pl-4 py-2 my-6 bg-[#00BFFF] bg-opacity-10 italic text-[#E0E0E0]">
-        {children}
-      </blockquote>
-    ),
-  },
-  list: {
-    bullet: ({ children }: any) => (
-      <ul className="list-disc pl-6 mb-4 space-y-1">
-        {children}
-      </ul>
-    ),
-    number: ({ children }: any) => (
-      <ol className="list-decimal pl-6 mb-4 space-y-1">
-        {children}
-      </ol>
-    ),
-  },
-  listItem: {
-    bullet: ({ children }: any) => (
-      <li className="text-[#E0E0E0]">
-        {children}
-      </li>
-    ),
-    number: ({ children }: any) => (
-      <li className="text-[#E0E0E0]">
-        {children}
-      </li>
-    ),
-  },
-  marks: {
-    code: ({ children }: any) => (
-      <code className="bg-[#333333] text-[#39FF14] px-1 py-0.5 rounded text-sm font-mono">
-        {children}
-      </code>
-    ),
-    strong: ({ children }: any) => (
-      <strong className="font-bold text-[#FFFFFF]">
-        {children}
-      </strong>
-    ),
-    em: ({ children }: any) => (
-      <em className="italic">
-        {children}
-      </em>
-    ),
-    link: ({ children, value }: any) => (
-      <a
-        href={value.href}
-        className="text-[#00BFFF] hover:text-[#FFD700] underline transition-colors"
-        target={value.href.startsWith('http') ? '_blank' : undefined}
-        rel={value.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-      >
-        {children}
-      </a>
-    ),
-  },
-}
+
 
 const levelColors = {
   beginner: 'bg-[#39FF14] text-[#121212] border-[#39FF14]',
@@ -165,6 +55,14 @@ export default async function GlossaryTermPage({ params }: Props) {
 
   if (!term) {
     notFound()
+  }
+
+  // Analyze fullExplanation content for glossary terms (excluding current term)
+  let termsInContent: any[] = []
+  if (term.fullExplanation) {
+    const contentAnalysis = await contentProcessor.getSerializableAnalysis(term.fullExplanation)
+    // Filter out the current term to avoid self-referencing
+    termsInContent = contentAnalysis.termsFound.filter((t: any) => t._id !== term._id)
   }
 
   const imageUrl = term.image ? getImageUrl(term.image, 800, 400) : null
@@ -246,8 +144,43 @@ export default async function GlossaryTermPage({ params }: Props) {
                 <div>
                   <h2 className="text-2xl font-bold text-[#FFD700] mb-6">Deep Explanation</h2>
                   <div className="max-w-none glossary-content">
-                    <PortableText value={term.fullExplanation} components={portableTextComponents} />
+                    <EnhancedPortableText 
+                      value={term.fullExplanation} 
+                      glossaryTerms={termsInContent}
+                      theme="dark"
+                    />
                   </div>
+                  
+                  {/* Related Terms Found in Content */}
+                  {termsInContent && termsInContent.length > 0 && (
+                    <div className="mt-8 p-6 bg-[#1A1A1A] rounded-xl border border-[#333333]">
+                      <h3 className="text-lg font-bold text-[#FFD700] mb-4">
+                        🔗 Related Terms in this Explanation
+                      </h3>
+                      <p className="text-[#E0E0E0] mb-4 text-sm">
+                        Hover over highlighted terms above to see quick definitions, or click to explore.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {termsInContent.slice(0, 6).map((relatedTerm: any) => (
+                          <Link
+                            key={relatedTerm._id}
+                            href={`/glossary/${relatedTerm.slug.current}`}
+                          >
+                            <span className="px-3 py-1 text-sm bg-[#333333] text-[#00BFFF] border border-[#00BFFF] rounded-full hover:bg-[#00BFFF] hover:text-[#121212] transition-colors">
+                              {relatedTerm.term}
+                            </span>
+                          </Link>
+                        ))}
+                        {termsInContent.length > 6 && (
+                          <Link href="/glossary">
+                            <span className="px-3 py-1 text-sm bg-[#FFD700] text-[#121212] rounded-full hover:bg-[#FFFFFF] transition-colors">
+                              +{termsInContent.length - 6} more
+                            </span>
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 
