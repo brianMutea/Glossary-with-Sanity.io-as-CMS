@@ -1,4 +1,6 @@
 import { badgeStyles, getLevelColor, getDomainColorClass, getStatusColor } from '@/lib/designSystem'
+import { combineClasses } from '@/lib/colorUtils'
+import { COLORS, TYPOGRAPHY } from '@/lib/constants'
 
 interface BadgeProps {
   children: React.ReactNode
@@ -17,15 +19,19 @@ export function Badge({
   className = '',
   style 
 }: BadgeProps) {
-  // Size classes
+  // Size classes using constants
   const sizeClasses = {
-    xs: 'px-1.5 py-0.5 text-xs',
-    sm: 'px-2 py-1 text-xs',
-    md: 'px-3 py-1 text-sm',
-    lg: 'px-4 py-2 text-base'
+    xs: `px-1.5 py-0.5 text-[${TYPOGRAPHY.fontSizes.xs}]`,
+    sm: `px-2 py-1 text-[${TYPOGRAPHY.fontSizes.xs}]`,
+    md: `px-3 py-1 text-[${TYPOGRAPHY.fontSizes.sm}]`,
+    lg: `px-4 py-2 text-[${TYPOGRAPHY.fontSizes.base}]`
   }
   
-  const sizeClass = `${sizeClasses[size]} font-medium rounded-full`
+  const sizeClass = combineClasses(
+    sizeClasses[size],
+    `font-[${TYPOGRAPHY.fontWeights.medium}]`,
+    'rounded-full'
+  )
   
   let variantClass = ''
 
@@ -37,35 +43,35 @@ export function Badge({
       variantClass = value ? getDomainColorClass(value) : 'bg-[#00BFFF] text-[#121212]'
       break
     case 'type':
-      variantClass = 'bg-[#FFD700] text-[#121212]'
+      variantClass = `bg-[${COLORS.primary.gold}] text-[${COLORS.primary.dark}]`
       break
     case 'language':
-      variantClass = 'bg-[#00BFFF] text-[#121212] border border-[#00BFFF]'
+      variantClass = `bg-[${COLORS.primary.blue}] text-[${COLORS.primary.dark}] border border-[${COLORS.primary.blue}]`
       break
     case 'status':
       if (value === 'completed') {
-        variantClass = 'bg-[#39FF14] text-[#121212]'
+        variantClass = `bg-[${COLORS.success}] text-[${COLORS.primary.dark}]`
       } else if (value === 'in-progress') {
-        variantClass = 'bg-[#FFD700] text-[#121212]'
+        variantClass = `bg-[${COLORS.warning}] text-[${COLORS.primary.dark}]`
       } else if (value === 'draft') {
-        variantClass = 'bg-[#E0E0E0] text-[#121212]'
+        variantClass = `bg-[${COLORS.primary.lightGray}] text-[${COLORS.primary.dark}]`
       } else {
-        variantClass = 'bg-[#333333] text-[#E0E0E0]'
+        variantClass = `bg-[${COLORS.primary.gray}] text-[${COLORS.text.primary}]`
       }
       break
     case 'progress':
-      variantClass = 'bg-[#39FF14] bg-opacity-20 text-[#39FF14] border border-[#39FF14]'
+      variantClass = `bg-[${COLORS.success}] bg-opacity-20 text-[${COLORS.success}] border border-[${COLORS.success}]`
       break
     case 'custom':
-      variantClass = 'bg-[#333333] text-[#E0E0E0]'
+      variantClass = `bg-[${COLORS.primary.gray}] text-[${COLORS.text.primary}]`
       break
     default:
-      variantClass = 'bg-[#333333] text-[#E0E0E0]'
+      variantClass = `bg-[${COLORS.primary.gray}] text-[${COLORS.text.primary}]`
   }
 
   return (
     <span 
-      className={`${sizeClass} ${variantClass} ${className}`}
+      className={combineClasses(sizeClass, variantClass, className)}
       style={style}
     >
       {children}

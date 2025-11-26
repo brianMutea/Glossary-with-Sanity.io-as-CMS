@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   typescript: {
-    // Only ignore build errors if absolutely necessary
+    // TypeScript configuration for production builds
     ignoreBuildErrors: false,
   },
   images: {

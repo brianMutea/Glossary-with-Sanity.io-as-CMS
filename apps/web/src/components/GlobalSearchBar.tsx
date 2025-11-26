@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { SearchResult } from '@/app/api/search/route'
 import { Badge } from './ui/Badge'
+import { getComponentClasses } from '@/lib/theme'
+import { combineClasses } from '@/lib/colorUtils'
+import { COLORS, API, Z_INDEX } from '@/lib/constants'
 
 interface GlobalSearchBarProps {
   placeholder?: string
@@ -62,7 +65,7 @@ export function GlobalSearchBar({
       } finally {
         setIsLoading(false)
       }
-    }, 300)
+    }, API.searchDebounceMs)
 
     return () => clearTimeout(timer)
   }, [query])
@@ -155,13 +158,11 @@ export function GlobalSearchBar({
           value={query}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
-          className="
-            block w-full pl-9 pr-10 py-2 
-            border border-[#333333] rounded-lg 
-            bg-[#1A1A1A] placeholder-[#E0E0E0] text-[#FFFFFF] text-sm
-            focus:outline-none focus:ring-2 focus:ring-[#00BFFF] focus:border-[#00BFFF]
-            transition-all duration-200
-          "
+          className={combineClasses(
+            getComponentClasses('input', 'default'),
+            getComponentClasses('input', undefined, undefined, 'focus'),
+            'pl-9 pr-10'
+          )}
         />
         {query && (
           <button
@@ -182,7 +183,12 @@ export function GlobalSearchBar({
 
       {/* Search Results Dropdown */}
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-1 bg-[#1A1A1A] border border-[#333333] rounded-lg shadow-lg z-50 max-h-96 overflow-y-auto">
+        <div className={combineClasses(
+          'absolute top-full left-0 right-0 mt-1',
+          `bg-[${COLORS.background.card}] border border-[${COLORS.border.primary}]`,
+          'rounded-lg shadow-lg max-h-96 overflow-y-auto',
+          `z-[${Z_INDEX.dropdown}]`
+        )}>
           {results.length > 0 ? (
             <>
               {results.map((result, index) => (

@@ -1,48 +1,50 @@
+import { COLORS, DIFFICULTY_LEVELS, DOMAINS, TERM_TYPES, ANIMATIONS } from './constants'
+
 // Centralized design system for consistent styling across components
 
 export const levelColors = {
-  beginner: 'bg-[#39FF14] text-[#121212] border-[#39FF14]',
-  intermediate: 'bg-[#FFD700] text-[#121212] border-[#FFD700]',
-  advanced: 'bg-[#FF6F61] text-[#121212] border-[#FF6F61]',
-  mixed: 'bg-[#E6E6FA] text-[#121212] border-[#E6E6FA]',
+  [DIFFICULTY_LEVELS.BEGINNER]: `bg-[${COLORS.primary.green}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.green}]`,
+  [DIFFICULTY_LEVELS.INTERMEDIATE]: `bg-[${COLORS.primary.gold}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.gold}]`,
+  [DIFFICULTY_LEVELS.ADVANCED]: `bg-[${COLORS.primary.coral}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.coral}]`,
+  mixed: `bg-[${COLORS.primary.purple}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.purple}]`,
 } as const
 
 export const domainColors = {
-  'ai': 'bg-[#E6E6FA] text-[#121212]',
-  'artificial-intelligence': 'bg-[#E6E6FA] text-[#121212]',
-  'ml': 'bg-[#00BFFF] text-[#121212]',
-  'machine-learning': 'bg-[#00BFFF] text-[#121212]',
-  'data-science': 'bg-[#39FF14] text-[#121212]',
-  'software-engineering': 'bg-[#E0E0E0] text-[#121212]',
-  'math': 'bg-[#E6E6FA] text-[#121212]',
-  'mathematics': 'bg-[#E6E6FA] text-[#121212]',
-  'statistics': 'bg-[#FF6F61] text-[#121212]',
-  'deep-learning': 'bg-[#E6E6FA] text-[#121212]',
-  'computer-vision': 'bg-[#FFD700] text-[#121212]',
-  'nlp': 'bg-[#FF6F61] text-[#121212]',
-  'natural-language-processing': 'bg-[#FF6F61] text-[#121212]',
+  [DOMAINS.AI]: `bg-[${COLORS.primary.purple}] text-[${COLORS.primary.dark}]`,
+  'artificial-intelligence': `bg-[${COLORS.primary.purple}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.ML]: `bg-[${COLORS.primary.blue}] text-[${COLORS.primary.dark}]`,
+  'machine-learning': `bg-[${COLORS.primary.blue}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.DATA_SCIENCE]: `bg-[${COLORS.primary.green}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.SOFTWARE_ENGINEERING]: `bg-[${COLORS.primary.lightGray}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.MATH]: `bg-[${COLORS.primary.purple}] text-[${COLORS.primary.dark}]`,
+  'mathematics': `bg-[${COLORS.primary.purple}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.STATISTICS]: `bg-[${COLORS.primary.coral}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.DEEP_LEARNING]: `bg-[${COLORS.primary.purple}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.COMPUTER_VISION]: `bg-[${COLORS.primary.gold}] text-[${COLORS.primary.dark}]`,
+  [DOMAINS.NLP]: `bg-[${COLORS.primary.coral}] text-[${COLORS.primary.dark}]`,
+  'natural-language-processing': `bg-[${COLORS.primary.coral}] text-[${COLORS.primary.dark}]`,
 } as const
 
 export const typeIcons = {
-  algorithm: '⚡',
-  model: '🧠',
-  metric: '📊',
-  library: '📚',
-  technique: '🔧',
-  concept: '💡',
-  architecture: '🏗️',
-  method: '🎯',
+  [TERM_TYPES.ALGORITHM]: '⚡',
+  [TERM_TYPES.MODEL]: '🧠',
+  [TERM_TYPES.METRIC]: '📊',
+  [TERM_TYPES.LIBRARY]: '📚',
+  [TERM_TYPES.TECHNIQUE]: '🔧',
+  [TERM_TYPES.CONCEPT]: '💡',
+  [TERM_TYPES.ARCHITECTURE]: '🏗️',
+  [TERM_TYPES.METHOD]: '🎯',
 } as const
 
 export const statusColors = {
-  draft: 'bg-[#E0E0E0] text-[#121212] border-[#E0E0E0]',
-  'in-progress': 'bg-[#FFD700] text-[#121212] border-[#FFD700]',
-  completed: 'bg-[#39FF14] text-[#121212] border-[#39FF14]',
+  draft: `bg-[${COLORS.primary.lightGray}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.lightGray}]`,
+  'in-progress': `bg-[${COLORS.primary.gold}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.gold}]`,
+  completed: `bg-[${COLORS.primary.green}] text-[${COLORS.primary.dark}] border-[${COLORS.primary.green}]`,
 } as const
 
 // Base card styling classes
 export const cardStyles = {
-  base: 'bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300',
+  base: `bg-[${COLORS.primary.white}] rounded-xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-${ANIMATIONS.normal}`,
   hover: 'hover:shadow-lg hover:border-gray-300',
   featured: 'lg:col-span-2',
   group: 'group',
@@ -51,11 +53,11 @@ export const cardStyles = {
 // Common image styling
 export const imageStyles = {
   container: 'relative overflow-hidden',
-  image: 'object-cover transition-transform duration-300',
+  image: `object-cover transition-transform duration-${ANIMATIONS.normal}`,
   imageHover: 'group-hover:scale-105',
   overlay: 'absolute inset-0 bg-gradient-to-t from-black/20 to-transparent',
   iconOverlay: 'absolute top-3 left-3',
-  iconBadge: 'text-2xl bg-white/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center',
+  iconBadge: `text-2xl bg-[${COLORS.primary.white}]/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center`,
 } as const
 
 // Badge styling
