@@ -47,26 +47,28 @@ export function EnhancedPortableText({
         />
       ),
       image: ({ value }: any) => {
-        const imageUrl = getImageUrl(value, 1200, 800)
+        const imageUrl = getImageUrl(value)
         if (!imageUrl) return null
         
         return (
-          <div className="my-8">
-            <Image
-              src={imageUrl}
-              alt={value.alt || ''}
-              width={1200}
-              height={800}
-              className="w-full h-auto rounded-lg shadow-lg object-contain"
-              style={{ maxHeight: '600px' }}
-            />
-            {value.caption && (
-              <p className={`text-center text-sm mt-3 italic ${
-                theme === 'dark' ? 'text-[#E0E0E0]' : 'text-gray-600'
-              }`}>
-                {value.caption}
-              </p>
-            )}
+          <div className="my-8 flex justify-center">
+            <div className="max-w-full">
+              <Image
+                src={imageUrl}
+                alt={value.alt || ''}
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-auto h-auto max-w-full max-h-[600px] rounded-lg shadow-lg object-contain"
+              />
+              {value.caption && (
+                <p className={`text-center text-sm mt-3 italic ${
+                  theme === 'dark' ? 'text-[#E0E0E0]' : 'text-gray-600'
+                }`}>
+                  {value.caption}
+                </p>
+              )}
+            </div>
           </div>
         )
       },
@@ -113,7 +115,7 @@ export function EnhancedPortableText({
       blockquote: ({ children }: any) => (
         <blockquote className={`border-l-4 pl-6 py-4 my-8 italic text-lg ${
           theme === 'dark' 
-            ? 'border-[#00BFFF] bg-[#00BFFF] bg-opacity-10 text-[#E0E0E0]' 
+            ? 'border-[#FFD700] text-[#FFD700] bg-transparent' 
             : 'border-blue-500 bg-blue-50 text-gray-700'
         }`}>
           {processChildrenForGlossary(children, glossaryTerms)}

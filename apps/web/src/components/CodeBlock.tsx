@@ -127,18 +127,21 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
           </div>
         )}
         <div className="codeblock-content relative">
-          <pre className={`codeblock-pre bg-[#1e1e1e] text-[#d4d4d4] p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-[#333333] ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
+          <pre className={`codeblock-pre bg-[#0d1117] text-[#e6edf3] p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-[#30363d] ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
             <code
               ref={codeRef}
               className={`codeblock-code language-${language}`}
-              style={{ fontWeight: 'normal' }}
+              style={{ 
+                fontWeight: 'normal',
+                color: '#e6edf3'
+              }}
             >
               {code}
             </code>
           </pre>
           <button
             onClick={copyToClipboard}
-            className="absolute top-3 right-3 bg-[#3c3c3c] hover:bg-[#4c4c4c] text-[#cccccc] px-3 py-1 rounded text-xs transition-colors font-medium"
+            className="absolute top-3 right-3 bg-[#21262d] hover:bg-[#30363d] text-[#f0f6fc] px-3 py-1 rounded text-xs transition-colors font-medium border border-[#30363d]"
             title="Copy to clipboard"
           >
             {copied ? (
@@ -179,7 +182,7 @@ export function CodeBlock({ code, language = 'javascript', filename, theme = 'li
         <pre className={`codeblock-pre bg-gray-50 text-gray-800 p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-gray-200 ${(filename || language) ? 'rounded-t-none rounded-b-lg' : 'rounded-lg'}`}>
           <code
             ref={codeRef}
-            className={`codeblock-code language-${language}`}
+            className={`codeblock-code light-theme language-${language}`}
             style={{ fontWeight: 'normal' }}
           >
             {code}

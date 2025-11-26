@@ -14,9 +14,15 @@ export function getImageUrl(image: any, width?: number, height?: number) {
   const asset = image.asset._id ? image.asset : { _ref: image.asset._ref }
   let url = urlFor(asset)
   
-  if (width) url = url.width(width)
-  if (height) url = url.height(height)
+  // If no dimensions specified, use auto sizing with max width
+  if (!width && !height) {
+    url = url.width(1200).fit('max')
+  } else {
+    if (width) url = url.width(width)
+    if (height) url = url.height(height)
+    url = url.fit('max')
+  }
   
   // Add optimization parameters
-  return url.format('webp').quality(85).fit('max').url()
+  return url.format('webp').quality(85).url()
 }

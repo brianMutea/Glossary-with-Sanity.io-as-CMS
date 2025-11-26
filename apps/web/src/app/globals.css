@@ -1288,3 +1288,210 @@ Custom scrollbar styles */
 .custom-scrollbar::-webkit-scrollbar-corner {
   background: #1e1e1e;
 }
+/* 
+Dark Theme Syntax Highlighting */
+.codeblock-code .token.comment,
+.codeblock-code .token.prolog,
+.codeblock-code .token.doctype,
+.codeblock-code .token.cdata {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.codeblock-code .token.punctuation {
+  color: #e6edf3;
+}
+
+.codeblock-code .token.property,
+.codeblock-code .token.tag,
+.codeblock-code .token.boolean,
+.codeblock-code .token.number,
+.codeblock-code .token.constant,
+.codeblock-code .token.symbol,
+.codeblock-code .token.deleted {
+  color: #79c0ff;
+}
+
+.codeblock-code .token.selector,
+.codeblock-code .token.attr-name,
+.codeblock-code .token.string,
+.codeblock-code .token.char,
+.codeblock-code .token.builtin,
+.codeblock-code .token.inserted {
+  color: #a5d6ff;
+}
+
+.codeblock-code .token.operator,
+.codeblock-code .token.entity,
+.codeblock-code .token.url,
+.codeblock-code .language-css .token.string,
+.codeblock-code .style .token.string {
+  color: #ff7b72;
+}
+
+.codeblock-code .token.atrule,
+.codeblock-code .token.attr-value,
+.codeblock-code .token.keyword {
+  color: #ff7b72;
+  font-weight: bold;
+}
+
+.codeblock-code .token.function,
+.codeblock-code .token.class-name {
+  color: #d2a8ff;
+}
+
+.codeblock-code .token.regex,
+.codeblock-code .token.important,
+.codeblock-code .token.variable {
+  color: #ffa657;
+}
+
+/* Light Theme Syntax Highlighting */
+.codeblock-code.light-theme .token.comment,
+.codeblock-code.light-theme .token.prolog,
+.codeblock-code.light-theme .token.doctype,
+.codeblock-code.light-theme .token.cdata {
+  color: #6a737d;
+  font-style: italic;
+}
+
+.codeblock-code.light-theme .token.punctuation {
+  color: #24292e;
+}
+
+.codeblock-code.light-theme .token.property,
+.codeblock-code.light-theme .token.tag,
+.codeblock-code.light-theme .token.boolean,
+.codeblock-code.light-theme .token.number,
+.codeblock-code.light-theme .token.constant,
+.codeblock-code.light-theme .token.symbol,
+.codeblock-code.light-theme .token.deleted {
+  color: #005cc5;
+}
+
+.codeblock-code.light-theme .token.selector,
+.codeblock-code.light-theme .token.attr-name,
+.codeblock-code.light-theme .token.string,
+.codeblock-code.light-theme .token.char,
+.codeblock-code.light-theme .token.builtin,
+.codeblock-code.light-theme .token.inserted {
+  color: #032f62;
+}
+
+.codeblock-code.light-theme .token.operator,
+.codeblock-code.light-theme .token.entity,
+.codeblock-code.light-theme .token.url,
+.codeblock-code.light-theme .language-css .token.string,
+.codeblock-code.light-theme .style .token.string {
+  color: #d73a49;
+}
+
+.codeblock-code.light-theme .token.atrule,
+.codeblock-code.light-theme .token.attr-value,
+.codeblock-code.light-theme .token.keyword {
+  color: #d73a49;
+  font-weight: bold;
+}
+
+.codeblock-code.light-theme .token.function,
+.codeblock-code.light-theme .token.class-name {
+  color: #6f42c1;
+}
+
+.codeblock-code.light-theme .token.regex,
+.codeblock-code.light-theme .token.important,
+.codeblock-code.light-theme .token.variable {
+  color: #e36209;
+}
+
+/* Better code block styling */
+.codeblock-pre {
+  font-family: 'Fira Code', 'Monaco', 'Menlo', 'Consolas', monospace !important;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.codeblock-code {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Responsive image improvements */
+.glossary-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}/* Enhan
+ced image responsiveness */
+.glossary-content .my-8 {
+  margin: 2rem 0;
+}
+
+.glossary-content .my-8 img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure images don't overflow their containers */
+.glossary-content figure,
+.glossary-content .image-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Better blockquote styling for dark theme */
+.glossary-content blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid;
+  font-style: italic;
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+/* Remove any unwanted backgrounds from blockquotes in dark theme */
+.glossary-content blockquote.bg-transparent {
+  background: transparent !important;
+}
+
+/* Code block improvements */
+.codeblock-container {
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.codeblock-pre {
+  margin: 0;
+  padding: 1.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.codeblock-code {
+  display: block;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  tab-size: 4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .codeblock-pre {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .glossary-content .my-8 {
+    margin: 1.5rem 0;
+  }
+}
