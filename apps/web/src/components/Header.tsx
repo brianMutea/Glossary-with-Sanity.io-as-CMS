@@ -61,7 +61,7 @@ export function Header({
             <div className="flex-1">
               <Link href="/" className="flex items-center">
                 <span className="text-xl font-bold text-[#FFD700]">
-                  Tech Glossary
+                  Glossify
                 </span>
               </Link>
             </div>

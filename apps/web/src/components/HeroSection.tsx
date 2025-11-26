@@ -48,8 +48,8 @@ export function HeroSection({ heroData }: HeroSectionProps) {
   // Use defaults if no hero data provided
   const defaultHeroData = {
     enabled: true,
-    headline: 'The best place to build, test, and discover front-end code.',
-    subheadline: 'Glossifyd is a comprehensive resource for front-end developers. Build and deploy websites, showcase your work, learn new concepts, and find inspiration.',
+    headline: 'Glossifyd is a project built on Sanity.io and Next JS',
+    subheadline: 'Glossifyd on Sanity.io',
     ctaButtons: [
       {
         text: 'Explore Glossary',

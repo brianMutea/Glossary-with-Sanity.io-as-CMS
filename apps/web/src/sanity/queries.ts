@@ -199,6 +199,10 @@ export const GLOSSARY_TERMS_QUERY = `*[_type == "glossaryTerm"] | order(term asc
   }
 }`
 
+export const GLOSSARY_TERMS_SLUGS_QUERY = `*[_type == "glossaryTerm" && defined(slug.current)]{
+  "slug": slug.current
+}`
+
 
 
 export const GLOSSARY_TERM_QUERY = `*[_type == "glossaryTerm" && slug.current == $slug][0] {
@@ -206,7 +210,16 @@ export const GLOSSARY_TERM_QUERY = `*[_type == "glossaryTerm" && slug.current ==
   term,
   slug,
   shortDefinition,
-  fullExplanation,
+  fullExplanation[]{
+    ...,
+    _type == "image" => {
+      ...,
+      asset->{
+        _id,
+        url
+      }
+    }
+  },
   level,
   domain,
   type,
@@ -326,10 +339,6 @@ export const LEARNING_PATH_QUERY = `*[_type == "learningPath" && slug.current ==
     description,
     status
   }
-}`
-
-export const GLOSSARY_TERMS_SLUGS_QUERY = `*[_type == "glossaryTerm" && defined(slug.current)]{
-  "slug": slug.current
 }`
 
 export const LEARNING_PATHS_SLUGS_QUERY = `*[_type == "learningPath" && defined(slug.current)]{

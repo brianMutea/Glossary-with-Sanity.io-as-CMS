@@ -45,7 +45,7 @@ export function EnhancedPortableText({
         />
       ),
       image: ({ value }: any) => {
-        const imageUrl = getImageUrl(value, 800, 600)
+        const imageUrl = getImageUrl(value, 1200, 800)
         if (!imageUrl) return null
         
         return (
@@ -53,9 +53,10 @@ export function EnhancedPortableText({
             <Image
               src={imageUrl}
               alt={value.alt || ''}
-              width={800}
-              height={600}
-              className="w-full rounded-lg shadow-lg"
+              width={1200}
+              height={800}
+              className="w-full h-auto rounded-lg shadow-lg object-contain"
+              style={{ maxHeight: '600px' }}
             />
             {value.caption && (
               <p className="text-center text-gray-600 text-sm mt-3 italic">

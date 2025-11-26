@@ -8,13 +8,15 @@ export function urlFor(source: any) {
 }
 
 export function getImageUrl(image: any, width?: number, height?: number) {
-  if (!image?.asset?._id) return null
+  if (!image?.asset?._id && !image?.asset?._ref) return null
   
-  let url = urlFor(image.asset)
+  // Handle both _id and _ref formats
+  const asset = image.asset._id ? image.asset : { _ref: image.asset._ref }
+  let url = urlFor(asset)
   
   if (width) url = url.width(width)
   if (height) url = url.height(height)
   
   // Add optimization parameters
-  return url.format('webp').quality(85).url()
+  return url.format('webp').quality(85).fit('max').url()
 }
