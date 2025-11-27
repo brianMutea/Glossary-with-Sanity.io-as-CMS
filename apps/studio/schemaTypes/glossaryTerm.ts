@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { DomainInput } from '../components/DomainInput'
 import { TypeInput } from '../components/TypeInput'
+import { richTextContent } from './shared/richTextContent'
 
 export const glossaryTerm = defineType({
     name: 'glossaryTerm',
@@ -35,97 +36,8 @@ export const glossaryTerm = defineType({
             name: 'fullExplanation',
             title: 'Deep Explanation',
             type: 'array',
-            description: 'Full guided explanation in article style',
-            of: [
-                {
-                    type: 'block',
-                    styles: [
-                        { title: 'Normal', value: 'normal' },
-                        { title: 'H1', value: 'h1' },
-                        { title: 'H2', value: 'h2' },
-                        { title: 'H3', value: 'h3' },
-                        { title: 'H4', value: 'h4' },
-                        { title: 'Quote', value: 'blockquote' },
-                    ],
-                    lists: [
-                        { title: 'Bullet', value: 'bullet' },
-                        { title: 'Numbered', value: 'number' },
-                    ],
-                    marks: {
-                        decorators: [
-                            { title: 'Strong', value: 'strong' },
-                            { title: 'Emphasis', value: 'em' },
-                            { title: 'Code', value: 'code' },
-                        ],
-                        annotations: [
-                            {
-                                title: 'URL',
-                                name: 'link',
-                                type: 'object',
-                                fields: [
-                                    {
-                                        title: 'URL',
-                                        name: 'href',
-                                        type: 'url',
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                },
-                {
-                    type: 'image',
-                    options: { hotspot: true },
-                    fields: [
-                        {
-                            name: 'alt',
-                            type: 'string',
-                            title: 'Alternative Text',
-                        },
-                        {
-                            name: 'caption',
-                            type: 'string',
-                            title: 'Caption',
-                        }
-                    ],
-                },
-                {
-                    type: 'code',
-                    title: 'Code Block',
-                    options: {
-                        language: 'javascript',
-                        languageAlternatives: [
-                            { title: 'JavaScript', value: 'javascript' },
-                            { title: 'TypeScript', value: 'typescript' },
-                            { title: 'HTML', value: 'html' },
-                            { title: 'CSS', value: 'css' },
-                            { title: 'SCSS', value: 'scss' },
-                            { title: 'Python', value: 'python' },
-                            { title: 'Java', value: 'java' },
-                            { title: 'C++', value: 'cpp' },
-                            { title: 'C#', value: 'csharp' },
-                            { title: 'Go', value: 'go' },
-                            { title: 'Rust', value: 'rust' },
-                            { title: 'PHP', value: 'php' },
-                            { title: 'Ruby', value: 'ruby' },
-                            { title: 'Swift', value: 'swift' },
-                            { title: 'Kotlin', value: 'kotlin' },
-                            { title: 'Dart', value: 'dart' },
-                            { title: 'Shell/Bash', value: 'bash' },
-                            { title: 'PowerShell', value: 'powershell' },
-                            { title: 'JSON', value: 'json' },
-                            { title: 'YAML', value: 'yaml' },
-                            { title: 'XML', value: 'xml' },
-                            { title: 'SQL', value: 'sql' },
-                            { title: 'GraphQL', value: 'graphql' },
-                            { title: 'Markdown', value: 'markdown' },
-                            { title: 'Docker', value: 'dockerfile' },
-                            { title: 'R', value: 'r' },
-                        ],
-                        withFilename: true,
-                    },
-                },
-            ],
+            description: 'Full guided explanation in article style with support for text, images, code, math equations, and videos',
+            of: richTextContent,
         }),
         defineField({
             name: 'level',

@@ -5,6 +5,7 @@ import { GlossaryTextProcessor } from './GlossaryTextProcessor'
 import Image from 'next/image'
 import { CodeBlock } from './CodeBlock'
 import { VideoEmbed } from './VideoEmbed'
+import { MathEquation } from './MathEquation'
 import { getImageUrl } from '@/sanity/image'
 
 interface GlossaryTerm {
@@ -44,6 +45,12 @@ export function EnhancedPortableText({
           url={value.url}
           title={value.title}
           caption={value.caption}
+        />
+      ),
+      mathEquation: ({ value }: any) => (
+        <MathEquation
+          value={{ ...value, displayMode: true }}
+          theme={theme}
         />
       ),
       image: ({ value }: any) => {
@@ -113,10 +120,10 @@ export function EnhancedPortableText({
       ),
       // Blockquotes with glossary processing
       blockquote: ({ children }: any) => (
-        <blockquote className={`border-l-4 pl-6 py-4 my-8 italic text-lg ${
+        <blockquote className={`border-l-4 pl-6 py-4 my-8 italic text-lg bg-transparent ${
           theme === 'dark' 
-            ? 'border-[#FFD700] text-[#FFD700] bg-transparent' 
-            : 'border-blue-500 bg-blue-50 text-gray-700'
+            ? 'border-[#E0E0E0] text-[#E0E0E0]' 
+            : 'border-gray-400 text-gray-700'
         }`}>
           {processChildrenForGlossary(children, glossaryTerms)}
         </blockquote>
@@ -185,6 +192,12 @@ export function EnhancedPortableText({
         >
           {children}
         </a>
+      ),
+      inlineMath: ({ children, value }: any) => (
+        <MathEquation
+          value={{ equation: value.equation, displayMode: false }}
+          theme={theme}
+        />
       ),
     },
   }

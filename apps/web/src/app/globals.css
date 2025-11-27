@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "katex/dist/katex.min.css";
 
 /* CodePen.io Inspired Design System */
 :root {
@@ -1445,7 +1446,7 @@ ced image responsiveness */
   overflow: hidden;
 }
 
-/* Better blockquote styling for dark theme */
+/* Better blockquote styling for both themes */
 .glossary-content blockquote {
   margin: 2rem 0;
   padding: 1rem 1.5rem;
@@ -1453,11 +1454,14 @@ ced image responsiveness */
   font-style: italic;
   font-size: 1.125rem;
   line-height: 1.6;
+  background: transparent !important;
 }
 
-/* Remove any unwanted backgrounds from blockquotes in dark theme */
-.glossary-content blockquote.bg-transparent {
+/* Ensure no colored backgrounds on blockquotes */
+.glossary-content blockquote,
+.prose blockquote {
   background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* Code block improvements */
@@ -1494,4 +1498,243 @@ ced image responsiveness */
   .glossary-content .my-8 {
     margin: 1.5rem 0;
   }
+}/* KaTe
+X Math Equation Styling */
+.math-equation {
+  font-family: 'KaTeX_Main', 'Times New Roman', serif;
+}
+
+.katex-dark .katex {
+  color: #e6edf3 !important;
+}
+
+.katex-light .katex {
+  color: #24292e !important;
+}
+
+/* KaTeX display mode centering */
+.katex-display {
+  text-align: center;
+  margin: 1.5em 0;
+}
+
+/* Ensure KaTeX equations are responsive */
+.katex {
+  font-size: 1em;
+  line-height: 1.2;
+}
+
+.katex-display .katex {
+  font-size: 1.2em;
+}
+
+/* Better spacing for inline math */
+.katex.katex-inline {
+  margin: 0 0.1em;
+}
+
+/* Math equation container styling */
+.math-equation {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Responsive math equations */
+@media (max-width: 768px) {
+  .katex {
+    font-size: 0.9em;
+  }
+  
+  .katex-display .katex {
+    font-size: 1.1em;
+  }
+}/* 
+Additional math equation improvements */
+.math-equation .katex-html {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Ensure math equations work well in both light and dark themes */
+.katex .accent-body {
+  color: inherit;
+}
+
+.katex .mord {
+  color: inherit;
+}
+
+.katex .mbin, .katex .mrel, .katex .mopen, .katex .mclose, .katex .mpunct {
+  color: inherit;
+}
+
+/* Math equation error styling */
+.katex-error {
+  color: #cc0000;
+  font-family: monospace;
+  font-size: 0.9em;
+  padding: 0.2em 0.4em;
+  background: rgba(204, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+/* Dark theme math error styling */
+.katex-dark .katex-error {
+  color: #ff7b72;
+  background: rgba(255, 123, 114, 0.1);
+}/* Math
+ Symbol Styling */
+.math-symbol {
+  font-family: 'KaTeX_Main', 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+}
+
+/* Math symbol hover effects */
+.math-symbol:hover {
+  cursor: help;
+}
+
+/* Ensure math symbols work well in different contexts */
+.math-symbol .katex {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Math symbol in dark theme */
+.katex-dark .math-symbol {
+  color: #79c0ff;
+}
+
+/* Math symbol in light theme */
+.katex-light .math-symbol {
+  color: #0969da;
+}
+
+/* Better rendering for common mathematical symbols */
+.math-symbol .katex .mord {
+  color: inherit;
+}
+
+.math-symbol .katex .msupsub {
+  color: inherit;
+}
+
+.math-symbol .katex .accent-body {
+  color: inherit;
+}
+
+/* Ensure proper spacing around math symbols */
+.math-symbol + .math-symbol {
+  margin-left: 0.1em;
+}
+
+/* Math symbols in headings */
+h1 .math-symbol,
+h2 .math-symbol,
+h3 .math-symbol,
+h4 .math-symbol {
+  font-size: inherit;
+  line-height: inherit;
+}/* Sm
+art Text Processing - Automatic Math Symbol Recognition */
+.math-symbol {
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.inline-math {
+  display: inline-block;
+  margin: 0 0.1em;
+}
+
+.math-fallback {
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+  color: inherit;
+}/* LaTeX
+ Inline Math Styling */
+.inline-math {
+  display: inline-block;
+  margin: 0 0.1em;
+  vertical-align: baseline;
+}
+
+.inline-math .katex {
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* Ensure inline math works well in different contexts */
+.inline-math .katex .mord {
+  color: inherit;
+}
+
+.inline-math .katex .mbin,
+.inline-math .katex .mrel,
+.inline-math .katex .mopen,
+.inline-math .katex .mclose,
+.inline-math .katex .mpunct {
+  color: inherit;
+}
+
+/* Better spacing for inline math in text */
+p .inline-math,
+li .inline-math,
+h1 .inline-math,
+h2 .inline-math,
+h3 .inline-math,
+h4 .inline-math {
+  margin: 0 0.05em;
+}/* In
+line Math Equation Styling */
+.math-equation.inline {
+  display: inline;
+  vertical-align: baseline;
+  margin: 0;
+}
+
+/* 
+KaTeX Math Equation Styling - Clean implementation */
+
+/* Block equations (displayMode: true) */
+.katex-display {
+  margin: 1em 0;
+  text-align: center;
+  display: block;
+}
+
+/* Default KaTeX inline behavior */
+.katex {
+  display: inline;
+  white-space: nowrap;
+}
+
+/* Inline Math Equations - Force proper inline rendering */
+.math-equation.inline {
+  display: inline !important;
+  vertical-align: baseline !important;
+  margin: 0 0.1em !important;
+}
+
+.math-equation.inline .katex {
+  display: inline !important;
+  vertical-align: baseline !important;
+  margin: 0 !important;
+  line-height: inherit !important;
+}
+
+.math-equation.inline .katex-html {
+  display: inline !important;
+}
+
+/* Override any display mode styling for inline equations */
+.math-equation.inline .katex-display {
+  display: inline !important;
+  margin: 0 !important;
+  text-align: left !important;
 }
